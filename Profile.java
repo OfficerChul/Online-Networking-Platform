@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Profile {
 
-    //userName should be unique
+    //userName should be unique for the Account object
     Account account;
     String email;
     String aboutMe;
@@ -11,7 +11,7 @@ public class Profile {
     private ArrayList<FriendRequest> sentFriendRequests = new ArrayList<FriendRequest>();
     private ArrayList<FriendRequest> receivedFriendRequests = new ArrayList<FriendRequest>();
 
-    //should I add two arraylists<friendRequest> to constructor?
+    // Constructs the Profile object
     public Profile(Account account, String email, String aboutMe, ArrayList<String> likesAndInterests, ArrayList<String> friendUserNames) {
         this.email = email;
         this.aboutMe = aboutMe;
@@ -19,6 +19,7 @@ public class Profile {
         this.friendUserNames = friendUserNames;
     }
 
+    // getters and setters
     public Account getAccount() {
         return account;
     }
