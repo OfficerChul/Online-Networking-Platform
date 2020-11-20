@@ -1,11 +1,9 @@
 # Project 5 - A Social Network "Profile" Application 
 ## Your implementation must have the following:
 *Users can create, edit, and delete accounts for themselves.\
-
   *The attributes you collect as part of account creation are up to you.\ 
   
 *Users should be required to either create an account or sign in before gaining access to the application.\ 
-
   *Whichever identifier you maintain for the user must be unique.\
   
 *Users can create, edit, and delete profiles.\
@@ -24,8 +22,8 @@
   *All user interactions must be GUI based.\ 
   *Data must persist regardless of whether or not a user is connected. If a user disconnects and reconnects, their data should still be present.\ 
   *Descriptive errors should appear as appropriate. The application should not crash under any circumstances.\ 
-  *Optional Features:\ 
   
+## Optional Features:\ 
 *Indicating whether a User is online.\
 *Adding profile photos.\
 *Allow accounts to be set to "private", where no other user can view them, and "protected", where only current friends can view them.
