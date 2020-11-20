@@ -17,10 +17,10 @@
   * If a friend request is confirmed, it will no longer appear for the recipient or the sender. Both users will be added to each other's friend list. 
   
 * **Users can view a list of all the application's users and send any given individual a friend request or view their profile.**
-  * The application must support simultaneous use by multiple users over a network. Changes to profiles and friend requests should appear in real-time as users add them. 
-  * All user interactions must be GUI based.
-  * Data must persist regardless of whether or not a user is connected. If a user disconnects and reconnects, their data should still be present.
-  * Descriptive errors should appear as appropriate. The application should not crash under any circumstances.
+* **The application must support simultaneous use by multiple users over a network. Changes to profiles and friend requests should appear in real-time as users add them.**
+* **All user interactions must be GUI based.**
+* **Data must persist regardless of whether or not a user is connected. If a user disconnects and reconnects, their data should still be present.**
+* **Descriptive errors should appear as appropriate. The application should not crash under any circumstances.**
   
 ## Optional Features:
 * Indicating whether a User is online.
