@@ -12,7 +12,7 @@ public class Profile {
     private ArrayList<FriendRequest> receivedFriendRequests = new ArrayList<FriendRequest>();
 
     //should I add two arraylists<friendRequest> to constructor?
-    public Profile(Account acount, String email, String aboutMe, ArrayList<String> likesAndInterests, ArrayList<String> friendUserNames) {
+    public Profile(Account account, String email, String aboutMe, ArrayList<String> likesAndInterests, ArrayList<String> friendUserNames) {
         this.email = email;
         this.aboutMe = aboutMe;
         this.likesAndInterests = likesAndInterests;
