@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Profile {
 
     //userName should be unique
-    Account account = new Account(String userName, String password);
+    Account account;
     String email;
     String aboutMe;
     private ArrayList<String> likesAndInterests = new ArrayList<>();
