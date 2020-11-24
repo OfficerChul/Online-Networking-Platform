@@ -35,10 +35,23 @@ public class ProfileClient extends JComponent implements Runnable {
             if (e.getSource() == loginButton) {
                 String username = userText.getText();
                 String password = String.valueOf(passwordText.getPassword());
-                if (userLogin(username, password) == 1) {
-                    loginFrame.dispose();
-                    loggedIn = true;
-                    showMainPanel();
+                
+                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
+                    if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
+                        if (password.length() >= 8) {
+                            if (userLogin(username, password) == 1) {
+                                loginFrame.dispose();
+                                loggedIn = true;
+                                showMainPanel();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.", "Login", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -49,9 +62,23 @@ public class ProfileClient extends JComponent implements Runnable {
             if (e.getSource() == registerButton2) {
                 String username = userText.getText();
                 String password = String.valueOf(passwordText.getPassword());
-                if (userRegister(username, password) == 1) {
-                    registerFrame.dispose();
+
+                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
+                    if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
+                        if (password.length() >= 8) {
+                            if (userRegister(username, password) == 1) {
+                                registerFrame.dispose();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.", "Login", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
 
             if (e.getSource() == registerCancelButton) {
