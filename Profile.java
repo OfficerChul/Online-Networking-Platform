@@ -6,13 +6,16 @@ public class Profile {
     Account account;
     String email;
     String aboutMe;
+    String name;
     private ArrayList<String> likesAndInterests = new ArrayList<>();
     private ArrayList<String> friendUserNames = new ArrayList<>();
     private ArrayList<FriendRequest> sentFriendRequests = new ArrayList<FriendRequest>();
     private ArrayList<FriendRequest> receivedFriendRequests = new ArrayList<FriendRequest>();
 
     // Constructs the Profile object
-    public Profile(Account account, String email, String aboutMe, ArrayList<String> likesAndInterests, ArrayList<String> friendUserNames) {
+    public Profile(String name, Account account, String email, String aboutMe, ArrayList<String> likesAndInterests, ArrayList<String> friendUserNames) {
+        this.name = name;
+        this.account = account;
         this.email = email;
         this.aboutMe = aboutMe;
         this.likesAndInterests = likesAndInterests;
