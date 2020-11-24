@@ -17,9 +17,18 @@ public class FriendRequest extends JComponent {
         this.usernameWhoSent = usernameWhoSent;
         this.usernameWhoReceive = usernameWhoReceive;
     }
+
+    /**
+     * this constructor is used to make a FriendRequest object
+       so that we can call method in this class.
+     * I put all the data of username who sent request to whom in a file.
+     * So when I call this constructor, it will read the data in friendRequest.txt first
+     * then put those data in an arraylist.
+     */
     public FriendRequest() {
         friendRequestList = new ArrayList<FriendRequest>();
-        if (new File("friendRequest.txt").exists() ) {
+        if (new File("friendRequest.txt").exists() ) { //if friendRequest.txt exist,
+                                                               // read file.
             try {
                 FileReader fr = new FileReader("friendRequest.txt");
                 BufferedReader bfr = new BufferedReader(fr);
@@ -35,12 +44,12 @@ public class FriendRequest extends JComponent {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        } else {  // if not exist, create it
             try {
                 File toWrite = new File("friendRequest.txt");
                 BufferedWriter bw = new BufferedWriter(new FileWriter(toWrite));
                     StringBuilder sb = new StringBuilder();
-                    sb.append("sent receive");
+                    sb.append("sent receive"); //first line, showing which column is sent and receive 
                     bw.write(sb.toString());
                     bw.newLine();
                     bw.flush();
@@ -49,14 +58,27 @@ public class FriendRequest extends JComponent {
                 }
         }
     }
+
+    /**
+     * A GUI of users' friend request list, and user can accept or reject after clicking that user
+     */
     public void listUsersFriendRequest(String usernameWhoReceived) {
-        JFrame frame = new JFrame("Your Friend Request");
+        JFrame frame = new JFrame("Your Friend Request"); 
         frame.setSize(450, 600);
-        frame.setLocation(400,0);
+        frame.setLocation(400,0); //you can change the size and location if you want
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         for (int i = 0, n = 0 ; i < friendRequestList.size() ; i++) {
-            if (usernameWhoReceived.equals(friendRequestList.get(i).getUsernameWhoReceive())) {
-                GridLayout obj = new GridLayout(++n/2 + 1, ++n/2 + 1);
+            if (usernameWhoReceived.equals(friendRequestList.get(i).getUsernameWhoReceive())) { // n is the number of username we want
+                // arraylist friendRequest is a list for every request,
+                // so i use for loop to pick the username we want to find(who sent request to that user)
+                
+                GridLayout obj = new GridLayout(++n/2 + 1, ++n/2 + 1); //the number of the the
+                                                                                 //button increased as the
+                                                                                // friend request increase
+                /**
+                 * each button is a username and has it own actionListener
+                 * I used for loop to do this
+                 */
                 frame.setLayout(obj);
                 JButton buttonName = new JButton(friendRequestList.get(i).getUsernameWhoSent());
                 frame.add(buttonName);
@@ -66,15 +88,16 @@ public class FriendRequest extends JComponent {
                         int Button = JOptionPane.showConfirmDialog(null,
                                 "Do you want to accept this user to be your friend?",
                                 "Friend Request", JOptionPane.YES_NO_OPTION);
-                        if (Button == JOptionPane.YES_OPTION) {
+                        if (Button == JOptionPane.YES_OPTION) { // click yes (accept)
+                            //To DO...
                             //friend.add(buttonName.getText());
                             //write new friend to friendList file
                             for (int i = 0; i < friendRequestList.size(); i++) {
                                 if (friendRequestList.get(i)
                                         .getUsernameWhoSent().equals(buttonName.getText())) {
-                                    friendRequestList.remove(i);
+                                    friendRequestList.remove(i); // remove from the friendRequest list
                                     File toReWrite = new File("friendRequest.txt");
-                                    try {
+                                    try { //rewrite the file (update file every time we accept or reject)
                                         toReWrite.delete();
                                         toReWrite.createNewFile();
                                         BufferedWriter bw = new BufferedWriter(new FileWriter(toReWrite));
@@ -100,14 +123,14 @@ public class FriendRequest extends JComponent {
                                     File toDelete = new File("friendRequest.txt");
                                     toDelete.delete();
                                 } else {
-                                    frame.dispose();
-                                    listUsersFriendRequest(usernameWhoReceived);
+                                    frame.dispose(); //when we accept or reject a user, we will update the gui
+                                    listUsersFriendRequest(usernameWhoReceived); //recursion, call this method again with fewer user
                                 }
                             } catch (IOException a) {
                                 a.printStackTrace();
                             }
 
-                        } else if (Button == JOptionPane.NO_OPTION) {
+                        } else if (Button == JOptionPane.NO_OPTION) { //click no (reject)
                             for (int i = 0; i < friendRequestList.size(); i++) {
                                 if (friendRequestList.get(i)
                                         .getUsernameWhoSent().equals(buttonName.getText())) {
@@ -156,10 +179,15 @@ public class FriendRequest extends JComponent {
         frame.setResizable(true);
     }
 
+    /**
+     * when user click the button send request call this function
+     * it will append request data in the existing friendRequest.txt
+     */
+
     public void friendRequest(String usernameWhoSent, String usernameWhoReceive) {
         try {
             Files.write(Paths.get("friendRequest.txt"), (usernameWhoSent
-                    + " " + usernameWhoReceive + "\n").getBytes(), StandardOpenOption.APPEND);
+                    + " " + usernameWhoReceive + "\n").getBytes(), StandardOpenOption.APPEND); //append text
         } catch (IOException io ) {
             io.printStackTrace();
         }
@@ -172,5 +200,10 @@ public class FriendRequest extends JComponent {
     public String getUsernameWhoSent() {
         return usernameWhoSent;
     }
-    
+
+    public static void main(String[] args) {
+        FriendRequest friendRequest = new FriendRequest();
+        friendRequest.listUsersFriendRequest("bb");
+    }
+
 }
