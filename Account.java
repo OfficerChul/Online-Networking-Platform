@@ -20,6 +20,10 @@ public class Account extends JComponent {
         this.username = username;
         this.password = password;
     }
+
+    /**
+     * A empty constructor, just used for calling method
+     */
     public Account() {
 
     }
@@ -51,10 +55,16 @@ public class Account extends JComponent {
             panel.add(create);
 
             frame.setVisible(true);
-            create.addActionListener(new ActionListener() {
+        /**
+         * when user click sign up, this method will read a file of all data of username and password
+         * and put them in both hashmap and arraylist.
+         * hashmap is used to check if there is duplicate username
+         * arraylist is used to save new data in file
+         */
+        create.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (new File("Data.txt").exists()) {
+                    if (new File("Data.txt").exists()) { //read file
                         StringBuilder sb = new StringBuilder();
                         try {
                             FileReader fr = new FileReader("Data.txt");
@@ -72,16 +82,17 @@ public class Account extends JComponent {
                             i.printStackTrace();
                         }
                     }
-                    if (e.getSource() == create ) {
+                    if (e.getSource() == create ) { // check if username is unique and the format is alphanumeric
                         if (!accountsData.containsKey(usernameText.getText())
                                 && usernameText.getText().matches("^[a-zA-Z0-9]*$")
-                                && passwordText.getText().length() >= 8
-                                && passwordText.getText().matches("^[a-zA-Z0-9]*$")) {
+                                && passwordText.getText().length() >= 8  //also, password need to be valid
+                                && passwordText.getText().matches("^[a-zA-Z0-9]*$")) { 
                             accountsData.put(usernameText.getText(), passwordText.getText());
                             allUserAccounts.add(new Account(usernameText.getText(),
                                     passwordText.getText()));
                             if (!new File("Data.txt").exists()) {
-                                File toWrite = new File("Data.txt");
+                                File toWrite = new File("Data.txt"); //if file is not existed
+                                                                             //create it, write new account in file
                                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(toWrite))) {
                                     StringBuilder sb = new StringBuilder();
                                     sb.append(allUserAccounts.get(allUserAccounts.size() - 1).username + " "
@@ -93,7 +104,8 @@ public class Account extends JComponent {
                                     n.printStackTrace();
                                     return;
                                 }
-                            } else if (new File("Data.txt").exists()) {
+                            } else if (new File("Data.txt").exists()) { // if file is existed,
+                                                                                // just append new account in the file
                                 try {
                                     Files.write(Paths.get("Data.txt"), (usernameText.getText()
                                             + " " + passwordText.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
@@ -104,17 +116,31 @@ public class Account extends JComponent {
                             frame.dispose();
                             JOptionPane.showMessageDialog(null, "Sign up successfully!", "Profile app",
                                     JOptionPane.INFORMATION_MESSAGE);
+
+                            /**
+                             * if username format is not valid
+                             * set the text to blank and show error message
+                             */
                         } else if (!usernameText.getText().matches("^[a-zA-Z0-9]*$")) {
                             JOptionPane.showMessageDialog(null, "Your username should be alphanumeric",
                                     "Profile app", JOptionPane.ERROR_MESSAGE);
                             usernameText.setText("");
                             passwordText.setText("");
+                            /**
+                             * if password format is not valid
+                             * just set the text of password to blank and show error message
+                             * keep the username so user doesn't need to type username again
+                             */
                         } else if ( passwordText.getText().length() <= 8
                                 || !passwordText.getText().matches("^[a-zA-Z0-9]*$")) {
                             JOptionPane.showMessageDialog(null, "Your password should be alphanumeric. Also, the length can't be fewer than 8 characters.",
                                     "Profile app", JOptionPane.ERROR_MESSAGE);
                             usernameText.setText(usernameText.getText());
                             passwordText.setText("");
+                            /**
+                             * if username format is duplicate
+                             * set the text to blank and show error message
+                             */
                         } else if (accountsData.containsKey(usernameText.getText())) {
                             JOptionPane.showMessageDialog(null, "This username has been used!",
                                     "Profile app",
