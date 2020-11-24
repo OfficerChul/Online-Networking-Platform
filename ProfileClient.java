@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class ProfileClient extends JComponent implements Runnable {
     Boolean loggedIn = false;
@@ -31,9 +32,33 @@ public class ProfileClient extends JComponent implements Runnable {
     JButton registerCancelButton;
     JButton listUserButton;
     JButton backToMeButton;
+    JPanel friendListPanel;
+    JScrollPane friendListScrollPanel;
+    JButton friendsButton;
+    JPanel lowerLeftPanel;
+    JLabel myNameLabel;
+    JLabel phoneLabel;
+    JLabel profileAboutMeLabel;
+    JButton profileAddFriendButton;
+    JButton profileCancelButton;
+    JLabel profileEmailLabel;
+    JTextField profileEmailText;
+    JLabel profileInterestsLabel;
+    JTextField profileLikesAndInterestsText;
+    JLabel profileNameLabel;
+    JTextField profileNameText;
+    JPanel upperLeftPanel;
+    JTextField profilePhoneText;
+    JButton profileSaveButton;
+    JPanel profilePanel;
+    JTextArea profileAboutMeArea;
+    JPanel lowerRightPanel;
 
     ProfileClient profileClient;
     Profile currentProfile;
+    // final Profile myProfile = profileA;
+
+    
 
     ActionListener actionListener = new ActionListener() {
         @Override
@@ -94,6 +119,20 @@ public class ProfileClient extends JComponent implements Runnable {
             if (e.getSource() == listUserButton) {
                 showListUserPanel();
                 // showFriendRequestPanel();
+            }
+
+            if (e.getSource() == backToMeButton) {
+                loadInfo(myProfile);
+                updateUI();
+            }
+
+            if (e.getSource() == profileCancelButton) {
+                loadInfo(myProfile);
+                updateUI();
+            }
+
+            if (e.getSource() == profileSaveButton) {
+
             }
 
         }
@@ -226,6 +265,8 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.add(registerCancelButton);
     }
 
+    
+
     private void showMainPanel() {
         mainFrame = new JFrame();
         JPanel panel = new JPanel();
@@ -241,51 +282,104 @@ public class ProfileClient extends JComponent implements Runnable {
         mainFrame.setContentPane(panel);
         panel.setLayout(null);
         
-        JPanel myInfoPanel = new JPanel();
-        myInfoPanel.setBounds(10, 10, 285, 130);
-        panel.add(myInfoPanel);
-        myInfoPanel.setLayout(null);
-        
-        JLabel myNameLabel = new JLabel("Ziyang Huang");
-        myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        myNameLabel.setBounds(73, 10, 177, 40);
-        myInfoPanel.add(myNameLabel);
-        
-        JPanel toolPanel = new JPanel();
-        toolPanel.setBounds(10, 550, 285, 111);
-        panel.add(toolPanel);
-        toolPanel.setLayout(null);
-        
-        backToMeButton = new JButton("Back To Me");
-        backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
-        backToMeButton.setBounds(10, 10, 95, 30);
+        upperLeftPanel = new JPanel();
+		upperLeftPanel.setBounds(10, 10, 285, 130);
+		panel.add(upperLeftPanel);
+		upperLeftPanel.setLayout(null);
+		
+		myNameLabel = new JLabel("Ziyang Huang");
+		myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+		myNameLabel.setBounds(73, 10, 177, 40);
+		upperLeftPanel.add(myNameLabel);
+		
+		lowerLeftPanel = new JPanel();
+		lowerLeftPanel.setBounds(10, 550, 285, 111);
+		panel.add(lowerLeftPanel);
+		lowerLeftPanel.setLayout(null);
+		
+		listUserButton = new JButton("Find Friend");
+		listUserButton.setFont(new Font("Arial", Font.BOLD, 12));
+		listUserButton.setBounds(145, 10, 95, 30);
+		lowerLeftPanel.add(listUserButton);
+		
+		backToMeButton = new JButton("My Profile");
+		backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
+        backToMeButton.setBounds(29, 10, 95, 30);
         backToMeButton.addActionListener(actionListener);
+		lowerLeftPanel.add(backToMeButton);
+		
+		friendListScrollPanel = new JScrollPane();
+		friendListScrollPanel.setBounds(10, 149, 285, 391);
+		panel.add(friendListScrollPanel);
+		
+		friendListPanel = new JPanel();
+		friendListPanel.setPreferredSize(new Dimension(285, 0));
+		friendListScrollPanel.setViewportView(friendListPanel);
+		friendListPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		profilePanel = new JPanel();
+		profilePanel.setBounds(305, 70, 579, 500);
+		panel.add(profilePanel);
+		profilePanel.setLayout(null);
+		
+		profileNameLabel = new JLabel("Name: ");
+		profileNameLabel.setBounds(10, 29, 54, 15);
+		profilePanel.add(profileNameLabel);
+		
+		profileEmailLabel = new JLabel("Email: ");
+		profileEmailLabel.setBounds(10, 68, 54, 15);
+		profilePanel.add(profileEmailLabel);
+		
+		profileAboutMeLabel = new JLabel("About Me: ");
+		profileAboutMeLabel.setBounds(10, 110, 80, 15);
+		profilePanel.add(profileAboutMeLabel);
+		
+		profileNameText = new JTextField();
+		profileNameText.setBounds(90, 26, 120, 21);
+		profilePanel.add(profileNameText);
+		profileNameText.setColumns(10);
+		
+		profileEmailText = new JTextField();
+		profileEmailText.setBounds(90, 65, 200, 21);
+		profilePanel.add(profileEmailText);
+		profileEmailText.setColumns(10);
+		
+		profileAboutMeArea = new JTextArea();
+		profileAboutMeArea.setBounds(20, 132, 535, 100);
+		profilePanel.add(profileAboutMeArea);
+		
+		profileInterestsLabel = new JLabel("Likes & Interests: ");
+		profileInterestsLabel.setBounds(10, 277, 163, 15);
+		profilePanel.add(profileInterestsLabel);
+		
+		profileLikesAndInterestsText = new JTextField();
+		profileLikesAndInterestsText.setBounds(24, 302, 531, 21);
+		profilePanel.add(profileLikesAndInterestsText);
+		profileLikesAndInterestsText.setColumns(10);
+		
+		profileAddFriendButton = new JButton("Add Friend");
+        profileAddFriendButton.setBounds(462, 443, 93, 23);
+        profileAddFriendButton.addActionListener(actionListener);
+		profilePanel.add(profileAddFriendButton);
+		
+		lowerRightPanel = new JPanel();
+		lowerRightPanel.setBounds(305, 580, 579, 81);
+		panel.add(lowerRightPanel);
+		lowerRightPanel.setLayout(null);
+		
+		profileCancelButton = new JButton("Cancel");
+        profileCancelButton.setBounds(476, 32, 93, 23);
+        profileCancelButton.addActionListener(actionListener);
+		lowerRightPanel.add(profileCancelButton);
+		
+		profileSaveButton = new JButton("Save");
+        profileSaveButton.setBounds(362, 32, 93, 23);
+        profileSaveButton.addActionListener(actionListener);
+		lowerRightPanel.add(profileSaveButton);
 
-        listUserButton = new JButton("List Users");
-        listUserButton.setFont(new Font("Arial", Font.BOLD, 12));
-        listUserButton.setBounds(120, 10, 95, 30);
-        listUserButton.addActionListener(actionListener);
 
-        toolPanel.add(backToMeButton);
-        toolPanel.add(listUserButton);
         
-        JScrollPane friendListPanel = new JScrollPane();
-        friendListPanel.setBounds(10, 149, 285, 391);
-        panel.add(friendListPanel);
         
-        // JScrollPane profileDetailPanel = new JScrollPane();
-        // profileDetailPanel.setBounds(305, 10, 579, 651);
-        // panel.add(profileDetailPanel);
-        
-        // JPanel panel1 = new JPanel();
-        // profileDetailPanel.setColumnHeaderView(panel);
-        
-        JLabel label = new JLabel("New label");
-        panel.add(label);
-        
-        JTextField textField = new JTextField();
-        panel.add(textField);
-        textField.setColumns(10);
     }
 
 
@@ -353,4 +447,25 @@ public class ProfileClient extends JComponent implements Runnable {
         return r.split(": ");
         // [Req1: username: password] -> []
     }
+
+    private void loadInfo(Profile profile) {
+        currentProfile = profileA;
+        profileNameText.setText(profileA.getAccount().getName());
+        profileEmailText.setText(profileA.getEmail());
+        profileLikesAndInterestsText.setText(profileA.getLikesAndInterests().toString());
+    }
+    
+    Account accountA = new Account("unA12345", "pwA12345");
+    String name = "zyh";
+    String email = "123123123@gmail.com";
+    String aboutMe = "qwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwer";
+    ArrayList<String> likesAndInterests= new ArrayList<>();
+
+
+    ArrayList<String> friendUserNames = new ArrayList<>();
+    
+
+
+    Profile profileA = new Profile(name, accountA, email, aboutMe, likesAndInterests, friendUserNames);
+    final Profile myProfile = profileA;
 }
