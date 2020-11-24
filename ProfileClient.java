@@ -25,6 +25,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JButton loginButton;
     JButton registerButton;
     JButton registerButton2;
+    JButton registerCancelButton;
 
     ProfileClient profileClient;
 
@@ -33,7 +34,7 @@ public class ProfileClient extends JComponent implements Runnable {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loginButton) {
                 String username = userText.getText();
-                String password = passwordText.getPassword().toString();
+                String password = String.valueOf(passwordText.getPassword());
                 if (userLogin(username, password) == 1) {
                     loginFrame.dispose();
                     loggedIn = true;
@@ -47,10 +48,14 @@ public class ProfileClient extends JComponent implements Runnable {
 
             if (e.getSource() == registerButton2) {
                 String username = userText.getText();
-                String password = passwordText.getPassword().toString();
+                String password = String.valueOf(passwordText.getPassword());
                 if (userRegister(username, password) == 1) {
                     registerFrame.dispose();
                 }
+            }
+
+            if (e.getSource() == registerCancelButton) {
+                registerFrame.dispose();
             }
 
         }
@@ -61,7 +66,7 @@ public class ProfileClient extends JComponent implements Runnable {
         String loginResponse;
         
         loginResponse = sendRequest(loginRequest);
-        if (rHandler(loginResponse)[0].equals("Res0")) {
+        if (rHandler(loginResponse)[0].equals("Res1")) {
             JOptionPane.showMessageDialog(null, "Login Successfully", "User Login", JOptionPane.INFORMATION_MESSAGE);
             return 1;
         } else if (rHandler(loginResponse)[0].equals("E1")) {
@@ -77,7 +82,7 @@ public class ProfileClient extends JComponent implements Runnable {
         String registerResponse;
         
         registerResponse = sendRequest(registerRequest);
-        if (rHandler(registerResponse)[0].equals("Res0")) {
+        if (rHandler(registerResponse)[0].equals("Res2")) {
             JOptionPane.showMessageDialog(null, "Register Successfully", "User Login", JOptionPane.INFORMATION_MESSAGE);
             return 1;
         } else if (rHandler(registerResponse)[0].equals("E2")) {
@@ -98,9 +103,6 @@ public class ProfileClient extends JComponent implements Runnable {
         initializeNetwork();
         
         showLoginPanel();
-
-        
-
     }
 
     private void showLoginPanel() {
@@ -129,11 +131,11 @@ public class ProfileClient extends JComponent implements Runnable {
         passwordText.setBounds(110, 60, 165, 25);
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(30, 110, 80, 25);
+        loginButton.setBounds(30, 110, 90, 25);
         loginButton.addActionListener(actionListener);
 
         registerButton = new JButton("Register");
-        registerButton.setBounds(150, 110, 80, 25);
+        registerButton.setBounds(170, 110, 90, 25);
         registerButton.addActionListener(actionListener);
 
         panel.add(userLabel);
@@ -171,68 +173,72 @@ public class ProfileClient extends JComponent implements Runnable {
         passwordText.setBounds(110, 60, 165, 25);
 
         registerButton2 = new JButton("Register");
-        registerButton2.setBounds(30, 110, 80, 25);
+        registerButton2.setBounds(30, 110, 90, 25);
         registerButton2.addActionListener(actionListener);
+
+        registerCancelButton = new JButton("Cancel");
+        registerCancelButton.setBounds(170, 110, 90, 25);
+        registerCancelButton.addActionListener(actionListener);
 
         panel.add(userLabel);
         panel.add(userText);
         panel.add(passwordLabel);
         panel.add(passwordText);
         panel.add(registerButton2);
+        panel.add(registerCancelButton);
     }
 
     private void showMainPanel() {
         mainFrame = new JFrame();
         JPanel panel = new JPanel();
 
-		mainFrame.setVisible(true);
+        mainFrame.setVisible(true);
         mainFrame.setTitle("Profile!");
-		mainFrame.setResizable(false);
-		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.setResizable(false);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setBounds(100, 100, 900, 700);
-        
 
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		mainFrame.setContentPane(panel);
-		panel.setLayout(null);
-		
-		JPanel myInfoPanel = new JPanel();
-		myInfoPanel.setBounds(10, 10, 285, 130);
-		panel.add(myInfoPanel);
-		myInfoPanel.setLayout(null);
-		
-		JLabel myNameLabel = new JLabel("Ziyang Huang");
-		myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
-		myNameLabel.setBounds(73, 10, 177, 40);
-		myInfoPanel.add(myNameLabel);
-		
-		JPanel toolPanel = new JPanel();
-		toolPanel.setBounds(10, 550, 285, 111);
-		panel.add(toolPanel);
-		toolPanel.setLayout(null);
-		
-		JButton friendRequestButton = new JButton("Find Friend");
-		friendRequestButton.setFont(new Font("Arial", Font.BOLD, 12));
-		friendRequestButton.setBounds(10, 10, 95, 30);
-		toolPanel.add(friendRequestButton);
-		
-		JScrollPane friendListPanel = new JScrollPane();
-		friendListPanel.setBounds(10, 149, 285, 391);
-		panel.add(friendListPanel);
-		
-		JScrollPane profileDetailPanel = new JScrollPane();
-		profileDetailPanel.setBounds(305, 10, 579, 651);
-		panel.add(profileDetailPanel);
-		
-		JPanel panel1 = new JPanel();
-		profileDetailPanel.setColumnHeaderView(panel);
-		
-		JLabel label = new JLabel("New label");
-		panel.add(label);
-		
-		JTextField textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
+        panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        mainFrame.setContentPane(panel);
+        panel.setLayout(null);
+        
+        JPanel myInfoPanel = new JPanel();
+        myInfoPanel.setBounds(10, 10, 285, 130);
+        panel.add(myInfoPanel);
+        myInfoPanel.setLayout(null);
+        
+        JLabel myNameLabel = new JLabel("Ziyang Huang");
+        myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        myNameLabel.setBounds(73, 10, 177, 40);
+        myInfoPanel.add(myNameLabel);
+        
+        JPanel toolPanel = new JPanel();
+        toolPanel.setBounds(10, 550, 285, 111);
+        panel.add(toolPanel);
+        toolPanel.setLayout(null);
+        
+        JButton listUserButton = new JButton("List Users");
+        listUserButton.setFont(new Font("Arial", Font.BOLD, 12));
+        listUserButton.setBounds(10, 10, 95, 30);
+        toolPanel.add(listUserButton);
+        
+        JScrollPane friendListPanel = new JScrollPane();
+        friendListPanel.setBounds(10, 149, 285, 391);
+        panel.add(friendListPanel);
+        
+        // JScrollPane profileDetailPanel = new JScrollPane();
+        // profileDetailPanel.setBounds(305, 10, 579, 651);
+        // panel.add(profileDetailPanel);
+        
+        // JPanel panel1 = new JPanel();
+        // profileDetailPanel.setColumnHeaderView(panel);
+        
+        JLabel label = new JLabel("New label");
+        panel.add(label);
+        
+        JTextField textField = new JTextField();
+        panel.add(textField);
+        textField.setColumns(10);
     }
 
     private void initializeNetwork() {
@@ -278,5 +284,6 @@ public class ProfileClient extends JComponent implements Runnable {
 
     private String[] rHandler(String r) {
         return r.split(": ");
+        // [Req1: username: password] -> []
     }
 }
