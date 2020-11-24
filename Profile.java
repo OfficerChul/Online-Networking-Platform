@@ -1,8 +1,15 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profile {
+public class Profile implements Serializable {
 
-    //userName should be unique for the Account object
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2395638123565212616L;
+
+    
+    // userName should be unique for the Account object
     Account account;
     String email;
     String aboutMe;
@@ -49,6 +56,14 @@ public class Profile {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAboutMe(String aboutMe) {

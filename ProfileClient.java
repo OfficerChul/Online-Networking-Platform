@@ -7,6 +7,10 @@ import java.net.*;
 import java.util.*;
 
 public class ProfileClient extends JComponent implements Runnable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5597188023823293381L;
     Boolean loggedIn = false;
     Socket socket;
     String hostName = "localhost";
@@ -450,7 +454,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
     private void loadInfo(Profile profile) {
         currentProfile = profileA;
-        profileNameText.setText(profileA.getAccount().getName());
+        profileNameText.setText(profileA.getName());
         profileEmailText.setText(profileA.getEmail());
         profileLikesAndInterestsText.setText(profileA.getLikesAndInterests().toString());
     }
