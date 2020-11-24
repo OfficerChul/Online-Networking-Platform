@@ -14,6 +14,9 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame loginFrame;
     JFrame registerFrame;
     JFrame mainFrame;
+    JFrame listAllUsFrame;
+    JFrame friendRequestFrame;
+    JFrame reqeustHistoryFrame;
 
     BufferedReader reader;
     PrintWriter writer;
@@ -26,8 +29,11 @@ public class ProfileClient extends JComponent implements Runnable {
     JButton registerButton;
     JButton registerButton2;
     JButton registerCancelButton;
+    JButton listUserButton;
+    JButton backToMeButton;
 
     ProfileClient profileClient;
+    Profile currentProfile;
 
     ActionListener actionListener = new ActionListener() {
         @Override
@@ -85,6 +91,11 @@ public class ProfileClient extends JComponent implements Runnable {
                 registerFrame.dispose();
             }
 
+            if (e.getSource() == listUserButton) {
+                showListUserPanel();
+                // showFriendRequestPanel();
+            }
+
         }
     };
 
@@ -110,10 +121,10 @@ public class ProfileClient extends JComponent implements Runnable {
         
         registerResponse = sendRequest(registerRequest);
         if (rHandler(registerResponse)[0].equals("Res2")) {
-            JOptionPane.showMessageDialog(null, "Register Successfully", "User Login", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Registered Successfully!", "User Login", JOptionPane.INFORMATION_MESSAGE);
             return 1;
         } else if (rHandler(registerResponse)[0].equals("E2")) {
-            JOptionPane.showMessageDialog(null, "Register Failed", "User Login", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The username already exists.", "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return 0;
@@ -139,7 +150,7 @@ public class ProfileClient extends JComponent implements Runnable {
         loginFrame.setSize(300, 200);
         loginFrame.setResizable(false);
         loginFrame.setLocationRelativeTo(null);
-        loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setVisible(true);
         loginFrame.add(panel);
 
@@ -219,11 +230,12 @@ public class ProfileClient extends JComponent implements Runnable {
         mainFrame = new JFrame();
         JPanel panel = new JPanel();
 
+        // mainFrame.setLocationRelativeTo(null);
+        mainFrame.setSize(900, 700);
         mainFrame.setVisible(true);
         mainFrame.setTitle("Profile!");
         mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainFrame.setBounds(100, 100, 900, 700);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         mainFrame.setContentPane(panel);
@@ -244,9 +256,17 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.add(toolPanel);
         toolPanel.setLayout(null);
         
-        JButton listUserButton = new JButton("List Users");
+        backToMeButton = new JButton("Back To Me");
+        backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
+        backToMeButton.setBounds(10, 10, 95, 30);
+        backToMeButton.addActionListener(actionListener);
+
+        listUserButton = new JButton("List Users");
         listUserButton.setFont(new Font("Arial", Font.BOLD, 12));
-        listUserButton.setBounds(10, 10, 95, 30);
+        listUserButton.setBounds(120, 10, 95, 30);
+        listUserButton.addActionListener(actionListener);
+
+        toolPanel.add(backToMeButton);
         toolPanel.add(listUserButton);
         
         JScrollPane friendListPanel = new JScrollPane();
@@ -266,6 +286,26 @@ public class ProfileClient extends JComponent implements Runnable {
         JTextField textField = new JTextField();
         panel.add(textField);
         textField.setColumns(10);
+    }
+
+
+    private void showListUserPanel() {
+        listAllUsFrame = new JFrame();
+        JPanel panel = new JPanel();
+
+        listAllUsFrame.setLocationRelativeTo(null);
+        listAllUsFrame.setSize(300, 500);
+        listAllUsFrame.setVisible(true);
+        listAllUsFrame.setTitle("List All Users");
+        listAllUsFrame.setResizable(false);
+        listAllUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    
+        
+    }
+
+    private void showFriendRequestPanel() {
+        FriendRequest friendRequest = new FriendRequest();
+        friendRequest.listUsersFriendRequest("username");
     }
 
     private void initializeNetwork() {
