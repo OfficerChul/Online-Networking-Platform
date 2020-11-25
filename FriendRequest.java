@@ -201,9 +201,4 @@ public class FriendRequest extends JComponent {
         return usernameWhoSent;
     }
 
-    public static void main(String[] args) {
-        FriendRequest friendRequest = new FriendRequest();
-        friendRequest.listUsersFriendRequest("bb");
-    }
-
 }
