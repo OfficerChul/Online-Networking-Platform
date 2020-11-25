@@ -404,21 +404,20 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     private void showListUserPanel() {
-        listAllUsFrame = new JFrame();
-        JPanel panel = new JPanel();
+        // listAllUsFrame = new JFrame();
+        // JPanel panel = new JPanel();
 
-        listAllUsFrame.setLocationRelativeTo(null);
-        listAllUsFrame.setSize(300, 500);
-        listAllUsFrame.setVisible(true);
-        listAllUsFrame.setTitle("List All Users");
-        listAllUsFrame.setResizable(false);
-        listAllUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // listAllUsFrame.setLocationRelativeTo(null);
+        // listAllUsFrame.setSize(300, 500);
+        // listAllUsFrame.setVisible(true);
+        // listAllUsFrame.setTitle("List All Users");
+        // listAllUsFrame.setResizable(false);
+        // listAllUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
 
     private void showFriendRequestPanel() {
-        FriendRequest friendRequest = new FriendRequest();
-        friendRequest.listUsersFriendRequest("username");
+
     }
 
     private void initializeNetwork() {
