@@ -8,12 +8,12 @@ public class Profile implements Serializable {
      */
     private static final long serialVersionUID = 2395638123565212616L;
 
-    
+
     // userName should be unique for the Account object
-    Account account;
-    String email;
-    String aboutMe;
-    String name;
+    private Account account;
+    private String email;
+    private String aboutMe;
+    private String name;
     private ArrayList<String> likesAndInterests = new ArrayList<>();
     private ArrayList<String> friendUserNames = new ArrayList<>();
     private ArrayList<FriendRequest> sentFriendRequests = new ArrayList<FriendRequest>();
@@ -94,4 +94,11 @@ public class Profile implements Serializable {
         this.sentFriendRequests = sentFriendRequests;
     }
 
+    public void addToLikesAndInterests(String interest) {
+        likesAndInterests.add(interest);
+    }
+
+    public void addToFriendUsernames(String username) {
+        friendUserNames.add(username);
+    }
 }
