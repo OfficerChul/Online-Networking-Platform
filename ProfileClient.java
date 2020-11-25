@@ -21,7 +21,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame mainFrame;
     JFrame listAllUsFrame;
     JFrame friendRequestFrame;
-    JFrame reqeustHistoryFrame;
+    JFrame requestHistoryFrame;
 
     BufferedReader reader;
     PrintWriter writer;
