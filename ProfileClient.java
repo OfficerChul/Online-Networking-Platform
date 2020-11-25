@@ -11,6 +11,7 @@ public class ProfileClient extends JComponent implements Runnable {
      *
      */
     private static final long serialVersionUID = 5597188023823293381L;
+    
     Boolean loggedIn = false;
     Socket socket;
     String hostName = "localhost";
@@ -59,6 +60,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JPanel profilePanel;
     JTextArea profileAboutMeArea;
     JPanel lowerRightPanel;
+    JScrollPane profileAboutMeScrollPanel;
 
     ProfileClient profileClient;
     Profile currentProfile;
@@ -353,6 +355,10 @@ public class ProfileClient extends JComponent implements Runnable {
         profileEmailLabel.setBounds(10, 68, 54, 15);
         profilePanel.add(profileEmailLabel);
 
+        profileAboutMeScrollPanel = new JScrollPane();
+		profileAboutMeScrollPanel.setBounds(20, 135, 535, 100);
+		profilePanel.add(profileAboutMeScrollPanel);
+
         profileAboutMeLabel = new JLabel("About Me: ");
         profileAboutMeLabel.setBounds(10, 110, 80, 15);
         profilePanel.add(profileAboutMeLabel);
@@ -368,8 +374,8 @@ public class ProfileClient extends JComponent implements Runnable {
         profileEmailText.setColumns(10);
 
         profileAboutMeArea = new JTextArea();
-        profileAboutMeArea.setBounds(20, 132, 535, 100);
-        profilePanel.add(profileAboutMeArea);
+		profileAboutMeArea.setLineWrap(true);
+		profileAboutMeScrollPanel.setViewportView(profileAboutMeArea);
 
         profileInterestsLabel = new JLabel("Likes & Interests: ");
         profileInterestsLabel.setBounds(10, 277, 163, 15);
@@ -486,6 +492,7 @@ public class ProfileClient extends JComponent implements Runnable {
         currentProfile = profile;
         profileNameText.setText(profile.getName());
         profileEmailText.setText(profile.getEmail());
+        profileAboutMeArea.setText(profile.getAboutMe());
         profileLikesAndInterestsText.setText(profile.getLikesAndInterests().toString());
     }
 
