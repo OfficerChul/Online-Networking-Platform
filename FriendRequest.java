@@ -9,7 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FriendRequest extends JComponent {
+public class FriendRequest extends JComponent implements Serializable {
     String usernameWhoSent;
     String usernameWhoReceive;
     ArrayList<FriendRequest> friendRequestList;
