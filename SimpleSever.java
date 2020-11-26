@@ -16,7 +16,7 @@ public class SimpleSever {
                 // PrintWriter writer;
 
                 try {
-                    serverSocket = new ServerSocket(4242);
+                    serverSocket = new ServerSocket(6868);
                     System.out.println("Waiting for the client to connect...");
                     socket = serverSocket.accept();
                     
