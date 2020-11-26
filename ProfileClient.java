@@ -20,7 +20,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame loginFrame;
     JFrame registerFrame;
     JFrame mainFrame;
-    JFrame listAllUsFrame;
+    JFrame listAllUserFrame;
     JFrame friendRequestFrame;
     JFrame requestHistoryFrame;
 
@@ -37,7 +37,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JButton registerButton;
     JButton registerButton2;
     JButton registerCancelButton;
-    JButton listUserButton;
+    JButton listAllUserButton;
     JButton backToMeButton;
     JPanel friendListPanel;
     JScrollPane friendListScrollPanel;
@@ -124,8 +124,8 @@ public class ProfileClient extends JComponent implements Runnable {
                 registerFrame.dispose();
             }
 
-            if (e.getSource() == listUserButton) {
-                showListUserPanel();
+            if (e.getSource() == listAllUserButton) {
+                showListAllUserPanel();
                 // showFriendRequestPanel();
             }
 
@@ -327,10 +327,10 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.add(lowerLeftPanel);
         lowerLeftPanel.setLayout(null);
 
-        listUserButton = new JButton("Find Friend");
-        listUserButton.setFont(new Font("Arial", Font.BOLD, 12));
-        listUserButton.setBounds(145, 10, 95, 30);
-        lowerLeftPanel.add(listUserButton);
+        listAllUserButton = new JButton("List Users");
+        listAllUserButton.setFont(new Font("Arial", Font.BOLD, 12));
+        listAllUserButton.setBounds(145, 10, 95, 30);
+        lowerLeftPanel.add(listAllUserButton);
 
         backToMeButton = new JButton("My Profile");
         backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
@@ -414,21 +414,78 @@ public class ProfileClient extends JComponent implements Runnable {
         loadInfo(myProfile);
     }
 
-    private void showListUserPanel() {
-        // listAllUsFrame = new JFrame();
-        // JPanel panel = new JPanel();
+    private void showListAllUserPanel() {
+        listAllUserFrame = new JFrame();
+        JPanel panel = new JPanel();
 
-        // listAllUsFrame.setLocationRelativeTo(null);
-        // listAllUsFrame.setSize(300, 500);
-        // listAllUsFrame.setVisible(true);
-        // listAllUsFrame.setTitle("List All Users");
-        // listAllUsFrame.setResizable(false);
-        // listAllUsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        listAllUserFrame.setTitle("Profile - List All Users");
+		listAllUserFrame.setResizable(false);
+		listAllUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		listAllUserFrame.setBounds(100, 100, 600, 400);
+		
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(new BorderLayout(0, 0));
+		listAllUserFrame.setContentPane(panel);
+		
+		JPanel listAllUserUpperPanel = new JPanel();
+		listAllUserUpperPanel.setPreferredSize(new Dimension(50, 30));
+		panel.add(listAllUserUpperPanel, BorderLayout.NORTH);
+		
+		JLabel listAllUserTitleLabel = new JLabel("All Users");
+		listAllUserTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		listAllUserUpperPanel.add(listAllUserTitleLabel);
+		
+		JScrollPane listAllUserMainScrollPanel = new JScrollPane();
+		panel.add(listAllUserMainScrollPanel, BorderLayout.CENTER);
+		
+		JPanel listAllUserMainPanel = new JPanel();
+		listAllUserMainPanel.setPreferredSize(new Dimension(580, 0));
+		listAllUserMainPanel.setMaximumSize(new Dimension(600, 32767));
+		listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
 
     }
 
     private void showFriendRequestPanel() {
+    
+    }
 
+    private void addUsernameButton(String username, JPanel targetPanel) {
+        JButton buttonToAdd = new JButton(username);
+        buttonToAdd.setPreferredSize(new Dimension(140, 25));
+        buttonToAdd.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String request = "Req10: " + username;
+                Object response = sendRequest(request);
+                
+                if (response instanceof Profile) {
+                    loadInfo((Profile) response);
+                    // TODO: Check if is friend already
+                    profileAddFriendButton.setVisible(true);
+                    profileSaveButton.setVisible(false);
+                    profileCancelButton.setVisible(false);
+                } else {
+                    // TODO: Check error response
+                    JOptionPane.showMessageDialog(null, (String) response, "User Login", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                
+            }
+
+        });
+        targetPanel.add(buttonToAdd);
+        updateUI();
+        resizePanel(targetPanel);
+    }
+
+    private void resizePanel(JPanel targetPanel) {
+        int numComponents = targetPanel.getComponentCount();
+        // TODO: check which panel to resize
+        int height = (numComponents / (targetPanel.getWidth() / (100 + 5))) * (100 + 5);  
+        targetPanel.setPreferredSize(new Dimension(0, height)); 
+        
+        updateUI();
     }
 
     private void initializeNetwork() {
