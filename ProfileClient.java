@@ -344,6 +344,7 @@ public class ProfileClient extends JComponent implements Runnable {
         listAllUserButton = new JButton("List Users");
         listAllUserButton.setFont(new Font("Arial", Font.BOLD, 12));
         listAllUserButton.setBounds(145, 10, 95, 30);
+        listAllUserButton.addActionListener(actionListener);
         lowerLeftPanel.add(listAllUserButton);
 
         backToMeButton = new JButton("My Profile");
@@ -406,6 +407,7 @@ public class ProfileClient extends JComponent implements Runnable {
         profileLikesAndInterestsText.setColumns(10);
 
         profileAddFriendButton = new JButton("Add Friend");
+        profileAddFriendButton.setVisible(false);
         profileAddFriendButton.setBounds(462, 443, 93, 23);
         profileAddFriendButton.addActionListener(actionListener);
         profilePanel.add(profileAddFriendButton);
@@ -435,7 +437,8 @@ public class ProfileClient extends JComponent implements Runnable {
         listAllUserFrame.setTitle("Profile - List All Users");
 		listAllUserFrame.setResizable(false);
 		listAllUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		listAllUserFrame.setBounds(100, 100, 600, 400);
+        listAllUserFrame.setBounds(100, 100, 600, 400);
+        listAllUserFrame.setVisible(true);
 		
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setLayout(new BorderLayout(0, 0));
@@ -455,12 +458,26 @@ public class ProfileClient extends JComponent implements Runnable {
 		JPanel listAllUserMainPanel = new JPanel();
 		listAllUserMainPanel.setPreferredSize(new Dimension(580, 0));
 		listAllUserMainPanel.setMaximumSize(new Dimension(600, 32767));
-		listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
+        listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
+
+        String[] userList = requestUserList();
+        for (String username : userList) {
+            addUsernameButton(username, listAllUserMainPanel);
+        }
 
     }
 
     private void showFriendRequestPanel() {
     
+    }
+
+    private String[] requestUserList() {
+        String request = "Req9: Request all users";
+        String[] response;
+        
+        response = ((String) sendRequest(request)).split(",");
+
+        return response;
     }
 
     private void addUsernameButton(String username, JPanel targetPanel) {
@@ -490,7 +507,8 @@ public class ProfileClient extends JComponent implements Runnable {
         });
         targetPanel.add(buttonToAdd);
         updateUI();
-        resizePanel(targetPanel);
+        // TODO: Resize
+        // resizePanel(targetPanel);
     }
 
     private void resizePanel(JPanel targetPanel) {
