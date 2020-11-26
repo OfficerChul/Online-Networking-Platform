@@ -15,7 +15,7 @@ public class ProfileClient extends JComponent implements Runnable {
     Boolean loggedIn = false;
     Socket socket;
     String hostName = "localhost";
-    int portNumber = 4242;
+    int portNumber = 6868;
 
     JFrame loginFrame;
     JFrame registerFrame;
@@ -175,6 +175,8 @@ public class ProfileClient extends JComponent implements Runnable {
             return 1;
         } else if (((String) loginResponse).split(": ")[0].equals("E1")) {
             JOptionPane.showMessageDialog(null, "Login Failed", "User Login", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, (String) loginResponse, "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return 0;
@@ -192,6 +194,9 @@ public class ProfileClient extends JComponent implements Runnable {
             return 1;
         } else if (((String) (registerResponse)).split(": ")[0].equals("E2")) {
             JOptionPane.showMessageDialog(null, "The username already exists.", "User Login",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, (String) (registerResponse), "User Login",
                     JOptionPane.INFORMATION_MESSAGE);
         }
 

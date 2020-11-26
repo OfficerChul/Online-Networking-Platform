@@ -41,6 +41,10 @@ public final class ServerRequestHandler implements Runnable {
             req = (String) request;
             String[] requestVals = req.split(":");
             switch (requestVals[0]) {
+                case "Req0": {
+                    response = "Res0: Connection Esablished";
+                    break;
+                }
                 case "Req1": { // Login: “Req1: <username>: <password>”
                     String username = removeSpaceAtStart(requestVals[1]);
                     String password = removeSpaceAtStart(requestVals[2]);
@@ -48,7 +52,7 @@ public final class ServerRequestHandler implements Runnable {
                     if (Login(username, password)) {
                         response = returnProfileFromUsername(username);
                     } else {
-                        response = "ERROR: Login Failed";
+                        response = "E1: ERROR: Login Failed";
                     }
                     break;
                 }
@@ -56,9 +60,9 @@ public final class ServerRequestHandler implements Runnable {
                     String username = removeSpaceAtStart(requestVals[1]);
                     boolean usernameTaken = usernameIsTaken(username);
                     if (usernameTaken) {
-                        response = "ERROR: Username already exists";
+                        response = "E2: ERROR: Username already exists";
                     } else {
-                        response = "username is available";
+                        response = "Res2: username is available";
                     }
                     break;
                 }
@@ -147,10 +151,12 @@ public final class ServerRequestHandler implements Runnable {
              var reader = new ObjectInputStream(inputStream);
              var outputStream = this.clientSocket.getOutputStream();
              var writer = new ObjectOutputStream(outputStream)) {
-            request = reader.readObject();
-            response = this.getResponse(request);
-            writer.writeObject(response);
-            writer.flush();
+            while (true) {
+                request = reader.readObject();
+                response = this.getResponse(request);
+                writer.writeObject(response);
+                writer.flush();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } //end try catch
