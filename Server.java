@@ -54,11 +54,11 @@ public final class Server {
         System.out.println("To close the server: Input a character below");;
 
         while (true) {
-            Scanner scan = new Scanner(System.in);
-            if (scan.hasNext()) {
-                CloseServer();
-                break;
-            }
+            // Scanner scan = new Scanner(System.in);
+            // if (scan.hasNext()) {
+            //     CloseServer();
+            //     break;
+            // }
             try {
                 clientSocket = this.serverSocket.accept();
             } catch (IOException e) {

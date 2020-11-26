@@ -131,7 +131,7 @@ public final class ServerRequestHandler implements Runnable {
                 default: {
                     response = "invalid request";
                 }
-            }
+            }   
         }
         Server.setProfiles(profiles); // updates server with ServerRequestHandler Data
         // Server.writeProfilesToFile("serverData.txt");
