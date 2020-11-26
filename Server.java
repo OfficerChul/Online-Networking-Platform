@@ -1,5 +1,5 @@
+import java.io.*;
 import java.net.ServerSocket;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,13 +16,20 @@ public final class Server {
     private final ServerSocket serverSocket;
     private ArrayList<String> userNames;
     private ArrayList<String> onlineUsers;
-    //private ArrayList<Profile> profiles;
+    private static ArrayList<Profile> profiles;
 
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
+        File serverDataFile = new File("serverData.txt");
+        if (serverDataFile.exists()) {
+            readProfilesFromFile("serverData.txt");
+        } else {
+            profiles = new ArrayList<>();
+        }
+
         // read all usernames from username file, instantiates userName arraylist
         // instantiates profiles arraylist
-    } //PowerServer
+    } //server constructor
 
     public void serveClients() {
         InetAddress address;
@@ -36,7 +43,6 @@ public final class Server {
             address = InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
             e.printStackTrace();
-
             return;
         } //end try catch
 
@@ -54,8 +60,6 @@ public final class Server {
             handler = new ServerRequestHandler(clientSocket);
             handlerThread = new Thread(handler);
             handlerThread.start();
-
-
         } //end while
     } //serveClients
 
@@ -70,8 +74,59 @@ public final class Server {
         server.serveClients();
     } //main
 
-    private void CloseServer {
+    private void CloseServer() {
+        writeProfilesToFile("serverData.txt");
         // write all the arraylist data back to the files
         // close the server
+    }
+
+    public static void writeProfilesToFile(String filename) {
+        File f = new File(filename);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(f);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            for (int i = 0; i < profiles.size(); i++) {
+                oos.writeObject(profiles.get(i));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readProfilesFromFile(String filename) {
+        File f = new File(filename);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(f);
+            ObjectInputStream oos = new ObjectInputStream(fis);
+            Profile current = (Profile) oos.readObject();
+            ArrayList<Profile> newProfiles = new ArrayList<Profile>();
+            while (current != null) {
+                newProfiles.add(current);
+                try {
+                    current = (Profile) oos.readObject();
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            profiles = newProfiles;
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (ClassNotFoundException classNotFoundException) {
+            classNotFoundException.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public static void setProfiles(ArrayList<Profile> profiles) {
+        Server.profiles = profiles;
     }
 }
