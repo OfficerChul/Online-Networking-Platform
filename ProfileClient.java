@@ -184,20 +184,34 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     public int userRegister(String username, String password) {
-        String registerRequest = String.format("Req2: %s: %s", username, password);
-        String registerResponse;
+        String registrationRequest = String.format("Req2: %s: %s", username, password);
+        String checkUsernameResponse;
+        Object registrationResponse;
 
-        registerResponse = (String) sendRequest(registerRequest);
-        if (((String) (registerResponse)).split(": ")[0].equals("Res2")) {
-            JOptionPane.showMessageDialog(null, "Registered Successfully!", "User Login",
+        checkUsernameResponse = (String) sendRequest(registrationRequest);
+        if (((String) (checkUsernameResponse)).split(": ")[0].equals("Res2")) {
+            // JOptionPane.showMessageDialog(null, "Registered Successfully!", "User Login",
+            //         JOptionPane.INFORMATION_MESSAGE);
+            Account newAccount = new Account(username, password);
+            Profile blankProfile = new Profile("", newAccount, "", "", new ArrayList<String>(), new ArrayList<String>());
+            registrationResponse = sendRequest(blankProfile);
+
+            if (registrationResponse instanceof Profile) {
+                JOptionPane.showMessageDialog(null, "Successfully created a new account", "User Login",
                     JOptionPane.INFORMATION_MESSAGE);
-            return 1;
-        } else if (((String) (registerResponse)).split(": ")[0].equals("E2")) {
+                return 1;
+            } else {
+                JOptionPane.showMessageDialog(null, (String) registrationResponse, "User Login",
+                            JOptionPane.ERROR_MESSAGE);
+                return 0;
+            }
+
+        } else if (((String) (checkUsernameResponse)).split(": ")[0].equals("E2")) {
             JOptionPane.showMessageDialog(null, "The username already exists.", "User Login",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, (String) (registerResponse), "User Login",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, (String) (checkUsernameResponse), "User Login",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         return 0;
