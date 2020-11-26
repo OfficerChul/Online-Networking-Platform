@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public final class ServerRequestHandler implements Runnable {
     public ServerRequestHandler(Socket clientSocket) {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
         this.clientSocket = clientSocket;
-    } //PowerRequestHandler
+    } //ServerRequestHandler
 
     private synchronized Object getResponse(Object request) { // synchronized to avoid race conditions
         profiles = Server.getProfiles(); // updates ServerRequestHandler data from Server
@@ -113,14 +114,18 @@ public final class ServerRequestHandler implements Runnable {
                     break;
                 }
                 case "Req9": { // Get all profile usernames: “Req9: ”
-                    ArrayList<String> userList = new ArrayList<String>();
+                    // ArrayList<String> userList = new ArrayList<String>();
+                    StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < profiles.size(); i++) {
-                        userList.add(profiles.get(i).getAccount().getUsername());
+                        sb.append(profiles.get(i).getAccount().getUsername());
+                        sb.append(",");
+                        // userList.add(profiles.get(i).getAccount().getUsername());
                     }
-                    userNames = userList;
+                    // userNames = userList;
 
                     // response is string arraylist of all current users' usernames to display
-                    response = userNames;
+                    // response = userNames;
+                    response = sb.toString();
                     break;
                 }
                 case "Req10": { // Refresh / resend Profile Data “Req10: <username>”
@@ -157,12 +162,14 @@ public final class ServerRequestHandler implements Runnable {
                 writer.writeObject(response);
                 writer.flush();
             }
+        } catch (SocketException e) {
+            String ipAddress = clientSocket.getInetAddress().getHostAddress();
+            System.out.println("Connection Lost from: " + ipAddress);
         } catch (IOException e) {
             e.printStackTrace();
-        } //end try catch
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        } //end try catch
     } //run
 
     private boolean Login(String username, String password) {
