@@ -102,15 +102,15 @@ public final class Server {
         try {
             fis = new FileInputStream(f);
             ObjectInputStream oos = new ObjectInputStream(fis);
-            Profile current = (Profile) oos.readObject();
+            Profile current;
             ArrayList<Profile> newProfiles = new ArrayList<Profile>();
-            while (current != null) {
-                newProfiles.add(current);
+            while (true) {
                 try {
                     current = (Profile) oos.readObject();
                 } catch (EOFException e) {
                     break;
                 }
+                newProfiles.add(current);
             }
             profiles = newProfiles;
         } catch (FileNotFoundException fileNotFoundException) {
