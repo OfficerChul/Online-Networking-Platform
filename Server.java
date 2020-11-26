@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * PJ04 Option 2 - Server
@@ -50,8 +51,14 @@ public final class Server {
         port = this.serverSocket.getLocalPort();
         System.out.printf("<Host Name: %s, Port: %d>%n", hostName, port);
         System.out.println("<Now serving clients...>");
+        System.out.println("To close the server: Input a character below");;
 
         while (true) {
+            Scanner scan = new Scanner(System.in);
+            if (scan.hasNext()) {
+                CloseServer();
+                break;
+            }
             try {
                 clientSocket = this.serverSocket.accept();
             } catch (IOException e) {

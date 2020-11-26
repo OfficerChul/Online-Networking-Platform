@@ -134,7 +134,7 @@ public final class ServerRequestHandler implements Runnable {
             }
         }
         Server.setProfiles(profiles); // updates server with ServerRequestHandler Data
-        Server.writeProfilesToFile("serverData.txt");
+        // Server.writeProfilesToFile("serverData.txt");
         // all responses are either Profile or String Objects
         return response;
     } //getResponse
