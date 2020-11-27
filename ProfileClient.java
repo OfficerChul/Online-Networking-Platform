@@ -152,13 +152,22 @@ public class ProfileClient extends JComponent implements Runnable {
                 ArrayList<String> myFriendUserNames = myProfile.getFriendUserNames();
                 Profile tempProfile = new Profile(name, myAccount, email, aboutMe, likesAndInterestsText, myFriendUserNames);
 
-                if (((String) sendRequest(tempProfile)).split(": ")[0].equals("Res5")) {
-                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, ((String) sendRequest(tempProfile)).split(": ")[1], "Profile", JOptionPane.ERROR_MESSAGE);
-                }
+                Object response = sendRequest(tempProfile);
 
-                myProfile = tempProfile;
+                if (response instanceof Profile) {
+                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
+                    myProfile = tempProfile;
+                } else {
+                    JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                // if (((String) sendRequest(tempProfile)).split(": ")[0].equals("Res5")) {
+                //     JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
+                // } else {
+                //     JOptionPane.showMessageDialog(null, ((String) sendRequest(tempProfile)).split(": ")[1], "Profile", JOptionPane.ERROR_MESSAGE);
+                // }
+
+                // myProfile = tempProfile;
             }
 
         }
@@ -355,6 +364,8 @@ public class ProfileClient extends JComponent implements Runnable {
 
         friendListScrollPanel = new JScrollPane();
         friendListScrollPanel.setBounds(10, 149, 285, 391);
+        friendListScrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        friendListScrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.add(friendListScrollPanel);
 
         friendListPanel = new JPanel();
@@ -452,7 +463,9 @@ public class ProfileClient extends JComponent implements Runnable {
 		listAllUserTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		listAllUserUpperPanel.add(listAllUserTitleLabel);
 		
-		JScrollPane listAllUserMainScrollPanel = new JScrollPane();
+        JScrollPane listAllUserMainScrollPanel = new JScrollPane();
+        listAllUserMainScrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        listAllUserMainScrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		panel.add(listAllUserMainScrollPanel, BorderLayout.CENTER);
 		
 		JPanel listAllUserMainPanel = new JPanel();
@@ -587,7 +600,11 @@ public class ProfileClient extends JComponent implements Runnable {
         profileNameText.setText(profile.getName());
         profileEmailText.setText(profile.getEmail());
         profileAboutMeArea.setText(profile.getAboutMe());
-        profileLikesAndInterestsText.setText(profile.getLikesAndInterests().toString());
+        String profileLikesAndInterestsTextString = "";
+        for (String likes : profile.getLikesAndInterests()) {
+            profileLikesAndInterestsTextString += likes + ", ";
+        }
+        profileLikesAndInterestsText.setText(profileLikesAndInterestsTextString);
     }
 
     // Account accountA = new Account("unA12345", "pwA12345");
