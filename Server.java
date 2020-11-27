@@ -2,11 +2,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+// import java.util.Objects;
+// import java.util.Scanner;
 
 /**
  * PJ04 Option 2 - Server
