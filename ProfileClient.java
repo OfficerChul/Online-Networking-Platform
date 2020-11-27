@@ -156,7 +156,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
                 if (response instanceof Profile) {
                     JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
-                    myProfile = tempProfile;
+                    myProfile = (Profile) response;
                 } else {
                     JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
                 }
@@ -494,8 +494,12 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     private void addUsernameButton(String username, JPanel targetPanel) {
+        if (username.equals(myProfile.getAccount().getUsername())) {
+            return;
+        }
+        
         JButton buttonToAdd = new JButton(username);
-        buttonToAdd.setPreferredSize(new Dimension(140, 25));
+        buttonToAdd.setPreferredSize(new Dimension(130, 25));
         buttonToAdd.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e)
@@ -504,11 +508,10 @@ public class ProfileClient extends JComponent implements Runnable {
                 Object response = sendRequest(request);
                 
                 if (response instanceof Profile) {
-                    loadInfo((Profile) response);
-                    // TODO: Check if is friend already
                     profileAddFriendButton.setVisible(true);
                     profileSaveButton.setVisible(false);
                     profileCancelButton.setVisible(false);
+                    loadInfo((Profile) response);
                 } else {
                     // TODO: Check error response
                     JOptionPane.showMessageDialog(null, (String) response, "User Login", JOptionPane.INFORMATION_MESSAGE);
@@ -605,6 +608,10 @@ public class ProfileClient extends JComponent implements Runnable {
             profileLikesAndInterestsTextString += likes + ", ";
         }
         profileLikesAndInterestsText.setText(profileLikesAndInterestsTextString);
+
+        if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
+            profileAddFriendButton.setVisible(false);
+        }
     }
 
     // Account accountA = new Account("unA12345", "pwA12345");

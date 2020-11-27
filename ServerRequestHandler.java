@@ -32,14 +32,12 @@ public final class ServerRequestHandler implements Runnable {
 
         if (request instanceof Profile) {
             Profile recievedProfile = (Profile) request;
-            profiles.add(recievedProfile);
+            if (usernameIsTaken(recievedProfile.getAccount().getUsername())) {
+                updateProfile(recievedProfile);
+            } else {
+                profiles.add(recievedProfile);
+            }
             response = recievedProfile;
-            // if (usernameIsTaken(recievedProfile.getAccount().getUsername())) {
-            //     response = "E2: ERROR: Username already exists";
-            // } else {
-            //     profiles.add(recievedProfile);
-            //     response = recievedProfile;
-            // }
         } else if (request instanceof String) {
             req = (String) request;
             String[] requestVals = req.split(":");
