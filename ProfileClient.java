@@ -624,7 +624,7 @@ public class ProfileClient extends JComponent implements Runnable {
         }
         
         JButton buttonToAdd = new JButton(username);
-        buttonToAdd.setPreferredSize(new Dimension(130, 25));
+        buttonToAdd.setPreferredSize(new Dimension(125, 25));
         buttonToAdd.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e)
@@ -652,15 +652,19 @@ public class ProfileClient extends JComponent implements Runnable {
 
         });
         targetPanel.add(buttonToAdd);
+        resizePanel(targetPanel);
         updateUI();
-        // TODO: Resize
-        // resizePanel(targetPanel);
     }
 
     private void resizePanel(JPanel targetPanel) {
-        int numComponents = targetPanel.getComponentCount();
-        // TODO: check which panel to resize
-        int height = (numComponents / (targetPanel.getWidth() / (100 + 5))) * (100 + 5);  
+        int numberOfComponents = targetPanel.getComponentCount();
+        int height;
+        if (targetPanel.equals(friendListPanel)) {
+            height = (numberOfComponents / 2) * (30) + 10;
+        } else {
+            height = (numberOfComponents / 4) * 30 + 10;
+        }
+        
         targetPanel.setPreferredSize(new Dimension(0, height)); 
         
         updateUI();
