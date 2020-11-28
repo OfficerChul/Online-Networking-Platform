@@ -269,7 +269,7 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < senderSentRequests.size(); i++) {
             if (senderSentRequests.get(i).usernameWhoReceive.equals(recipientUsername)) {
                 senderSentRequests.get(i).setStatus("Accepted");
-                senderSentRequests.remove(i);
+                // senderSentRequests.remove(i);
             }
         }
         profiles.get(senderIndex).setSentFriendRequests(senderSentRequests);
@@ -278,7 +278,7 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < recipientRecievedRequests.size(); i++) {
             if (recipientRecievedRequests.get(i).usernameWhoSent.equals(senderUsername)) {
                 recipientRecievedRequests.get(i).setStatus("Accepted");
-                recipientRecievedRequests.remove(i);
+                // recipientRecievedRequests.remove(i);
             }
         }
         profiles.get(recipientIndex).setReceivedFriendRequests(recipientRecievedRequests);
@@ -308,7 +308,7 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < senderSentRequests.size(); i++) {
             if (senderSentRequests.get(i).usernameWhoReceive.equals(recipientUsername)) {
                 senderSentRequests.get(i).setStatus("Rejected");
-                senderSentRequests.remove(i);
+                // senderSentRequests.remove(i);
             }
         }
         profiles.get(senderIndex).setSentFriendRequests(senderSentRequests);
@@ -317,7 +317,7 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < recipientRecievedRequests.size(); i++) {
             if (recipientRecievedRequests.get(i).usernameWhoSent.equals(senderUsername)) {
                 recipientRecievedRequests.get(i).setStatus("Rejected");
-                recipientRecievedRequests.remove(i);
+                // recipientRecievedRequests.remove(i);
             }
         }
         profiles.get(recipientIndex).setReceivedFriendRequests(recipientRecievedRequests);

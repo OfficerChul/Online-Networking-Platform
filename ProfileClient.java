@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -44,8 +45,6 @@ public class ProfileClient extends JComponent implements Runnable {
     JPanel friendListPanel;
     JScrollPane friendListScrollPanel;
     JButton friendsButton;
-    JPanel lowerLeftPanel;
-    JLabel myNameLabel;
     JLabel phoneLabel;
     JLabel profileAboutMeLabel;
     JButton profileAddFriendButton;
@@ -56,7 +55,6 @@ public class ProfileClient extends JComponent implements Runnable {
     JTextField profileLikesAndInterestsText;
     JLabel profileNameLabel;
     JTextField profileNameText;
-    JPanel upperLeftPanel;
     JTextField profilePhoneText;
     JButton profileSaveButton;
     JPanel profilePanel;
@@ -68,8 +66,6 @@ public class ProfileClient extends JComponent implements Runnable {
     ProfileClient profileClient;
     Profile currentProfile;
     // final Profile myProfile = profileA;
-
-    
 
     ActionListener actionListener = new ActionListener() {
         @Override
@@ -177,6 +173,8 @@ public class ProfileClient extends JComponent implements Runnable {
                 ArrayList<String> likesAndInterestsText = new ArrayList<>(Arrays.asList(profileLikesAndInterestsText.getText().split(", ")));
                 ArrayList<String> myFriendUserNames = myProfile.getFriendUserNames();
                 Profile tempProfile = new Profile(name, myAccount, email, aboutMe, likesAndInterestsText, myFriendUserNames);
+                tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
+                tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
 
                 Object response = sendRequest(tempProfile);
 
@@ -209,7 +207,7 @@ public class ProfileClient extends JComponent implements Runnable {
             myProfile = (Profile) loginResponse;
             return 1;
         } else if (((String) loginResponse).split(": ")[0].equals("E1")) {
-            JOptionPane.showMessageDialog(null, "Login Failed", "User Login", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Wrong username or password", "User Login", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, (String) loginResponse, "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -361,17 +359,17 @@ public class ProfileClient extends JComponent implements Runnable {
         mainFrame.setContentPane(panel);
         panel.setLayout(null);
 
-        upperLeftPanel = new JPanel();
+        JPanel upperLeftPanel = new JPanel();
         upperLeftPanel.setBounds(10, 10, 285, 130);
         panel.add(upperLeftPanel);
         upperLeftPanel.setLayout(null);
 
-        myNameLabel = new JLabel("Ziyang Huang");
+        JLabel myNameLabel = new JLabel(myProfile.getAccount().getUsername());
         myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
         myNameLabel.setBounds(73, 10, 177, 40);
         upperLeftPanel.add(myNameLabel);
 
-        lowerLeftPanel = new JPanel();
+        JPanel lowerLeftPanel = new JPanel();
         lowerLeftPanel.setBounds(10, 550, 285, 111);
         panel.add(lowerLeftPanel);
         lowerLeftPanel.setLayout(null);
@@ -471,6 +469,19 @@ public class ProfileClient extends JComponent implements Runnable {
         lowerRightPanel.add(profileSaveButton);
 
         loadInfo(myProfile);
+
+        Timer timer = new Timer(5000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {                    
+                updateMyProfile();
+                panel.updateUI();
+                friendListPanel.updateUI();
+
+            }
+        });
+        timer.setRepeats(true);
+        timer.setCoalesce(true);
+        timer.setInitialDelay(0);
+        timer.start();
     }
 
     private void showListAllUserPanel() {
@@ -575,12 +586,12 @@ public class ProfileClient extends JComponent implements Runnable {
                             Profile response;
                             
                             if (choice == JOptionPane.YES_OPTION) {
-                                request = String.format("Req7: %s: %s", username, record);
+                                request = String.format("Req7: %s: %s", record, username);
                                 response = (Profile) sendRequest(request);
                                 myProfile = response;
                                 loadInfo(myProfile);
                             } else if (choice == JOptionPane.NO_OPTION) {
-                                request = String.format("Req8: %s: %s", username, record);
+                                request = String.format("Req8: %s: %s", record, username);
                                 response = (Profile) sendRequest(request);
                                 myProfile = response;
                                 loadInfo(myProfile);
@@ -626,6 +637,11 @@ public class ProfileClient extends JComponent implements Runnable {
                     profileSaveButton.setVisible(false);
                     profileCancelButton.setVisible(false);
                     loadInfo((Profile) response);
+                    if (myProfile.getFriendUserNames().contains(username)) {
+                        profileAddFriendButton.setVisible(false);
+                        profileSaveButton.setVisible(false);
+                        profileCancelButton.setVisible(false);
+                    }
                 } else {
                     // TODO: Check error response
                     JOptionPane.showMessageDialog(null, (String) response, "User Login", JOptionPane.INFORMATION_MESSAGE);
@@ -722,17 +738,17 @@ public class ProfileClient extends JComponent implements Runnable {
             profileLikesAndInterestsTextString += likes + ", ";
         }
         profileLikesAndInterestsText.setText(profileLikesAndInterestsTextString);
-        profileAddFriendButton.setVisible(true);
-        profileSaveButton.setVisible(false);
-        profileCancelButton.setVisible(false);
+        // profileAddFriendButton.setVisible(true);
+        // profileSaveButton.setVisible(false);
+        // profileCancelButton.setVisible(false);
 
         if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
             profileAddFriendButton.setVisible(false);
             profileSaveButton.setVisible(true);
             profileCancelButton.setVisible(true);
+            friendListPanel.removeAll();
             for (String friendUsername : myProfile.getFriendUserNames()) {
                 addUsernameButton(friendUsername, friendListPanel);
-                profileAddFriendButton.setVisible(false);
             }
         }
     }
@@ -741,7 +757,7 @@ public class ProfileClient extends JComponent implements Runnable {
         String request = "Req10: " + myProfile.getAccount().getUsername();
         Object response = sendRequest(request);
         if (response instanceof Profile) {
-            loadInfo((Profile) response);
+            myProfile = (Profile) response;
         }
     }
 
