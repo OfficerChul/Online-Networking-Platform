@@ -79,19 +79,19 @@ public final class ServerRequestHandler implements Runnable {
 
                     if (usersAreFriends(senderUsername,
                             recipientUsername).equals("true")) {
-                        response = "ERROR: Users are already friends";
+                        response = "E61: ERROR: Users are already friends";
                         break;
                     } else if (usersAreFriends(senderUsername,
                             recipientUsername).equals("Invalid Username")) {
-                        response = "ERROR: invalid username";
+                        response = "E62: ERROR: Invalid username";
                         break;
                     } else if (!friendRequestAlreadyExists(senderUsername,
                             recipientUsername)) {
                         if (SendFriendRequest(senderUsername, recipientUsername)) {
-                            response = "Req6: Request Sent";
+                            response = "Res6: Request Sent";
                         }
                     } else if (friendRequestAlreadyExists(senderUsername, recipientUsername)) {
-                        response = "ERROR: Friend request already sent";
+                        response = "E63: ERROR: Friend request already sent";
                     }
                     break;
                 }
@@ -268,6 +268,7 @@ public final class ServerRequestHandler implements Runnable {
         senderSentRequests = profiles.get(senderIndex).getSentFriendRequests();
         for (int i = 0; i < senderSentRequests.size(); i++) {
             if (senderSentRequests.get(i).usernameWhoReceive.equals(recipientUsername)) {
+                senderSentRequests.get(i).setStatus("Accepted");
                 senderSentRequests.remove(i);
             }
         }
@@ -276,6 +277,7 @@ public final class ServerRequestHandler implements Runnable {
         recipientRecievedRequests = profiles.get(recipientIndex).getReceivedFriendRequests();
         for (int i = 0; i < recipientRecievedRequests.size(); i++) {
             if (recipientRecievedRequests.get(i).usernameWhoSent.equals(senderUsername)) {
+                recipientRecievedRequests.get(i).setStatus("Accepted");
                 recipientRecievedRequests.remove(i);
             }
         }
@@ -305,6 +307,7 @@ public final class ServerRequestHandler implements Runnable {
         senderSentRequests = profiles.get(senderIndex).getSentFriendRequests();
         for (int i = 0; i < senderSentRequests.size(); i++) {
             if (senderSentRequests.get(i).usernameWhoReceive.equals(recipientUsername)) {
+                senderSentRequests.get(i).setStatus("Rejected");
                 senderSentRequests.remove(i);
             }
         }
@@ -313,6 +316,7 @@ public final class ServerRequestHandler implements Runnable {
         recipientRecievedRequests = profiles.get(recipientIndex).getReceivedFriendRequests();
         for (int i = 0; i < recipientRecievedRequests.size(); i++) {
             if (recipientRecievedRequests.get(i).usernameWhoSent.equals(senderUsername)) {
+                recipientRecievedRequests.get(i).setStatus("Rejected");
                 recipientRecievedRequests.remove(i);
             }
         }

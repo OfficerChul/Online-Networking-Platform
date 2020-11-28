@@ -17,6 +17,8 @@ public class ProfileClient extends JComponent implements Runnable {
     String hostName = "localhost";
     int portNumber = 6868;
 
+    Profile myProfile;
+
     JFrame loginFrame;
     JFrame registerFrame;
     JFrame mainFrame;
@@ -61,6 +63,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JTextArea profileAboutMeArea;
     JPanel lowerRightPanel;
     JScrollPane profileAboutMeScrollPanel;
+    JButton friendRequestButton;
 
     ProfileClient profileClient;
     Profile currentProfile;
@@ -126,7 +129,10 @@ public class ProfileClient extends JComponent implements Runnable {
 
             if (e.getSource() == listAllUserButton) {
                 showListAllUserPanel();
-                // showFriendRequestPanel();
+            }
+
+            if (e.getSource() == friendRequestButton) {
+                showFriendRequestPanel();
             }
 
             if (e.getSource() == backToMeButton) {
@@ -134,6 +140,26 @@ public class ProfileClient extends JComponent implements Runnable {
                 profileSaveButton.setVisible(true);
                 profileCancelButton.setVisible(true);
                 updateUI();
+            }
+
+            if (e.getSource() == profileAddFriendButton) {
+                String username = myProfile.getAccount().getUsername();
+                String targetUsername = currentProfile.getAccount().getUsername();
+                
+                String request = String.format("Req6: %s: %s", username, targetUsername);
+                String response;
+            
+                response = (String) sendRequest(request);
+
+                if (response.split(": ")[0].equals("Res6")) {
+                    JOptionPane.showMessageDialog(null, "Request Sent", "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                    updateMyProfile();
+                } else {
+                    JOptionPane.showMessageDialog(null, response.split(": ")[2], "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                
+
             }
 
             if (e.getSource() == profileCancelButton) {
@@ -352,15 +378,21 @@ public class ProfileClient extends JComponent implements Runnable {
 
         listAllUserButton = new JButton("List Users");
         listAllUserButton.setFont(new Font("Arial", Font.BOLD, 12));
-        listAllUserButton.setBounds(145, 10, 95, 30);
+        listAllUserButton.setBounds(145, 20, 95, 30);
         listAllUserButton.addActionListener(actionListener);
         lowerLeftPanel.add(listAllUserButton);
 
         backToMeButton = new JButton("My Profile");
         backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
-        backToMeButton.setBounds(29, 10, 95, 30);
+        backToMeButton.setBounds(29, 20, 95, 30);
         backToMeButton.addActionListener(actionListener);
         lowerLeftPanel.add(backToMeButton);
+
+        friendRequestButton = new JButton("Requests");
+        friendRequestButton.setFont(new Font("Arial", Font.BOLD, 12));
+        friendRequestButton.setBounds(29, 60, 95, 30);
+        friendRequestButton.addActionListener(actionListener);
+        lowerLeftPanel.add(friendRequestButton);
 
         friendListScrollPanel = new JScrollPane();
         friendListScrollPanel.setBounds(10, 149, 285, 391);
@@ -419,7 +451,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
         profileAddFriendButton = new JButton("Add Friend");
         profileAddFriendButton.setVisible(false);
-        profileAddFriendButton.setBounds(462, 443, 93, 23);
+        profileAddFriendButton.setBounds(462, 443, 110, 23);
         profileAddFriendButton.addActionListener(actionListener);
         profilePanel.add(profileAddFriendButton);
 
@@ -481,7 +513,89 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     private void showFriendRequestPanel() {
-    
+        friendRequestFrame = new JFrame();
+        JPanel panel = new JPanel();
+
+        friendRequestFrame.setTitle("Profile - Friend Request");
+		friendRequestFrame.setResizable(false);
+		friendRequestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        friendRequestFrame.setBounds(100, 100, 320, 530);
+        friendRequestFrame.setVisible(true);
+
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(new BorderLayout(0, 0));
+		friendRequestFrame.setContentPane(panel);
+		
+		JPanel friendRequestUpperPanel = new JPanel();
+        panel.add(friendRequestUpperPanel, BorderLayout.NORTH);
+        
+        JScrollPane friendRequestScrollPanel = new JScrollPane();
+		panel.add(friendRequestScrollPanel, BorderLayout.CENTER);
+		
+		JPanel friendRequestPanel = new JPanel();
+		friendRequestPanel.setPreferredSize(new Dimension(250, 0));
+		friendRequestScrollPanel.setViewportView(friendRequestPanel);
+		
+		JButton friendRequestSentRequestButton = new JButton("Sent Request");
+        friendRequestSentRequestButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                friendRequestPanel.removeAll();
+                friendRequestPanel.updateUI();
+                for (FriendRequest sentRequest : myProfile.getSentFriendRequests()) {
+                    String record = String.format("%s: %s", sentRequest.getUsernameWhoReceive(), sentRequest.getStatus());
+                    JLabel labelToAdd = new JLabel(record);
+                    
+                    labelToAdd.setPreferredSize(new Dimension(250, 25));
+                    friendRequestPanel.add(labelToAdd);
+                }
+                friendRequestPanel.updateUI();
+            }
+        });
+        friendRequestUpperPanel.add(friendRequestSentRequestButton);
+		
+		JButton friendRequestReceivedRequestButton = new JButton("Received Request");
+        friendRequestReceivedRequestButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                friendRequestPanel.removeAll();
+                friendRequestPanel.updateUI();
+                for (FriendRequest receivedRequest : myProfile.getReceivedFriendRequests()) {
+                    String record = receivedRequest.getUsernameWhoSent();
+                    JButton buttonToAdd = new JButton(record);
+                    buttonToAdd.setPreferredSize(new Dimension(250, 25));
+                    buttonToAdd.addActionListener(new ActionListener()
+                    {
+                        public void actionPerformed(ActionEvent e) {
+                            int choice = JOptionPane.showConfirmDialog(null, "Do you want to accept the friend request?", "Friend Request", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            String username = myProfile.getAccount().getUsername();
+                            String request;
+                            Profile response;
+                            
+                            if (choice == JOptionPane.YES_OPTION) {
+                                request = String.format("Req7: %s: %s", username, record);
+                                response = (Profile) sendRequest(request);
+                                myProfile = response;
+                                loadInfo(myProfile);
+                            } else if (choice == JOptionPane.NO_OPTION) {
+                                request = String.format("Req8: %s: %s", username, record);
+                                response = (Profile) sendRequest(request);
+                                myProfile = response;
+                                loadInfo(myProfile);
+                            }
+                        }
+                    });
+                    friendRequestPanel.add(buttonToAdd);
+                    friendRequestPanel.updateUI();
+                }
+            }
+        });
+        friendRequestUpperPanel.add(friendRequestReceivedRequestButton);
+		
+
+	
     }
 
     private String[] requestUserList() {
@@ -608,9 +722,26 @@ public class ProfileClient extends JComponent implements Runnable {
             profileLikesAndInterestsTextString += likes + ", ";
         }
         profileLikesAndInterestsText.setText(profileLikesAndInterestsTextString);
+        profileAddFriendButton.setVisible(true);
+        profileSaveButton.setVisible(false);
+        profileCancelButton.setVisible(false);
 
         if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
             profileAddFriendButton.setVisible(false);
+            profileSaveButton.setVisible(true);
+            profileCancelButton.setVisible(true);
+            for (String friendUsername : myProfile.getFriendUserNames()) {
+                addUsernameButton(friendUsername, friendListPanel);
+                profileAddFriendButton.setVisible(false);
+            }
+        }
+    }
+
+    private void updateMyProfile() {
+        String request = "Req10: " + myProfile.getAccount().getUsername();
+        Object response = sendRequest(request);
+        if (response instanceof Profile) {
+            loadInfo((Profile) response);
         }
     }
 
@@ -623,5 +754,5 @@ public class ProfileClient extends JComponent implements Runnable {
     // ArrayList<String> friendUserNames = new ArrayList<>();
 
     // Profile profileA = new Profile(name, accountA, email, aboutMe, likesAndInterests, friendUserNames);
-    Profile myProfile;
+    
 }
