@@ -592,11 +592,15 @@ public class ProfileClient extends JComponent implements Runnable {
                                 response = (Profile) sendRequest(request);
                                 myProfile = response;
                                 loadInfo(myProfile);
+                                buttonToAdd.setEnabled(false);
+                                buttonToAdd.setText("Accepted:" + buttonToAdd.getText());
                             } else if (choice == JOptionPane.NO_OPTION) {
                                 request = String.format("Req8: %s: %s", record, username);
                                 response = (Profile) sendRequest(request);
                                 myProfile = response;
                                 loadInfo(myProfile);
+                                buttonToAdd.setEnabled(false);
+                                buttonToAdd.setText("Refused:" + buttonToAdd.getText());
                             }
                         }
                     });
@@ -624,7 +628,8 @@ public class ProfileClient extends JComponent implements Runnable {
         if (username.equals(myProfile.getAccount().getUsername())) {
             return;
         }
-        
+        targetPanel.removeAll();;
+        targetPanel.updateUI();
         JButton buttonToAdd = new JButton(username);
         buttonToAdd.setPreferredSize(new Dimension(125, 25));
         buttonToAdd.addActionListener(new ActionListener() 
