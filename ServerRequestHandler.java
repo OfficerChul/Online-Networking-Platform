@@ -166,6 +166,7 @@ public final class ServerRequestHandler implements Runnable {
                 // writer.writeObject(response);
                 writer.writeUnshared(response);
                 writer.flush();
+                writer.reset();
             }
         } catch (SocketException e) {
             String ipAddress = clientSocket.getInetAddress().getHostAddress();
@@ -282,7 +283,7 @@ public final class ServerRequestHandler implements Runnable {
         senderSentRequests = profiles[senderIndex].getSentFriendRequests();
         for (int i = 0; i < senderSentRequests.length; i++) {
             if (senderSentRequests[i].usernameWhoReceive.equals(recipientUsername)) {
-                senderSentRequests[i].setStatus("Accepted");
+                senderSentRequests[i].setStatus(1);
                 // senderSentRequests.remove(i);
             }
         }
@@ -291,7 +292,7 @@ public final class ServerRequestHandler implements Runnable {
         recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
         for (int i = 0; i < recipientreceivedRequests.length; i++) {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
-                recipientreceivedRequests[i].setStatus("Accepted");
+                recipientreceivedRequests[i].setStatus(1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -323,7 +324,7 @@ public final class ServerRequestHandler implements Runnable {
         senderSentRequests = profiles[senderIndex].getSentFriendRequests();
         for (int i = 0; i < senderSentRequests.length; i++) {
             if (senderSentRequests[i].usernameWhoReceive.equals(recipientUsername)) {
-                senderSentRequests[i].setStatus("Rejected");
+                senderSentRequests[i].setStatus(-1);
                 // senderSentRequests.remove(i);
             }
         }
@@ -332,7 +333,7 @@ public final class ServerRequestHandler implements Runnable {
         recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
         for (int i = 0; i < recipientreceivedRequests.length; i++) {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
-                recipientreceivedRequests[i].setStatus("Rejected");
+                recipientreceivedRequests[i].setStatus(-1);
                 // recipientreceivedRequests.remove(i);
             }
         }

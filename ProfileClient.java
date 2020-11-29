@@ -34,8 +34,10 @@ public class ProfileClient extends JComponent implements Runnable {
 
     JLabel userLabel;
     JLabel passwordLabel;
-    JTextField userText;
-    JPasswordField passwordText;
+    JTextField userLoginText;
+    JPasswordField passwordLoginText;
+    JTextField userRegistrationText;
+    JPasswordField passwordRegistrationText;
     JButton loginButton;
     JButton registerButton;
     JButton registerButton2;
@@ -71,8 +73,8 @@ public class ProfileClient extends JComponent implements Runnable {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loginButton) {
-                String username = userText.getText();
-                String password = String.valueOf(passwordText.getPassword());
+                String username = userLoginText.getText();
+                String password = String.valueOf(passwordLoginText.getPassword());
                 
                 if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
                     if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
@@ -98,8 +100,8 @@ public class ProfileClient extends JComponent implements Runnable {
             }
 
             if (e.getSource() == registerButton2) {
-                String username = userText.getText();
-                String password = String.valueOf(passwordText.getPassword());
+                String username = userRegistrationText.getText();
+                String password = String.valueOf(passwordRegistrationText.getPassword());
 
                 if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
                     if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
@@ -279,14 +281,14 @@ public class ProfileClient extends JComponent implements Runnable {
         userLabel = new JLabel("Username:");
         userLabel.setBounds(10, 30, 80, 25);
 
-        userText = new JTextField(15);
-        userText.setBounds(110, 30, 165, 25);
+        userLoginText = new JTextField(15);
+        userLoginText.setBounds(110, 30, 165, 25);
 
         passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(10, 60, 80, 25);
 
-        passwordText = new JPasswordField(15);
-        passwordText.setBounds(110, 60, 165, 25);
+        passwordLoginText = new JPasswordField(15);
+        passwordLoginText.setBounds(110, 60, 165, 25);
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 110, 90, 25);
@@ -297,9 +299,9 @@ public class ProfileClient extends JComponent implements Runnable {
         registerButton.addActionListener(actionListener);
 
         panel.add(userLabel);
-        panel.add(userText);
+        panel.add(userLoginText);
         panel.add(passwordLabel);
-        panel.add(passwordText);
+        panel.add(passwordLoginText);
         panel.add(loginButton);
         panel.add(registerButton);
 
@@ -321,14 +323,14 @@ public class ProfileClient extends JComponent implements Runnable {
         userLabel = new JLabel("Username:");
         userLabel.setBounds(10, 30, 80, 25);
 
-        userText = new JTextField(15);
-        userText.setBounds(110, 30, 165, 25);
+        userRegistrationText = new JTextField(15);
+        userRegistrationText.setBounds(110, 30, 165, 25);
 
         passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(10, 60, 80, 25);
 
-        passwordText = new JPasswordField(15);
-        passwordText.setBounds(110, 60, 165, 25);
+        passwordRegistrationText = new JPasswordField(15);
+        passwordRegistrationText.setBounds(110, 60, 165, 25);
 
         registerButton2 = new JButton("Register");
         registerButton2.setBounds(30, 110, 90, 25);
@@ -339,9 +341,9 @@ public class ProfileClient extends JComponent implements Runnable {
         registerCancelButton.addActionListener(actionListener);
 
         panel.add(userLabel);
-        panel.add(userText);
+        panel.add(userRegistrationText);
         panel.add(passwordLabel);
-        panel.add(passwordText);
+        panel.add(passwordRegistrationText);
         panel.add(registerButton2);
         panel.add(registerCancelButton);
     }
@@ -557,7 +559,16 @@ public class ProfileClient extends JComponent implements Runnable {
                 friendRequestPanel.removeAll();
                 friendRequestPanel.updateUI();
                 for (FriendRequest sentRequest : myProfile.getSentFriendRequests()) {
-                    String record = String.format("%s: %s", sentRequest.getUsernameWhoReceive(), sentRequest.getStatus());
+                    int status = sentRequest.getStatus();
+                    String statusString;
+                    if (status == 0) {
+                        statusString = "Pending";
+                    } else if (status == 1) {
+                        statusString = "Accepted";
+                    } else {
+                        statusString = "Rejected";
+                    }
+                    String record = String.format("%s: %s", sentRequest.getUsernameWhoReceive(), statusString);
                     JLabel labelToAdd = new JLabel(record);
                     
                     labelToAdd.setPreferredSize(new Dimension(250, 25));
@@ -628,8 +639,7 @@ public class ProfileClient extends JComponent implements Runnable {
         if (username.equals(myProfile.getAccount().getUsername())) {
             return;
         }
-        targetPanel.removeAll();;
-        targetPanel.updateUI();
+
         JButton buttonToAdd = new JButton(username);
         buttonToAdd.setPreferredSize(new Dimension(125, 25));
         buttonToAdd.addActionListener(new ActionListener() 
@@ -759,8 +769,10 @@ public class ProfileClient extends JComponent implements Runnable {
             profileSaveButton.setVisible(true);
             profileCancelButton.setVisible(true);
             friendListPanel.removeAll();
+            friendListPanel.updateUI();
             for (String friendUsername : myProfile.getFriendUserNames()) {
                 addUsernameButton(friendUsername, friendListPanel);
+                friendListPanel.updateUI();
             }
         }
     }
@@ -771,7 +783,8 @@ public class ProfileClient extends JComponent implements Runnable {
         if (response instanceof Profile) {
             myProfile = (Profile) response;
         }
-
+        friendListPanel.removeAll();
+        friendListPanel.updateUI();
         for (String friendUsername : myProfile.getFriendUserNames()) {
             addUsernameButton(friendUsername, friendListPanel);
         }

@@ -18,12 +18,12 @@ public class FriendRequest implements Serializable {
     private static final long serialVersionUID = -1699480957029563158L;
     String usernameWhoSent;
     String usernameWhoReceive;
-    String status;
+    int status; // -1: refuese; 0: pending; 1: accepted
     
     public FriendRequest(String usernameWhoSent, String usernameWhoReceive) {
         this.usernameWhoSent = usernameWhoSent;
         this.usernameWhoReceive = usernameWhoReceive;
-        this.status = "Pending";
+        this.status = 0;
     }
 
     public String getUsernameWhoReceive() {
@@ -34,11 +34,11 @@ public class FriendRequest implements Serializable {
         return usernameWhoSent;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
