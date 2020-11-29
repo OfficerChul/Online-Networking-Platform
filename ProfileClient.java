@@ -103,8 +103,8 @@ public class ProfileClient extends JComponent implements Runnable {
                 String username = userRegistrationText.getText();
                 String password = String.valueOf(passwordRegistrationText.getPassword());
 
-                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
-                    if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
+                if (!username.isBlank() && username.length() < 16 && username.matches("^[a-zA-Z0-9]*$")) {
+                    if (!password.isBlank() && password.length() < 21 && password.matches("^[a-zA-Z0-9]*$")) {
                         if (password.length() >= 8) {
                             if (userRegister(username, password) == 1) {
                                 registerFrame.dispose();
@@ -113,10 +113,10 @@ public class ProfileClient extends JComponent implements Runnable {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.", "Login", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric and no more than 21 characters.", "Login", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric and no more than 15 characters.", "Login", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -364,16 +364,20 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.setLayout(null);
 
         JPanel upperLeftPanel = new JPanel();
+        upperLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border"));
         upperLeftPanel.setBounds(10, 10, 285, 130);
         panel.add(upperLeftPanel);
         upperLeftPanel.setLayout(null);
 
         JLabel myNameLabel = new JLabel(myProfile.getAccount().getUsername());
         myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        myNameLabel.setBounds(73, 10, 177, 40);
+        myNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		myNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myNameLabel.setBounds(55, 10, 175, 40);
         upperLeftPanel.add(myNameLabel);
 
         JPanel lowerLeftPanel = new JPanel();
+        lowerLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border"));
         lowerLeftPanel.setBounds(10, 550, 285, 111);
         panel.add(lowerLeftPanel);
         lowerLeftPanel.setLayout(null);
@@ -407,7 +411,15 @@ public class ProfileClient extends JComponent implements Runnable {
         friendListScrollPanel.setViewportView(friendListPanel);
         friendListPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+        JLabel friendListTitleLabel = new JLabel("Friend List");
+        friendListTitleLabel.setPreferredSize(new Dimension(0, 35));
+		friendListTitleLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		friendListTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		friendListTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		friendListScrollPanel.setColumnHeaderView(friendListTitleLabel);
+
         profilePanel = new JPanel();
+        profilePanel.setBorder(UIManager.getBorder("ScrollPane.border"));
         profilePanel.setBounds(305, 70, 579, 500);
         panel.add(profilePanel);
         profilePanel.setLayout(null);
