@@ -1,5 +1,5 @@
 import java.net.*;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.io.*;
 
 public class SimpleSever {
@@ -77,9 +77,9 @@ public class SimpleSever {
         }
     }
 
-    private static String[] rHandler(String r) {
-        return r.split(": ");
-    }
+    // private static String[] rHandler(String r) {
+    //     return r.split(": ");
+    // }
 
     
     
@@ -89,10 +89,10 @@ public class SimpleSever {
         String name = "zyh";
         String email = "123123123@gmail.com";
         String aboutMe = "qwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwer";
-        ArrayList<String> likesAndInterests= new ArrayList<>();
+        String likesAndInterests = "";
 
 
-        ArrayList<String> friendUserNames = new ArrayList<>();
+        String[] friendUserNames = new String[0];
         
 
 

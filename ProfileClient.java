@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
-import java.util.*;
+// import java.util.*;
 
 public class ProfileClient extends JComponent implements Runnable {
     /**
@@ -170,8 +170,10 @@ public class ProfileClient extends JComponent implements Runnable {
                 Account myAccount = myProfile.getAccount();
                 String email = profileEmailText.getText();
                 String aboutMe = profileAboutMeArea.getText();
-                ArrayList<String> likesAndInterestsText = new ArrayList<>(Arrays.asList(profileLikesAndInterestsText.getText().split(", ")));
-                ArrayList<String> myFriendUserNames = myProfile.getFriendUserNames();
+                // ArrayList<String> likesAndInterestsText = new ArrayList<>(Arrays.asList(profileLikesAndInterestsText.getText().split(", ")));
+                String likesAndInterestsText = profileLikesAndInterestsText.getText();
+                // ArrayList<String> myFriendUserNames = myProfile.getFriendUserNames();
+                String[] myFriendUserNames = myProfile.getFriendUserNames();
                 Profile tempProfile = new Profile(name, myAccount, email, aboutMe, likesAndInterestsText, myFriendUserNames);
                 tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
                 tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
@@ -226,7 +228,7 @@ public class ProfileClient extends JComponent implements Runnable {
             // JOptionPane.showMessageDialog(null, "Registered Successfully!", "User Login",
             //         JOptionPane.INFORMATION_MESSAGE);
             Account newAccount = new Account(username, password);
-            Profile blankProfile = new Profile("", newAccount, "", "", new ArrayList<String>(), new ArrayList<String>());
+            Profile blankProfile = new Profile("", newAccount, "", "", "", new String[0]);
             registrationResponse = sendRequest(blankProfile);
 
             if (registrationResponse instanceof Profile) {
@@ -637,11 +639,20 @@ public class ProfileClient extends JComponent implements Runnable {
                     profileSaveButton.setVisible(false);
                     profileCancelButton.setVisible(false);
                     loadInfo((Profile) response);
-                    if (myProfile.getFriendUserNames().contains(username)) {
-                        profileAddFriendButton.setVisible(false);
-                        profileSaveButton.setVisible(false);
-                        profileCancelButton.setVisible(false);
+
+                    for (int i = 0; i < myProfile.getFriendUserNames().length; i++) {
+                        if (myProfile.getFriendUserNames()[i].equals(username)) {
+                            profileAddFriendButton.setVisible(false);
+                            profileSaveButton.setVisible(false);
+                            profileCancelButton.setVisible(false);
+                        }
                     }
+
+                    // if (myProfile.getFriendUserNames().contains(username)) {
+                    //     profileAddFriendButton.setVisible(false);
+                    //     profileSaveButton.setVisible(false);
+                    //     profileCancelButton.setVisible(false);
+                    // }
                 } else {
                     // TODO: Check error response
                     JOptionPane.showMessageDialog(null, (String) response, "User Login", JOptionPane.INFORMATION_MESSAGE);
@@ -727,24 +738,16 @@ public class ProfileClient extends JComponent implements Runnable {
         return response;
     }
 
-    // private String[] rHandler(String r) {
-    //     return r.split(": ");
-    //     // [Req1: username: password] -> []
-    // }
-
     private void loadInfo(Profile profile) {
         currentProfile = profile;
         profileNameText.setText(profile.getName());
         profileEmailText.setText(profile.getEmail());
         profileAboutMeArea.setText(profile.getAboutMe());
-        String profileLikesAndInterestsTextString = "";
-        for (String likes : profile.getLikesAndInterests()) {
-            profileLikesAndInterestsTextString += likes + ", ";
-        }
-        profileLikesAndInterestsText.setText(profileLikesAndInterestsTextString);
-        // profileAddFriendButton.setVisible(true);
-        // profileSaveButton.setVisible(false);
-        // profileCancelButton.setVisible(false);
+        // String profileLikesAndInterestsTextString = "";
+        // for (String likes : profile.getLikesAndInterests()) {
+        //     profileLikesAndInterestsTextString += likes + ", ";
+        // }
+        profileLikesAndInterestsText.setText(profile.getLikesAndInterests());
 
         if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
             profileAddFriendButton.setVisible(false);
@@ -762,6 +765,10 @@ public class ProfileClient extends JComponent implements Runnable {
         Object response = sendRequest(request);
         if (response instanceof Profile) {
             myProfile = (Profile) response;
+        }
+
+        for (String friendUsername : myProfile.getFriendUserNames()) {
+            addUsernameButton(friendUsername, friendListPanel);
         }
     }
 

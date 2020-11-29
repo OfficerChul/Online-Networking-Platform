@@ -3,9 +3,10 @@ import java.net.ServerSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 // import java.util.Objects;
 // import java.util.Scanner;
+import java.util.Arrays;
 
 /**
  * PJ04 Option 2 - Server
@@ -15,9 +16,12 @@ import java.util.ArrayList;
  */
 public final class Server {
     private final ServerSocket serverSocket;
-    private ArrayList<String> userNames;
-    private ArrayList<String> onlineUsers;
-    private static ArrayList<Profile> profiles;
+    private String[] userNames;
+    // private ArrayList<String> userNames;
+    private String[] onlineUsers;
+    // private ArrayList<String> onlineUsers;
+    private static Profile[] profiles;
+    // private static ArrayList<Profile> profiles;
 
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
@@ -25,7 +29,7 @@ public final class Server {
         if (serverDataFile.exists()) {
             readProfilesFromFile("serverData.txt");
         } else {
-            profiles = new ArrayList<>();
+            profiles = new Profile[0];
         }
 
         // read all usernames from username file, instantiates userName arraylist
@@ -93,8 +97,9 @@ public final class Server {
         try {
             fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (int i = 0; i < profiles.size(); i++) {
-                oos.writeObject(profiles.get(i));
+            for (int i = 0; i < profiles.length; i++) {
+                // oos.writeObject(profiles[i]);
+                oos.writeUnshared(profiles[i]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -110,14 +115,15 @@ public final class Server {
             fis = new FileInputStream(f);
             ObjectInputStream oos = new ObjectInputStream(fis);
             Profile current;
-            ArrayList<Profile> newProfiles = new ArrayList<Profile>();
+            Profile[] newProfiles = new Profile[0];
             while (true) {
                 try {
                     current = (Profile) oos.readObject();
                 } catch (EOFException e) {
                     break;
                 }
-                newProfiles.add(current);
+                newProfiles = Arrays.copyOf(newProfiles, newProfiles.length + 1);
+                newProfiles[newProfiles.length - 1] = current;
             }
             profiles = newProfiles;
         } catch (FileNotFoundException fileNotFoundException) {
@@ -129,11 +135,11 @@ public final class Server {
         }
     }
 
-    public static ArrayList<Profile> getProfiles() {
+    public static Profile[] getProfiles() {
         return profiles;
     }
 
-    public static void setProfiles(ArrayList<Profile> profiles) {
+    public static void setProfiles(Profile[] profiles) {
         Server.profiles = profiles;
     }
 }
