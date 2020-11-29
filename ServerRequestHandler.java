@@ -143,7 +143,7 @@ public final class ServerRequestHandler implements Runnable {
             }   
         }
         Server.setProfiles(profiles); // updates server with ServerRequestHandler Data
-        // Server.writeProfilesToFile("serverData.txt");
+        Server.writeProfilesToFile("serverData.txt");
         // all responses are either Profile or String Objects
         return response;
     } //getResponse
@@ -253,7 +253,7 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < profiles.length; i++) {
             if (profiles[i].getAccount().getUsername().equals(username)) {
                 // profiles.remove(i);
-                profiles[i - 1] = profiles[profiles.length - 1];
+                profiles[i] = profiles[profiles.length - 1];
                 profiles = Arrays.copyOf(profiles, profiles.length - 1);
             }
         }
@@ -284,6 +284,8 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < senderSentRequests.length; i++) {
             if (senderSentRequests[i].usernameWhoReceive.equals(recipientUsername)) {
                 senderSentRequests[i].setStatus(1);
+                senderSentRequests[i] = senderSentRequests[senderSentRequests.length - 1];
+                senderSentRequests = Arrays.copyOf(senderSentRequests, senderSentRequests.length - 1);
                 // senderSentRequests.remove(i);
             }
         }
@@ -293,6 +295,8 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < recipientreceivedRequests.length; i++) {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
                 recipientreceivedRequests[i].setStatus(1);
+                recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
+                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -325,6 +329,8 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < senderSentRequests.length; i++) {
             if (senderSentRequests[i].usernameWhoReceive.equals(recipientUsername)) {
                 senderSentRequests[i].setStatus(-1);
+                senderSentRequests[i] = senderSentRequests[senderSentRequests.length - 1];
+                senderSentRequests = Arrays.copyOf(senderSentRequests, senderSentRequests.length - 1);
                 // senderSentRequests.remove(i);
             }
         }
@@ -334,6 +340,8 @@ public final class ServerRequestHandler implements Runnable {
         for (int i = 0; i < recipientreceivedRequests.length; i++) {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
                 recipientreceivedRequests[i].setStatus(-1);
+                recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
+                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
