@@ -28,7 +28,7 @@ public class Profile implements Serializable {
 
     // Constructs the Profile object
     public Profile(String name, Account account, String email,
-                    String aboutMe, String likesAndInterests, String[] friendUserNames) {
+                   String aboutMe, String likesAndInterests, String[] friendUserNames) {
         this.name = name;
         this.account = account;
         this.email = email;
@@ -37,6 +37,11 @@ public class Profile implements Serializable {
         this.friendUserNames = friendUserNames;
         this.sentFriendRequests = new FriendRequest[0];
         this.receivedFriendRequests = new FriendRequest[0];
+    }
+    
+    //Constructs without any parameters for making testcases
+    public Profile() {
+        
     }
 
     // return an Account object
@@ -64,11 +69,11 @@ public class Profile implements Serializable {
         return likesAndInterests;
     }
 
-    // return user's "About Me" 
+    // return user's "About Me"
     public String getAboutMe() {
         return aboutMe;
     }
-    
+
     // return user's email address
     public String getEmail() {
         return email;
