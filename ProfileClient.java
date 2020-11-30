@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
-// import java.util.*;
+
+/**
+ * PJ05 Option 2 - Client
+ *
+ * @author Ziyang Huang
+ * @version November 23, 2020
+ */
 
 public class ProfileClient extends JComponent implements Runnable {
     /**
@@ -735,20 +741,10 @@ public class ProfileClient extends JComponent implements Runnable {
                             profileCancelButton.setVisible(false);
                         }
                     }
-
-                    // if (myProfile.getFriendUserNames().contains(username)) {
-                    //     profileAddFriendButton.setVisible(false);
-                    //     profileSaveButton.setVisible(false);
-                    //     profileCancelButton.setVisible(false);
-                    // }
                 } else {
-                    
                     JOptionPane.showMessageDialog(null, "Deleted Account", "User Login", JOptionPane.INFORMATION_MESSAGE);
                 }
-
-                
             }
-
         });
         targetPanel.add(buttonToAdd);
         resizePanel(targetPanel);
@@ -765,7 +761,6 @@ public class ProfileClient extends JComponent implements Runnable {
         }
         
         targetPanel.setPreferredSize(new Dimension(0, height)); 
-        
         updateUI();
     }
 
@@ -775,13 +770,8 @@ public class ProfileClient extends JComponent implements Runnable {
         try {
             socket = new Socket(hostName, portNumber);
 
-            // ois = new ObjectInputStream(new
-            // BufferedInputStream(socket.getInputStream()));
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-
-            // writer = new PrintWriter(socket.getOutputStream());
-            // reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             initializationResponse = (String) sendRequest(initializationRequest);
             if (((String) (initializationResponse)).split(": ")[0].equals("E0")) {
@@ -789,6 +779,9 @@ public class ProfileClient extends JComponent implements Runnable {
             } else if (((String) (initializationResponse)).split(": ")[0].equals("Res0")) {
                 JOptionPane.showMessageDialog(null, "Successfully connected to the server!", "Connection Established",
                         JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Unexpected Error. Please try again.", "Profile", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
 
         } catch (IOException e) {
@@ -796,7 +789,6 @@ public class ProfileClient extends JComponent implements Runnable {
                     "Connection Failed", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-
     }
 
     private Object sendRequest(Object request) {
@@ -805,12 +797,6 @@ public class ProfileClient extends JComponent implements Runnable {
             oos.writeObject(request);
             oos.flush();
             response = ois.readObject();
-
-            // writer.println(request);
-            // writer.flush();
-
-            // response = reader.readLine();
-
         } catch (UnknownHostException e) {
             response = "E0: Unknown Host";
             e.printStackTrace();
@@ -832,10 +818,7 @@ public class ProfileClient extends JComponent implements Runnable {
         profileNameText.setText(profile.getName());
         profileEmailText.setText(profile.getEmail());
         profileAboutMeArea.setText(profile.getAboutMe());
-        // String profileLikesAndInterestsTextString = "";
-        // for (String likes : profile.getLikesAndInterests()) {
-        //     profileLikesAndInterestsTextString += likes + ", ";
-        // }
+
         profileLikesAndInterestsText.setText(profile.getLikesAndInterests());
 
         if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
@@ -845,6 +828,7 @@ public class ProfileClient extends JComponent implements Runnable {
             friendListPanel.removeAll();
             friendListPanel.updateUI();
             profileUsernameLabel.setText("");
+
             for (String friendUsername : myProfile.getFriendUserNames()) {
                 addUsernameButton(friendUsername, friendListPanel);
                 friendListPanel.updateUI();
@@ -864,15 +848,4 @@ public class ProfileClient extends JComponent implements Runnable {
             addUsernameButton(friendUsername, friendListPanel);
         }
     }
-
-    // Account accountA = new Account("unA12345", "pwA12345");
-    // String name = "zyh";
-    // String email = "123123123@gmail.com";
-    // String aboutMe = "qwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwerqwerqwerqwerwqerwqerqwerwqerqwerqwerwqerwqerwer";
-    // ArrayList<String> likesAndInterests = new ArrayList<>();
-
-    // ArrayList<String> friendUserNames = new ArrayList<>();
-
-    // Profile profileA = new Profile(name, accountA, email, aboutMe, likesAndInterests, friendUserNames);
-    
 }

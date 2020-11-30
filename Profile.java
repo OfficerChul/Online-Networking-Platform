@@ -1,7 +1,12 @@
 import java.io.Serializable;
-// import java.lang.reflect.Array;
-// import java.util.ArrayList;
 import java.util.Arrays;
+
+/**
+ * PJ05 Option 2 - Profile Class
+ *
+ * @author Kyochul Jang
+ * @version November 23, 2020
+ */
 
 public class Profile implements Serializable {
 
@@ -20,10 +25,6 @@ public class Profile implements Serializable {
     private String[] friendUserNames;
     private FriendRequest[] sentFriendRequests;
     private FriendRequest[] receivedFriendRequests;
-    // private ArrayList<String> likesAndInterests = new ArrayList<>();
-    // private ArrayList<String> friendUserNames = new ArrayList<>();
-    // private ArrayList<FriendRequest> sentFriendRequests = new ArrayList<FriendRequest>();
-    // private ArrayList<FriendRequest> receivedFriendRequests = new ArrayList<FriendRequest>();
 
     // Constructs the Profile object
     public Profile(String name, Account account, String email, String aboutMe, String likesAndInterests, String[] friendUserNames) {

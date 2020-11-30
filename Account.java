@@ -1,5 +1,4 @@
 import java.io.Serializable;
-
 // import javax.swing.*;
 // import java.awt.*;
 // import java.awt.event.*;
@@ -10,8 +9,34 @@ import java.io.Serializable;
 // import java.nio.file.StandardOpenOption;
 // import java.util.HashMap;
 // import java.util.ArrayList;
+
+/**
+ * PJ05 Option 2 - Account Class
+ *
+ * @author Kyochul Jang, Gilbert Hsu
+ * @version November 23, 2020
+ */
+
 public class Account implements Serializable {
+    private String username;
+    private String password;
+    // JTextField usernameText;
+    // JTextField passwordText;
+    // JButton create;
+    // HashMap<String, String> accountsData;
+    // ArrayList<Account> allUserAccounts;
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6666842209341941741L;
+    // public class Account extends JComponent implements Serializable
     
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     // retrieves user's password
     public String getPassword() {
         return password;
@@ -21,24 +46,8 @@ public class Account implements Serializable {
     public String getUsername() {
         return username;
     }
-    /**
-     *
-     */
-    private static final long serialVersionUID = 6666842209341941741L;
-    // public class Account extends JComponent implements Serializable
-    private String username;
-    private String password;
-    // JTextField usernameText;
-    // JTextField passwordText;
-    // JButton create;
-    // HashMap<String, String> accountsData;
-    // ArrayList<Account> allUserAccounts;
 
     // creates an account with the given user username and password
-    public Account(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     // /**
     //  * A empty constructor, just used for calling method

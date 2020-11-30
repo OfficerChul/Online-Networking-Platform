@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * PJ04 Option 2 - Request Handler for Server
+ * PJ05 Option 2 - Request Handler for Server
  *
  * @author Eashan Dubey
  * @version November 22, 2020
@@ -274,8 +274,6 @@ public final class ServerRequestHandler implements Runnable {
         // adds to both users' friend lists
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientreceivedRequests;
-        // ArrayList<FriendRequest> senderSentRequests;
-        // ArrayList<FriendRequest> recipientreceivedRequests;
 
         int senderIndex = -1;
         int recipientIndex = -1;
@@ -320,8 +318,6 @@ public final class ServerRequestHandler implements Runnable {
         // deletes friendRequest from sender & recipient records
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientreceivedRequests;
-        // ArrayList<FriendRequest> senderSentRequests;
-        // ArrayList<FriendRequest> recipientreceivedRequests;
         int senderIndex = -1;
         int recipientIndex = -1;
         for (int i = 0; i < profiles.length; i++) {
@@ -368,8 +364,6 @@ public final class ServerRequestHandler implements Runnable {
 
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientreceivedRequests;
-        // ArrayList<FriendRequest> senderSentRequests;
-        // ArrayList<FriendRequest> recipientreceivedRequests;
         int senderIndex = -1;
         int recipientIndex = -1;
         for (int i = 0; i < profiles.length; i++) {
@@ -412,8 +406,6 @@ public final class ServerRequestHandler implements Runnable {
     private boolean friendRequestAlreadyExists(String senderUsername, String recipientUsername) {
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientreceivedRequests;
-        // ArrayList<FriendRequest> senderSentRequests;
-        // ArrayList<FriendRequest> recipientreceivedRequests;
         boolean exists = false;
         Boolean existsInSenderRecords = false;
         Boolean existsInRecipientRecords = false;

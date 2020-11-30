@@ -10,15 +10,23 @@ import java.io.Serializable;
 // import java.util.ArrayList;
 // import java.util.Arrays;
 
+/**
+ * PJ05 Option 2 - FriendRequest Class
+ *
+ * @author Gilbert Hsu
+ * @version November 23, 2020
+ */
+
 // public class FriendRequest extends JComponent implements Serializable {
 public class FriendRequest implements Serializable {
     /**
      *
      */
     private static final long serialVersionUID = -1699480957029563158L;
+
     String usernameWhoSent;
     String usernameWhoReceive;
-    int status; // -1: refuese; 0: pending; 1: accepted
+    int status; // -1: refused; 0: pending; 1: accepted
     
     // creates a FriendRequest object with the usernames of the sender and the recipient
     // sets the request status to pending
@@ -223,6 +231,4 @@ public class FriendRequest implements Serializable {
     //         io.printStackTrace();
     //     }
     // }
-
-    
 }

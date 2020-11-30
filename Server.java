@@ -3,25 +3,20 @@ import java.net.ServerSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-// import java.util.ArrayList;
-// import java.util.Objects;
-// import java.util.Scanner;
 import java.util.Arrays;
 
 /**
- * PJ04 Option 2 - Server
+ * PJ05 Option 2 - Server
  *
  * @author Eashan Dubey
  * @version November 22, 2020
  */
+
 public final class Server {
     private final ServerSocket serverSocket;
     private String[] userNames;
-    // private ArrayList<String> userNames;
     private String[] onlineUsers;
-    // private ArrayList<String> onlineUsers;
     private static Profile[] profiles;
-    // private static ArrayList<Profile> profiles;
 
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
@@ -31,7 +26,6 @@ public final class Server {
         } else {
             profiles = new Profile[0];
         }
-
         // read all usernames from username file, instantiates userName arraylist
         // instantiates profiles arraylist
     } //server constructor
