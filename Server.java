@@ -14,8 +14,8 @@ import java.util.Arrays;
 
 public final class Server {
     private final ServerSocket serverSocket;
-    private String[] userNames;
-    private String[] onlineUsers;
+    // private String[] userNames;
+    // private String[] onlineUsers;
     private static Profile[] profiles;
 
     public Server(int port) throws IOException {
@@ -28,7 +28,7 @@ public final class Server {
         }
         // read all usernames from username file, instantiates userName arraylist
         // instantiates profiles arraylist
-    } //server constructor
+    } // server constructor
 
     public void serveClients() {
         InetAddress address;
@@ -43,7 +43,7 @@ public final class Server {
         } catch (UnknownHostException e) {
             e.printStackTrace();
             return;
-        } //end try catch
+        } // end try catch
 
         hostName = address.getCanonicalHostName();
         port = this.serverSocket.getLocalPort();
@@ -54,19 +54,19 @@ public final class Server {
         while (true) {
             // Scanner scan = new Scanner(System.in);
             // if (scan.hasNext()) {
-            //     CloseServer();
-            //     break;
+            // CloseServer();
+            // break;
             // }
             try {
                 clientSocket = this.serverSocket.accept();
             } catch (IOException e) {
                 break;
-            } //end try catch
+            } // end try catch
             handler = new ServerRequestHandler(clientSocket);
             handlerThread = new Thread(handler);
             handlerThread.start();
-        } //end while
-    } //serveClients
+        } // end while
+    } // serveClients
 
     public static void main(String[] args) {
         Server server;
@@ -75,11 +75,19 @@ public final class Server {
         } catch (IOException e) {
             e.printStackTrace();
             return;
-        } //end try catch
-        server.serveClients();
-    } //main
+        } // end try catch
 
-    private void closeServer() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                closeServer();
+                System.out.println("Shutting down...");
+            }
+        }); // save server data when server is interrupted
+
+        server.serveClients();
+    } // main
+
+    private static void closeServer() {
         writeProfilesToFile("serverData.txt");
         // write all the arraylist data back to the files
         // close the server
@@ -95,6 +103,7 @@ public final class Server {
                 // oos.writeObject(profiles[i]);
                 oos.writeUnshared(profiles[i]);
             }
+            oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -120,6 +129,7 @@ public final class Server {
                 newProfiles[newProfiles.length - 1] = current;
             }
             profiles = newProfiles;
+            oos.close();
         } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         } catch (IOException ioException) {
