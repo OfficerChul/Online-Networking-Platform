@@ -37,67 +37,82 @@ public class Profile implements Serializable {
         this.receivedFriendRequests = new FriendRequest[0];
     }
 
-    // getters and setters
+    // return an Account object
     public Account getAccount() {
         return account;
     }
 
+    // return an array of friend requests received from other users
     public FriendRequest[] getReceivedFriendRequests() {
         return receivedFriendRequests;
     }
 
+    // return an array of friend requests sent to other users
     public FriendRequest[] getSentFriendRequests() {
         return sentFriendRequests;
     }
 
+    // return a String array of usernames of friended users
     public String[] getFriendUserNames() {
         return friendUserNames;
     }
 
+    // return user's likes and interests
     public String getLikesAndInterests() {
         return likesAndInterests;
     }
 
+    // return user's "About Me" 
     public String getAboutMe() {
         return aboutMe;
     }
-
+    
+    // return user's email address
     public String getEmail() {
         return email;
     }
 
+    // return user's name
     public String getName() {
         return name;
     }
 
+    // updates user's name with the given name
     public void setName(String name) {
         this.name = name;
     }
 
+    // updates user's "About Me" page with the given string of texts
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
     }
 
+    // updates the user's account
     public void setAccount(Account account) {
         this.account = account;
     }
 
+    // updates email
     public void setEmail(String email) {
         this.email = email;
     }
 
+    // updates friendlist of usernames
     public void setFriendUserNames(String[] friendUserNames) {
         this.friendUserNames = friendUserNames;
     }
 
+    // updates likes and interests page
     public void setLikesAndInterests(String likesAndInterests) {
         this.likesAndInterests = likesAndInterests;
     }
 
+    // updates an array of received friend requests
     public void setReceivedFriendRequests(FriendRequest[] receivedFriendRequests) {
         this.receivedFriendRequests = receivedFriendRequests;
     }
 
+    // updates an array of sent friend requests
     public void setSentFriendRequests(FriendRequest[] sentFriendRequests) {
         this.sentFriendRequests = sentFriendRequests;
     }
@@ -107,6 +122,7 @@ public class Profile implements Serializable {
     //     likesAndInterests[likesAndInterests.length - 1] = interest;
     // }
 
+    // adds a username to the friend list
     public void addToFriendUsernames(String username) {
         friendUserNames = Arrays.copyOf(friendUserNames, friendUserNames.length + 1);
         friendUserNames[friendUserNames.length - 1] = username;
