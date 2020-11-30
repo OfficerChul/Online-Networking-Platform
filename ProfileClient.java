@@ -94,13 +94,16 @@ public class ProfileClient extends JComponent implements Runnable {
                                 showMainPanel();
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.", "Login", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
+                                                            "Login", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.",
+                                                        "Login", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.", "Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.",
+                                                    "Login", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -119,13 +122,19 @@ public class ProfileClient extends JComponent implements Runnable {
                                 registerFrame.dispose();
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.", "Login", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,
+                                "Your password should be at least 8 characters long.",
+                                "Login", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric and no more than 21 characters.", "Login", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,
+                            "Your password should be alphanumeric and no more than 21 characters.",
+                            "Login", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric and no more than 15 characters.", "Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                        "Your username should be alphanumeric and no more than 15 characters.",
+                        "Login", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -150,12 +159,15 @@ public class ProfileClient extends JComponent implements Runnable {
             }
 
             if (e.getSource() == deleteProfileButton) {
-                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you profile?", "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you profile?",
+                                                            "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     Profile blankProfile = new Profile("", myProfile.getAccount(), "", "", "", new String[0]);
                     Object deleteProfileResponse = sendRequest(blankProfile);
                     if (deleteProfileResponse instanceof Profile) {
-                        JOptionPane.showMessageDialog(null, "Successfully deleted your profile", "Profile - Delete Profile", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Successfully deleted your profile",
+                                                        "Profile - Delete Profile",
+                                                        JOptionPane.INFORMATION_MESSAGE);
                         myProfile = (Profile) deleteProfileResponse;
                         loadInfo(myProfile);
                     } else {
@@ -166,28 +178,42 @@ public class ProfileClient extends JComponent implements Runnable {
             }
 
             if (e.getSource() == deleteAccountButton) {
-                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you Account?", "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you Account?",
+                                                            "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     JPasswordField password = new JPasswordField();
-                    Object[] passwordField = {"You are trying to delete your account. Enter your password to confirm.", password};
-                    int result = JOptionPane.showConfirmDialog(null, passwordField, "Profile - Delete Account", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                    Object[] passwordField = {"You are trying to delete your account. " + 
+                                                "Enter your password to confirm.", password};
+                    int result = JOptionPane.showConfirmDialog(null, passwordField,
+                                                                "Profile - Delete Account",
+                                                                JOptionPane.OK_CANCEL_OPTION,
+                                                                JOptionPane.WARNING_MESSAGE);
+
                     if (result == JOptionPane.OK_OPTION) {
                         if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
-                            int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, you can no longer login with this account. Please confirm.", "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
-                            if (secondChoice == JOptionPane.YES_OPTION); {
+                            int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, " + 
+                                                    "you can no longer login with this account. Please confirm.",
+                                                    "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+
+                            if (secondChoice == JOptionPane.YES_OPTION) {
                                 String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
                                 if (response.split(": ")[0].equals("Res4")) {
                                     mainFrame.dispose();
-                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.",
+                                                                            "Profile - Delete Account",
+                                                                            JOptionPane.INFORMATION_MESSAGE);
                                     System.exit(0);    
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.",
+                                                                    "Profile - Delete Account",
+                                                                    JOptionPane.INFORMATION_MESSAGE);
                                 }
                                 
                             }
                             
                         } else {
-                            JOptionPane.showMessageDialog(null, "Wrong password", "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Wrong password",
+                                                            "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -203,10 +229,12 @@ public class ProfileClient extends JComponent implements Runnable {
                 response = (String) sendRequest(request);
 
                 if (response.split(": ")[0].equals("Res6")) {
-                    JOptionPane.showMessageDialog(null, "Request Sent", "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Request Sent",
+                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
                     updateMyProfile();
                 } else {
-                    JOptionPane.showMessageDialog(null, response.split(": ")[2], "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, response.split(": ")[2],
+                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
                 }
                 
                 
@@ -225,30 +253,22 @@ public class ProfileClient extends JComponent implements Runnable {
                 Account myAccount = myProfile.getAccount();
                 String email = profileEmailText.getText();
                 String aboutMe = profileAboutMeArea.getText();
-                // ArrayList<String> likesAndInterestsText = new ArrayList<>(Arrays.asList(profileLikesAndInterestsText.getText().split(", ")));
                 String likesAndInterestsText = profileLikesAndInterestsText.getText();
-                // ArrayList<String> myFriendUserNames = myProfile.getFriendUserNames();
                 String[] myFriendUserNames = myProfile.getFriendUserNames();
-                Profile tempProfile = new Profile(name, myAccount, email, aboutMe, likesAndInterestsText, myFriendUserNames);
+                Profile tempProfile = new Profile(name, myAccount, email, aboutMe,
+                                                    likesAndInterestsText, myFriendUserNames);
                 tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
                 tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
 
                 Object response = sendRequest(tempProfile);
 
                 if (response instanceof Profile) {
-                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile",
+                                                    JOptionPane.INFORMATION_MESSAGE);
                     myProfile = (Profile) response;
                 } else {
                     JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
                 }
-                
-                // if (((String) sendRequest(tempProfile)).split(": ")[0].equals("Res5")) {
-                //     JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile", JOptionPane.INFORMATION_MESSAGE);
-                // } else {
-                //     JOptionPane.showMessageDialog(null, ((String) sendRequest(tempProfile)).split(": ")[1], "Profile", JOptionPane.ERROR_MESSAGE);
-                // }
-
-                // myProfile = tempProfile;
             }
 
         }
@@ -264,7 +284,8 @@ public class ProfileClient extends JComponent implements Runnable {
             myProfile = (Profile) loginResponse;
             return 1;
         } else if (((String) loginResponse).split(": ")[0].equals("E1")) {
-            JOptionPane.showMessageDialog(null, "Wrong username or password", "User Login", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Wrong username or password", "User Login",
+                                                JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, (String) loginResponse, "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -672,7 +693,11 @@ public class ProfileClient extends JComponent implements Runnable {
                     buttonToAdd.addActionListener(new ActionListener()
                     {
                         public void actionPerformed(ActionEvent e) {
-                            int choice = JOptionPane.showConfirmDialog(null, "Do you want to accept the friend request?", "Friend Request", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            int choice = JOptionPane.showConfirmDialog(null,
+                                                                        "Do you want to accept the friend request?",
+                                                                        "Friend Request",
+                                                                        JOptionPane.YES_NO_CANCEL_OPTION,
+                                                                        JOptionPane.QUESTION_MESSAGE);
                             String username = myProfile.getAccount().getUsername();
                             String request;
                             Profile response;
@@ -742,7 +767,8 @@ public class ProfileClient extends JComponent implements Runnable {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Deleted Account", "User Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Deleted Account", "User Login",
+                                                    JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -780,7 +806,8 @@ public class ProfileClient extends JComponent implements Runnable {
                 JOptionPane.showMessageDialog(null, "Successfully connected to the server!", "Connection Established",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Unexpected Error. Please try again.", "Profile", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Unexpected Error. Please try again.",
+                                                "Profile", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
 

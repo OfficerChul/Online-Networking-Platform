@@ -107,7 +107,8 @@ public class FriendRequest implements Serializable {
     //     frame.setLocation(400,0); //you can change the size and location if you want
     //     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //     for (int i = 0, n = 0 ; i < friendRequestList.size() ; i++) {
-    //         if (usernameWhoReceived.equals(friendRequestList.get(i).getUsernameWhoReceive())) { // n is the number of username we want
+    //         if (usernameWhoReceived.equals(friendRequestList.get(i).getUsernameWhoReceive())) {
+                    // n is the number of username we want
     //             // arraylist friendRequest is a list for every request,
     //             // so i use for loop to pick the username we want to find(who sent request to that user)
                 
@@ -163,7 +164,8 @@ public class FriendRequest implements Serializable {
     //                                 toDelete.delete();
     //                             } else {
     //                                 frame.dispose(); //when we accept or reject a user, we will update the gui
-    //                                 listUsersFriendRequest(usernameWhoReceived); //recursion, call this method again with fewer user
+    //                                 listUsersFriendRequest(usernameWhoReceived);
+                                        //recursion, call this method again with fewer user
     //                             }
     //                         } catch (IOException a) {
     //                             a.printStackTrace();

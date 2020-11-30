@@ -27,7 +27,8 @@ public class Profile implements Serializable {
     private FriendRequest[] receivedFriendRequests;
 
     // Constructs the Profile object
-    public Profile(String name, Account account, String email, String aboutMe, String likesAndInterests, String[] friendUserNames) {
+    public Profile(String name, Account account, String email,
+                    String aboutMe, String likesAndInterests, String[] friendUserNames) {
         this.name = name;
         this.account = account;
         this.email = email;

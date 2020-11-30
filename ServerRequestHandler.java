@@ -54,7 +54,7 @@ public final class ServerRequestHandler implements Runnable {
                     String username = removeSpaceAtStart(requestVals[1]);
                     String password = removeSpaceAtStart(requestVals[2]);
 
-                    if (Login(username, password)) {
+                    if (login(username, password)) {
                         response = returnProfileFromUsername(username);
                     } else {
                         response = "E1: ERROR: Login Failed";
@@ -178,7 +178,7 @@ public final class ServerRequestHandler implements Runnable {
         } //end try catch
     } //run
 
-    private boolean Login(String username, String password) {
+    private boolean login(String username, String password) {
         // check credentials from arraylist, return user details if correct
         boolean login = false;
         String profilePassword = null;
@@ -304,7 +304,8 @@ public final class ServerRequestHandler implements Runnable {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
                 recipientreceivedRequests[i].setStatus(1);
                 recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
-                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length - 1);
+                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
+                                                            recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -347,7 +348,8 @@ public final class ServerRequestHandler implements Runnable {
             if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
                 recipientreceivedRequests[i].setStatus(-1);
                 recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
-                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length - 1);
+                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
+                                                            recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -446,7 +448,8 @@ public final class ServerRequestHandler implements Runnable {
         } else if (!existsInRecipientRecords && existsInSenderRecords) {
             // if request only exists on records of one side, update other side
             recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length + 1);
-            recipientreceivedRequests[recipientreceivedRequests.length - 1] = new FriendRequest(senderUsername, recipientUsername);
+            recipientreceivedRequests[recipientreceivedRequests.length - 1] = new FriendRequest(senderUsername,
+                                                                                                 recipientUsername);
             // recipientreceivedRequests.add(new FriendRequest(senderUsername, recipientUsername));
             profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
             exists = true;

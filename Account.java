@@ -135,7 +135,8 @@ public class Account implements Serializable {
     //                         // just append new account in the file
     //                         try {
     //                             Files.write(Paths.get("Data.txt"), (usernameText.getText()
-    //                                     + " " + passwordText.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
+    //                                     + " " + passwordText.getText() + "\n").getBytes(),
+    //                                      StandardOpenOption.APPEND);
     //                         } catch (IOException io ) {
     //                             io.printStackTrace();
     //                         }
@@ -160,7 +161,8 @@ public class Account implements Serializable {
     //                      */
     //                 } else if ( passwordText.getText().length() <= 8
     //                         || !passwordText.getText().matches("^[a-zA-Z0-9]*$")) {
-    //                     JOptionPane.showMessageDialog(null, "Your password should be alphanumeric. Also, the length can't be fewer than 8 characters.",
+    //                     JOptionPane.showMessageDialog(null,
+    //                  "Your password should be alphanumeric. Also, the length can't be fewer than 8 characters.",
     //                             "Profile app", JOptionPane.ERROR_MESSAGE);
     //                     usernameText.setText(usernameText.getText());
     //                     passwordText.setText("");
