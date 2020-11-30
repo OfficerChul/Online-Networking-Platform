@@ -26,3 +26,26 @@
 * Indicating whether a User is online.
 * Adding profile photos.
 * Allow accounts to be set to "private", where no other user can view them, and "protected", where only current friends can view them.
+
+## Description of Each Class
+* **Account**
+  * Creates an Account object with user's name and password
+  * Contains generic getter and setter methods
+  * Implements Serializable
+* **Profile**
+  * Creates a Profile object with user's name, account, email, aboutMe, likes and interests, and an array of friend usernames
+  * Contains generic getter and setter methods
+  * Method for adding a friend to the friend list
+  * Implements Serializable
+* **ProfileClient**
+  * Client class that is capable of simultaneous use by multiple users over the same network
+  * Manages all the GUI interfaces
+* **Server**
+  * Server class that is able to simulatenously hold multiple users using a separate thread for each client
+  * All the saved data during the use of the application persists regardless of whether or not a user is connected to the server
+  * Implements Object Input/Output Stream to read and write any type of data transferred between each client and the server to a file
+* **ServerRequestHandler**
+  * Request Handler usedf for the server to handle the requests sent from the client
+  * Implements synchronization while handling the request to control the access of multiple threads
+  
+ *Note: More to be added
