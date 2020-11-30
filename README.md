@@ -45,7 +45,7 @@
   * All the saved data during the use of the application persists regardless of whether or not a user is connected to the server
   * Implements Object Input/Output Stream to read and write any type of data transferred between each client and the server to a file
 * **ServerRequestHandler**
-  * Request Handler usedf for the server to handle the requests sent from the client
+  * Request Handler used for the server to handle the requests sent from the client
   * Implements synchronization while handling the request to control the access of multiple threads
   
- *Note: More to be added
+ *Note: More to be added*
