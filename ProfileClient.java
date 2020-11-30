@@ -64,6 +64,9 @@ public class ProfileClient extends JComponent implements Runnable {
     JPanel lowerRightPanel;
     JScrollPane profileAboutMeScrollPanel;
     JButton friendRequestButton;
+    JLabel profileUsernameLabel;
+    JButton deleteProfileButton;
+    JButton deleteAccountButton;
 
     ProfileClient profileClient;
     Profile currentProfile;
@@ -138,6 +141,49 @@ public class ProfileClient extends JComponent implements Runnable {
                 profileSaveButton.setVisible(true);
                 profileCancelButton.setVisible(true);
                 updateUI();
+            }
+
+            if (e.getSource() == deleteProfileButton) {
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you profile?", "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    Profile blankProfile = new Profile("", myProfile.getAccount(), "", "", "", new String[0]);
+                    Object deleteProfileResponse = sendRequest(blankProfile);
+                    if (deleteProfileResponse instanceof Profile) {
+                        JOptionPane.showMessageDialog(null, "Successfully deleted your profile", "Profile - Delete Profile", JOptionPane.INFORMATION_MESSAGE);
+                        myProfile = (Profile) deleteProfileResponse;
+                        loadInfo(myProfile);
+                    } else {
+                        JOptionPane.showMessageDialog(null, (String) deleteProfileResponse, "User Login",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            if (e.getSource() == deleteAccountButton) {
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you Account?", "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    JPasswordField password = new JPasswordField();
+                    Object[] passwordField = {"You are trying to delete your account. Enter your password to confirm.", password};
+                    int result = JOptionPane.showConfirmDialog(null, passwordField, "Profile - Delete Account", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (result == JOptionPane.OK_OPTION) {
+                        if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
+                            int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, you can no longer login with this account. Please confirm.", "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+                            if (secondChoice == JOptionPane.YES_OPTION); {
+                                String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
+                                if (response.split(": ")[0].equals("Res4")) {
+                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You will be logged out now.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    System.exit(0);    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                
+                            }
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Wrong password", "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
             }
 
             if (e.getSource() == profileAddFriendButton) {
@@ -376,6 +422,16 @@ public class ProfileClient extends JComponent implements Runnable {
         myNameLabel.setBounds(55, 10, 175, 40);
         upperLeftPanel.add(myNameLabel);
 
+        deleteProfileButton = new JButton("Delete Profile");
+        deleteProfileButton.setBounds(10, 97, 120, 23);
+        deleteProfileButton.addActionListener(actionListener);
+		upperLeftPanel.add(deleteProfileButton);
+		
+		deleteAccountButton = new JButton("Delete Account");
+        deleteAccountButton.setBounds(155, 97, 120, 23);
+        deleteAccountButton.addActionListener(actionListener);
+		upperLeftPanel.add(deleteAccountButton);
+
         JPanel lowerLeftPanel = new JPanel();
         lowerLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border"));
         lowerLeftPanel.setBounds(10, 550, 285, 111);
@@ -423,6 +479,10 @@ public class ProfileClient extends JComponent implements Runnable {
         profilePanel.setBounds(305, 70, 579, 500);
         panel.add(profilePanel);
         profilePanel.setLayout(null);
+
+        profileUsernameLabel = new JLabel("");
+		profileUsernameLabel.setBounds(325, 29, 66, 15);
+		profilePanel.add(profileUsernameLabel);
 
         profileNameLabel = new JLabel("Name: ");
         profileNameLabel.setBounds(10, 29, 54, 15);
@@ -486,7 +546,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
         loadInfo(myProfile);
 
-        Timer timer = new Timer(5000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {                    
                 updateMyProfile();
                 panel.updateUI();
@@ -681,8 +741,8 @@ public class ProfileClient extends JComponent implements Runnable {
                     //     profileCancelButton.setVisible(false);
                     // }
                 } else {
-                    // TODO: Check error response
-                    JOptionPane.showMessageDialog(null, (String) response, "User Login", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    JOptionPane.showMessageDialog(null, "Deleted Account", "User Login", JOptionPane.INFORMATION_MESSAGE);
                 }
 
                 
@@ -767,6 +827,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
     private void loadInfo(Profile profile) {
         currentProfile = profile;
+        profileUsernameLabel.setText("User: " + profile.getAccount().getUsername());
         profileNameText.setText(profile.getName());
         profileEmailText.setText(profile.getEmail());
         profileAboutMeArea.setText(profile.getAboutMe());
@@ -782,6 +843,7 @@ public class ProfileClient extends JComponent implements Runnable {
             profileCancelButton.setVisible(true);
             friendListPanel.removeAll();
             friendListPanel.updateUI();
+            profileUsernameLabel.setText("");
             for (String friendUsername : myProfile.getFriendUserNames()) {
                 addUsernameButton(friendUsername, friendListPanel);
                 friendListPanel.updateUI();

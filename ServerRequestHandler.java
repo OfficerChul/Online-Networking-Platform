@@ -73,7 +73,7 @@ public final class ServerRequestHandler implements Runnable {
                 }
                 case "Req4": { // Delete user: “Req4: <username>”
                     String username = removeSpaceAtStart(requestVals[1]);
-                    DeleteProfile(username);
+                    deleteAccount(username);
                     response = "Res4: Successfully Deleted";
                     break;
                 }
@@ -91,7 +91,7 @@ public final class ServerRequestHandler implements Runnable {
                         break;
                     } else if (!friendRequestAlreadyExists(senderUsername,
                             recipientUsername)) {
-                        if (SendFriendRequest(senderUsername, recipientUsername)) {
+                        if (sendFriendRequest(senderUsername, recipientUsername)) {
                             response = "Res6: Request Sent";
                         }
                     } else if (friendRequestAlreadyExists(senderUsername, recipientUsername)) {
@@ -102,7 +102,7 @@ public final class ServerRequestHandler implements Runnable {
                 case "Req7": { // Accept FriendRequest: “Req7: <username>: <targetUsername>”
                     String senderUsername = removeSpaceAtStart(requestVals[1]);
                     String recipientUsername = removeSpaceAtStart(requestVals[2]);
-                    AcceptFriendRequest(senderUsername, recipientUsername);
+                    acceptFriendRequest(senderUsername, recipientUsername);
 
                     // response is the profile of the recipient user / user that accepts request
                     response = returnProfileFromUsername(recipientUsername);
@@ -111,7 +111,7 @@ public final class ServerRequestHandler implements Runnable {
                 case "Req8": { // Refuse Friend Request: “Req8: <username>: <targetUsername>”
                     String senderUsername = removeSpaceAtStart(requestVals[1]);
                     String recipientUsername = removeSpaceAtStart(requestVals[2]);
-                    RejectFriendRequest(senderUsername, recipientUsername);
+                    rejectFriendRequest(senderUsername, recipientUsername);
 
                     // response is the profile of the recipient user / user that refuses request
                     response = returnProfileFromUsername(recipientUsername);
@@ -247,7 +247,7 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
-    private void DeleteProfile(String username) {
+    private void deleteProfile(String username) {
         // should be after login
         // remove user from arraylists
         for (int i = 0; i < profiles.length; i++) {
@@ -259,7 +259,17 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
-    private void AcceptFriendRequest(String senderUsername, String recipientUsername) {
+    private void deleteAccount(String username) {
+        for (int i = 0; i < profiles.length; i++) {
+            if (profiles[i].getAccount().getUsername().equals(username)) {
+                // profiles.remove(i);
+                profiles[i] = profiles[profiles.length - 1];
+                profiles = Arrays.copyOf(profiles, profiles.length - 1);
+            }
+        }
+    }
+
+    private void acceptFriendRequest(String senderUsername, String recipientUsername) {
         // deletes friendRequest from sender & recipient records
         // adds to both users' friend lists
         FriendRequest[] senderSentRequests;
@@ -306,7 +316,7 @@ public final class ServerRequestHandler implements Runnable {
         profiles[recipientIndex].addToFriendUsernames(senderUsername);
     }
 
-    private void RejectFriendRequest(String senderUsername, String recipientUsername) {
+    private void rejectFriendRequest(String senderUsername, String recipientUsername) {
         // deletes friendRequest from sender & recipient records
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientreceivedRequests;
@@ -348,7 +358,7 @@ public final class ServerRequestHandler implements Runnable {
         profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
     }
 
-    private boolean SendFriendRequest(String senderUsername, String recipientUsername) {
+    private boolean sendFriendRequest(String senderUsername, String recipientUsername) {
         // creates a new FriendRequest Object, adds this to both users' respective arraylists
         // returns false if either username is invalid
 
@@ -393,10 +403,10 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
-    private void RescindFriendRequest(String senderUsername, String recipientUsername) {
+    private void rescindFriendRequest(String senderUsername, String recipientUsername) {
         // logically the same as RejectFriendRequest method:
         // deletes friendRequest from sender & recipient records
-        RejectFriendRequest(senderUsername, recipientUsername);
+        rejectFriendRequest(senderUsername, recipientUsername);
     }
 
     private boolean friendRequestAlreadyExists(String senderUsername, String recipientUsername) {
