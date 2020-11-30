@@ -574,12 +574,16 @@ public class ProfileClient extends JComponent implements Runnable {
 
         loadInfo(myProfile);
 
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(500, new ActionListener() {
             public void actionPerformed(ActionEvent e) {                    
                 updateMyProfile();
                 panel.updateUI();
                 friendListPanel.updateUI();
-
+                if (isConnectionLost()) {
+                    JOptionPane.showMessageDialog(null, "Connection Lost. Exiting...", "Profile",
+                                                        JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
             }
         });
         timer.setRepeats(true);
@@ -732,7 +736,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
     private String[] requestUserList() {
         String request = "Req9: Request all users";
-        String[] response;
+        String[] response = new String[0];
         
         response = ((String) sendRequest(request)).split(",");
 
@@ -825,16 +829,16 @@ public class ProfileClient extends JComponent implements Runnable {
             oos.flush();
             response = ois.readObject();
         } catch (UnknownHostException e) {
-            response = "E0: Unknown Host";
-            e.printStackTrace();
+            response = "Unknown Host";
+            // e.printStackTrace();
         } catch (IOException e) {
-            response = "E0: Connection Failed";
-            e.printStackTrace();
+            response = "Connection Failed";
+            // e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            response = "E0: Class Not Found";
-            e.printStackTrace();
+            response = "Class Not Found";
+            // e.printStackTrace();
         } catch (NullPointerException e) {
-            response = "E0: Null Pointer Exception";
+            response = "Connection Failed";
         }
         return response;
     }
@@ -874,5 +878,9 @@ public class ProfileClient extends JComponent implements Runnable {
         for (String friendUsername : myProfile.getFriendUserNames()) {
             addUsernameButton(friendUsername, friendListPanel);
         }
+    }
+
+    private boolean isConnectionLost() {
+        return !socket.isConnected();
     }
 }

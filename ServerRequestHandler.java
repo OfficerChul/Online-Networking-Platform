@@ -14,11 +14,9 @@ import java.util.Objects;
 public final class ServerRequestHandler implements Runnable {
 
     private final Socket clientSocket;
-    private String[] userNames;
-    // private ArrayList<String> userNames;
-    private String[] onlineUsers;
+    // private String[] userNames;
+    // private String[] onlineUsers;
     private Profile[] profiles;
-    // private ArrayList<Profile> profiles;
 
     public ServerRequestHandler(Socket clientSocket) {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
@@ -472,7 +470,7 @@ public final class ServerRequestHandler implements Runnable {
     private String usersAreFriends(String username1, String username2) {
         Profile profile1 = returnProfileFromUsername(username1);
         Profile profile2 = returnProfileFromUsername(username2);
-        boolean areFriends = false;
+        // boolean areFriends = false;
         if ((profile1 == null) || (profile2 == null)) {
             return "Invalid Username";
         } else {

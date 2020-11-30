@@ -97,7 +97,7 @@ public class SimpleSever {
 
 
         Profile profileA = new Profile(name, accountA, email, aboutMe, likesAndInterests, friendUserNames);
-        final Profile myProfile = profileA;
+        // final Profile myProfile = profileA;
 
         if (obj instanceof String) {
             String[] rArray = ((String) obj).split(": ");
