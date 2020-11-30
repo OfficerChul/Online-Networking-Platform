@@ -31,10 +31,14 @@ public class Account implements Serializable {
      */
     private static final long serialVersionUID = 6666842209341941741L;
     // public class Account extends JComponent implements Serializable
-    
+
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+    
+    public Account(String username) {
+        this.username = username;
     }
 
     // retrieves user's password
