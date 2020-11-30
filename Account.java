@@ -11,10 +11,13 @@ import java.io.Serializable;
 // import java.util.HashMap;
 // import java.util.ArrayList;
 public class Account implements Serializable {
+    
+    // retrieves user's password
     public String getPassword() {
         return password;
     }
 
+    // retrieves user's username
     public String getUsername() {
         return username;
     }
@@ -22,7 +25,7 @@ public class Account implements Serializable {
      *
      */
     private static final long serialVersionUID = 6666842209341941741L;
-    // public class Account extends JComponent implements Serializable {
+    // public class Account extends JComponent implements Serializable
     private String username;
     private String password;
     // JTextField usernameText;
@@ -31,6 +34,7 @@ public class Account implements Serializable {
     // HashMap<String, String> accountsData;
     // ArrayList<Account> allUserAccounts;
 
+    // creates an account with the given user username and password
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
