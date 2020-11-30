@@ -171,7 +171,8 @@ public class ProfileClient extends JComponent implements Runnable {
                             if (secondChoice == JOptionPane.YES_OPTION); {
                                 String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
                                 if (response.split(": ")[0].equals("Res4")) {
-                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You will be logged out now.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    mainFrame.dispose();
+                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
                                     System.exit(0);    
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.", "Profile - Delete Account", JOptionPane.INFORMATION_MESSAGE);
