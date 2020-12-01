@@ -8,6 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +47,8 @@ public class FriendRequestTest {
         System.setIn(testIn);
     }
 
+    String className = "FriendRequest";
+    Method method;
     Class<?> object = Object.class;
     Class<?> friendRequest = FriendRequest.class;
     FriendRequest newFriendRequest = new FriendRequest("sentUser","receivedUser");
@@ -131,6 +135,27 @@ public class FriendRequestTest {
 
         String result = newFriendRequest.getUsernameWhoReceive();
 
+        String methodName = "getUsernameWhoReceive";
+
+        // Attempt to access the class method
+        try {
+            method = friendRequest.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Field wasn't retrieved properly", result, "receivedUser");
     }
 
@@ -138,12 +163,54 @@ public class FriendRequestTest {
     void getUsernameWhoSent() {
         String result = newFriendRequest.getUsernameWhoSent();
 
+        String methodName = "getUsernameWhoSent";
+
+        // Attempt to access the class method
+        try {
+            method = friendRequest.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Field wasn't retrieved properly", result, "sentUser");
     }
 
     @Test
     void getStatus() {
         int result = newFriendRequest.getStatus();
+
+        String methodName = "getStatus";
+
+        // Attempt to access the class method
+        try {
+            method = friendRequest.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = int.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, 0);
     }
@@ -154,6 +221,28 @@ public class FriendRequestTest {
 
         final Field field = friendRequest.getDeclaredField("status");
         field.setAccessible(true);
+
+        String methodName = "setStatus";
+
+        // Attempt to access the class method
+        try {
+            method = friendRequest.getDeclaredMethod(methodName, int.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newFriendRequest), 1);
     }
 }
