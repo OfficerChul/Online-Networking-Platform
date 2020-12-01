@@ -8,6 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.assertEquals;
 
@@ -46,6 +48,7 @@ public class AccountTest {
 
     Class<?> object = Object.class;
     Class<?> account = Account.class;
+    String className = "Account";
     Account newAccount = new Account("abc", "12345678");
 
     //test class
@@ -89,6 +92,9 @@ public class AccountTest {
             System.out.println("username field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int usernameModifier = usernameField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "password" + "` field is `private`!", Modifier.isPrivate(usernameModifier));
 
         //check if password field exists or not
         try {
@@ -105,6 +111,9 @@ public class AccountTest {
             System.out.println("password field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int passwordModifier = passwordField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "password" + "` field is `private`!", Modifier.isPrivate(passwordModifier));
 
     }
 
