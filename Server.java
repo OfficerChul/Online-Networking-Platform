@@ -80,6 +80,7 @@ public final class Server {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 closeServer();
+                
                 System.out.println("Shutting down...");
             }
         }); // save server data when server is interrupted

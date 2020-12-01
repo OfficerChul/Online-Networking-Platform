@@ -21,15 +21,15 @@ public final class ServerRequestHandler implements Runnable {
     public ServerRequestHandler(Socket clientSocket) {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
         this.clientSocket = clientSocket;
-    } //ServerRequestHandler
+    } // ServerRequestHandler
 
     private synchronized Object getResponse(Object request) { // synchronized to avoid race conditions
         profiles = Server.getProfiles(); // updates ServerRequestHandler data from Server
         Object response = null;
         String req = null;
-        if ((request == null)) {
+        if (request == null) {
             return "MALFORMED_REQUEST";
-        } //end if
+        } // end if
 
         if (request instanceof Profile) {
             Profile receivedProfile = (Profile) request;
@@ -79,16 +79,13 @@ public final class ServerRequestHandler implements Runnable {
                     String senderUsername = removeSpaceAtStart(requestVals[1]);
                     String recipientUsername = removeSpaceAtStart(requestVals[2]);
 
-                    if (usersAreFriends(senderUsername,
-                            recipientUsername).equals("true")) {
+                    if (usersAreFriends(senderUsername, recipientUsername).equals("true")) {
                         response = "E61: ERROR: Users are already friends";
                         break;
-                    } else if (usersAreFriends(senderUsername,
-                            recipientUsername).equals("Invalid Username")) {
+                    } else if (usersAreFriends(senderUsername, recipientUsername).equals("Invalid Username")) {
                         response = "E62: ERROR: Invalid username";
                         break;
-                    } else if (!friendRequestAlreadyExists(senderUsername,
-                            recipientUsername)) {
+                    } else if (!friendRequestAlreadyExists(senderUsername, recipientUsername)) {
                         if (sendFriendRequest(senderUsername, recipientUsername)) {
                             response = "Res6: Request Sent";
                         }
@@ -138,16 +135,17 @@ public final class ServerRequestHandler implements Runnable {
                 default: {
                     response = "invalid request";
                 }
-            }   
+            }
         }
         Server.setProfiles(profiles); // updates server with ServerRequestHandler Data
         Server.writeProfilesToFile("serverData.txt");
         // all responses are either Profile or String Objects
         return response;
-    } //getResponse
+    } // getResponse
 
     /**
-     * Serves the request made by the client connected to this request handler's client socket.
+     * Serves the request made by the client connected to this request handler's
+     * client socket.
      */
     @Override
     public void run() {
@@ -155,9 +153,9 @@ public final class ServerRequestHandler implements Runnable {
         Object response;
 
         try (var inputStream = this.clientSocket.getInputStream();
-             var reader = new ObjectInputStream(inputStream);
-             var outputStream = this.clientSocket.getOutputStream();
-             var writer = new ObjectOutputStream(outputStream)) {
+                var reader = new ObjectInputStream(inputStream);
+                var outputStream = this.clientSocket.getOutputStream();
+                var writer = new ObjectOutputStream(outputStream)) {
             while (true) {
                 request = reader.readObject();
                 response = this.getResponse(request);
@@ -173,8 +171,8 @@ public final class ServerRequestHandler implements Runnable {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } //end try catch
-    } //run
+        } // end try catch
+    } // run
 
     private boolean login(String username, String password) {
         // check credentials from arraylist, return user details if correct
@@ -303,7 +301,7 @@ public final class ServerRequestHandler implements Runnable {
                 recipientreceivedRequests[i].setStatus(1);
                 recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
                 recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
-                                                            recipientreceivedRequests.length - 1);
+                        recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -347,7 +345,7 @@ public final class ServerRequestHandler implements Runnable {
                 recipientreceivedRequests[i].setStatus(-1);
                 recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
                 recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
-                                                            recipientreceivedRequests.length - 1);
+                        recipientreceivedRequests.length - 1);
                 // recipientreceivedRequests.remove(i);
             }
         }
@@ -355,7 +353,8 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     private boolean sendFriendRequest(String senderUsername, String recipientUsername) {
-        // creates a new FriendRequest Object, adds this to both users' respective arraylists
+        // creates a new FriendRequest Object, adds this to both users' respective
+        // arraylists
         // returns false if either username is invalid
 
         FriendRequest thisFriendRequest = new FriendRequest(senderUsername, recipientUsername);
@@ -447,8 +446,9 @@ public final class ServerRequestHandler implements Runnable {
             // if request only exists on records of one side, update other side
             recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length + 1);
             recipientreceivedRequests[recipientreceivedRequests.length - 1] = new FriendRequest(senderUsername,
-                                                                                                 recipientUsername);
-            // recipientreceivedRequests.add(new FriendRequest(senderUsername, recipientUsername));
+                    recipientUsername);
+            // recipientreceivedRequests.add(new FriendRequest(senderUsername,
+            // recipientUsername));
             profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
             exists = true;
         } else if (existsInRecipientRecords && !existsInSenderRecords) {
@@ -478,7 +478,7 @@ public final class ServerRequestHandler implements Runnable {
             var profile2FriendList = profile2.getFriendUserNames();
 
             if ((Arrays.asList(profile1FriendList).contains(username2))
-                // profile1FriendList.contains(username2))
+                    // profile1FriendList.contains(username2))
                     && (Arrays.asList(profile2FriendList).contains(username2))) {
                 return "true";
             } else if (!(Arrays.asList(profile1FriendList)).contains(username2)
