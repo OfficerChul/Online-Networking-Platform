@@ -14,7 +14,7 @@ import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServerRequestHandlerTest {
+public class ServerRequestHandlerTest {
 
     private final PrintStream originalOutput = System.out;
     private final InputStream originalSysIn = System.in;
@@ -80,7 +80,7 @@ class ServerRequestHandlerTest {
 
         //check if clientSocket field exists or not
         try {
-            clientSocketField = serverRequestHandler.getDeclaredField("serverSocket");
+            clientSocketField = serverRequestHandler.getDeclaredField("clientSocket");
         } catch (NoSuchFieldException e) {
             System.out.println("clientSocket field does not exist.");
             Assert.fail();
@@ -117,8 +117,6 @@ class ServerRequestHandlerTest {
         //check if the field is private and final
         int profilesModifier = profilesField.getModifiers();
         Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" + "` field is `private`!", Modifier.isPrivate(profilesModifier));
-
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" + "` field is `final`!", Modifier.isFinal(profilesModifier));
     }
 
 //    @Test
