@@ -49,6 +49,7 @@ public class AccountTest {
     Class<?> object = Object.class;
     Class<?> account = Account.class;
     String className = "Account";
+    Method method;
     Account newAccount = new Account("abc", "12345678");
 
     //test class
@@ -126,6 +127,27 @@ public class AccountTest {
 
         String result = newAccount.getPassword();
 
+        String methodName = "getPassword";
+
+        // Attempt to access the class method
+        try {
+            method = account.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Field wasn't retrieved properly", result, "12345678");
     }
 
@@ -135,6 +157,27 @@ public class AccountTest {
         field.setAccessible(true);
 
         String result = newAccount.getUsername();
+
+        String methodName = "getUsername";
+
+        // Attempt to access the class method
+        try {
+            method = account.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "abc");
     }
