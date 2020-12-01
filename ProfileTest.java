@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -54,6 +55,7 @@ class ProfileTest {
     static FriendRequest newFriendRequest = new FriendRequest("a", "b");
     static FriendRequest[] newFriendRequestArray = {newFriendRequest};
     Profile newProfile = new Profile("Kyochul Jang", newAccount, "email@email.com", "aboutMe", "likesAndInterests", b);
+    String className = "Profile";
 
 
     //test class
@@ -103,6 +105,9 @@ class ProfileTest {
             System.out.println("account field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int accountModifier = accountField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "account" + "` field is `private`!", Modifier.isPrivate(accountModifier));
 
         //check if email field exists or not
         try {
@@ -119,6 +124,9 @@ class ProfileTest {
             System.out.println("email field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int emailModifier = emailField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "email" + "` field is `private`!", Modifier.isPrivate(emailModifier));
 
         //check if aboutMe field exists or not
         try {
@@ -135,6 +143,9 @@ class ProfileTest {
             System.out.println("aboutMe field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int aboutMeModifier = aboutMeField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "aboutMe" + "` field is `private`!", Modifier.isPrivate(aboutMeModifier));
 
         //check if name field exists or not
         try {
@@ -151,6 +162,9 @@ class ProfileTest {
             System.out.println("name field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int nameModifier = nameField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "name" + "` field is `private`!", Modifier.isPrivate(nameModifier));
 
         //check if likesAndInterests field exists or not
         try {
@@ -168,6 +182,9 @@ class ProfileTest {
             System.out.println("likesAndInterests field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int likesAndInterestsModifier = likesAndInterestsField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "likesAndInterests" + "` field is `private`!", Modifier.isPrivate(likesAndInterestsModifier));
 
         //check if friendUserNames field exists or not
         try {
@@ -185,6 +202,9 @@ class ProfileTest {
             System.out.println("friendUserNames field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int friendUserNamesModifier = friendUserNamesField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "friendUserNames" + "` field is `private`!", Modifier.isPrivate(friendUserNamesModifier));
 
         //check if sentFriendRequests field exists or not
         try {
@@ -201,6 +221,9 @@ class ProfileTest {
             System.out.println("sentFriendRequests field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int sentFriendRequestsModifier = sentFriendRequestsField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "sentFriendRequests" + "` field is `private`!", Modifier.isPrivate(sentFriendRequestsModifier));
 
         //check if receivedFriendRequests field exists or not
         try {
@@ -218,6 +241,9 @@ class ProfileTest {
             System.out.println("receivedFriendRequests field has wrong type");
             Assert.fail();
         }
+        //check if the field is private
+        int receivedFriendRequestsModifier = receivedFriendRequestsField.getModifiers();
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "receivedFriendRequests" + "` field is `private`!", Modifier.isPrivate(receivedFriendRequestsModifier));
 
     }
 
