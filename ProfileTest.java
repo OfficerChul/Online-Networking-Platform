@@ -1,21 +1,21 @@
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
-class ProfileTest {
+public class ProfileTest {
 
     private final PrintStream originalOutput = System.out;
     private final InputStream originalSysIn = System.in;
@@ -51,16 +51,17 @@ class ProfileTest {
     Class<?> object = Object.class;
     Class<?> profile = Profile.class;
     String[] b = {"a"};
-    static Account newAccount = new Account("abc","12345678");
+    static Account newAccount = new Account("abc", "12345678");
     static FriendRequest newFriendRequest = new FriendRequest("a", "b");
     static FriendRequest[] newFriendRequestArray = {newFriendRequest};
     Profile newProfile = new Profile("Kyochul Jang", newAccount, "email@email.com", "aboutMe", "likesAndInterests", b);
     String className = "Profile";
+    Method method;
 
 
     //test class
     @Test
-    public void testAllClasses() {
+    public void testProfile() {
         //check if Profile class exists or not
         try {
             Object object1 = Class.forName("Profile");
@@ -79,7 +80,7 @@ class ProfileTest {
 
     //test field
     @Test
-    public void testAllFields() {
+    public void testFields() {
         //fields in Profile class
         Field accountField;
         Field emailField;
@@ -248,139 +249,413 @@ class ProfileTest {
     }
 
     //test getters and setters
-
     @Test
-    void getAccount() throws NoSuchFieldException, IllegalAccessException {
+    public void getAccount() throws NoSuchFieldException, IllegalAccessException {
+
+        String methodName = "getAccount";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Account.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
 
         Account result = newProfile.getAccount();
+
+
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, newAccount);
     }
 
     @Test
-    void getReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
+    public void getReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("receivedFriendRequests");
         field.setAccessible(true);
         field.set(newProfile, newFriendRequestArray);
         FriendRequest[] result = newProfile.getReceivedFriendRequests();
 
+        String methodName = "getReceivedFriendRequests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = FriendRequest[].class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertArrayEquals(result, new FriendRequest[]{newFriendRequest}, "Field wasn't retrieved properly");
 
     }
 
     @Test
-    void getSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
+    public void getSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("sentFriendRequests");
         field.setAccessible(true);
         field.set(newProfile, newFriendRequestArray);
         FriendRequest[] result = newProfile.getSentFriendRequests();
 
+        String methodName = "getSentFriendRequests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = FriendRequest[].class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertArrayEquals(result, newFriendRequestArray, "Field wasn't retrieved properly");
 
     }
 
     @Test
-    void getFriendUserNames() {
+    public void getFriendUserNames() {
 
         String[] result = newProfile.getFriendUserNames();
+
+        String methodName = "getFriendUserNames";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String[].class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals(result, new String[]{"a"}, "Field wasn't retrieved properly");
 
     }
 
     @Test
-    void getLikesAndInterests() {
+    public void getLikesAndInterests() {
 
         String result = newProfile.getLikesAndInterests();
+
+        String methodName = "getLikesAndInterests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "likesAndInterests");
 
     }
 
     @Test
-    void getAboutMe() {
+    public void getAboutMe() {
 
         String result = newProfile.getAboutMe();
+
+        String methodName = "getAboutMe";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "aboutMe");
 
     }
 
     @Test
-    void getEmail() {
+    public void getEmail() {
 
         String result = newProfile.getEmail();
+
+        String methodName = "getEmail";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "email@email.com");
 
     }
 
     @Test
-    void getName() {
+    public void getName() {
 
         String result = newProfile.getName();
+
+        String methodName = "getName";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has no parameters!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = String.class;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "Kyochul Jang");
 
     }
 
     @Test
-    void setName() throws NoSuchFieldException, IllegalAccessException {
+    public void setName() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("name");
         field.setAccessible(true);
 
         newProfile.setName("Yeju Kim");
 
+        String methodName = "setName";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, String.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), "Yeju Kim");
 
     }
 
     @Test
-    void setAboutMe() throws NoSuchFieldException, IllegalAccessException {
+    public void setAboutMe() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("aboutMe");
         field.setAccessible(true);
 
         newProfile.setAboutMe("myGirlFriend");
 
+        String methodName = "setAboutMe";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, String.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), "myGirlFriend");
 
     }
 
     @Test
-    void setAccount() throws NoSuchFieldException, IllegalAccessException {
+    public void setAccount() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("account");
         field.setAccessible(true);
 
         newProfile.setAccount(new Account("Yeju", "girlFriend"));
 
+        String methodName = "setAccount";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, Account.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), new Account("Yeju", "girlFriend"));
 
     }
 
     @Test
-    void setEmail() throws NoSuchFieldException, IllegalAccessException {
+    public void setEmail() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("email");
         field.setAccessible(true);
 
         newProfile.setEmail("Yeju_Kim@email.com");
 
+        String methodName = "setEmail";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, String.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), "Yeju_Kim@email.com");
 
     }
 
     @Test
-    void setFriendUserNames() throws NoSuchFieldException, IllegalAccessException {
+    public void setFriendUserNames() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("friendUserNames");
         field.setAccessible(true);
 
         newProfile.setFriendUserNames(new String[]{"myGirlLOL"});
+
+        String methodName = "setFriendUserNames";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, String[].class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals((Object[]) field.get(newProfile), new String[]{"myGirlLOL"}, "Fields didn't match");
 
@@ -388,36 +663,99 @@ class ProfileTest {
     }
 
     @Test
-    void setLikesAndInterests() throws NoSuchFieldException, IllegalAccessException {
+    public void setLikesAndInterests() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("likesAndInterests");
         field.setAccessible(true);
 
         newProfile.setLikesAndInterests("ILikeHer");
 
+        String methodName = "setLikesAndInterests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, String.class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), "ILikeHer");
 
     }
 
     @Test
-    void setReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
+    public void setReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("receivedFriendRequests");
         field.setAccessible(true);
 
         newProfile.setReceivedFriendRequests(newFriendRequestArray);
 
+        String methodName = "setReceivedFriendRequests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, FriendRequest[].class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+
         assertEquals("Fields didn't match", field.get(newProfile), newFriendRequestArray);
 
     }
 
     @Test
-    void setSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
+    public void setSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
         Field field = newProfile.getClass().getDeclaredField("sentFriendRequests");
         field.setAccessible(true);
 
         newProfile.setSentFriendRequests(newFriendRequestArray);
+
+        String methodName = "setSentFriendRequests";
+
+        // Attempt to access the class method
+        try {
+            method = profile.getDeclaredMethod(methodName, FriendRequest[].class);
+        } catch (NoSuchMethodException e) {
+            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+                    " has one parameter!");
+            return;
+        } //end try catch
+
+        Class<?> expectedReturnType = method.getReturnType();
+        Class<?> actualReturnType = Void.TYPE;
+
+        // Perform tests
+        int modifiers = method.getModifiers();
+
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), newFriendRequestArray);
 
