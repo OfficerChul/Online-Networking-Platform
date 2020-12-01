@@ -832,6 +832,9 @@ public class ProfileClient extends JComponent implements Runnable {
             response = "Unknown Host";
             // e.printStackTrace();
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Connection Failed. Quiting...",
+                                            "Profile", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
             response = "Connection Failed";
             // e.printStackTrace();
         } catch (ClassNotFoundException e) {
