@@ -148,7 +148,7 @@ public class ServerTest {
         Field field = server.getDeclaredField("profiles");
         field.setAccessible(true);
 
-        String methodName = "getPassword";
+        String methodName = "getProfiles";
 
         // Attempt to access the class method
         try {
@@ -169,21 +169,21 @@ public class ServerTest {
 
         Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
-        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName + "` method is NOT `static`!", Modifier.isStatic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `static`!", Modifier.isStatic(modifiers));
 
     }
 
     @Test
     void setProfiles() throws NoSuchFieldException {
 
-        Field field = server.getDeclaredField("password");
+        Field field = server.getDeclaredField("profiles");
         field.setAccessible(true);
 
-        String methodName = "getUsername";
+        String methodName = "setProfiles";
 
         // Attempt to access the class method
         try {
-            method = server.getDeclaredMethod(methodName);
+            method = server.getDeclaredMethod(methodName, Profile[].class);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
                     " has no parameter!");
@@ -200,7 +200,7 @@ public class ServerTest {
 
         Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
-        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName + "` method is NOT `static`!", Modifier.isStatic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `static`!", Modifier.isStatic(modifiers));
 
     }
 }
