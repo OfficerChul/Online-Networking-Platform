@@ -13,6 +13,13 @@
 * **The application supports simultaneous use by multiple users over a network. Changes to profiles and friend requests appears in real-time as users add them.**
 * **All user interactions are GUI based.**
 * **Data persists regardless of whether or not a user is connected. If a user disconnects and reconnects, their data are still present.**
+  
+## Optional Features:
+* Indicating whether a User is online.
+* Adding profile photos.
+* Allow accounts to be set to "private", where no other user can view them, and "protected", where only current friends can view them.
+
+*Note: Yet to be added*
 
 ## Description of Each Class
 * **Account**
@@ -37,91 +44,88 @@
   
  *Note: More to be added*
 
-## Testing
-
-*Most test cases are done via JUnit except for the GUI interactions*
-
+## Testcases
 * **AccountTest**
-  * **Class**
-    * Tests whether the class exists or not
-    * Tests if the class inherits correctly
-  * **Fields** 
-    * Tests whether the fields exist or not
-    * Tests if the field has correct type
-    * Tests if the field has the correct modifier
-  * **Accessor and Mutator methods**
-    * Tests whether the methods exist or not
-    * Tests if the method has correct parameters
-    * Tests if the method has correct modifiers
-    * Tests if the method has correct return type
-    * Tests if the method retrives properly
+  
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+ 
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
 * **FriendRequestTest**
-  * **Class**
-   * Tests whether the class exists or not
-   * Tests if the class inherits correctly
-  * **Fields**
-   * Tests whether the fields exist or not
-   * Tests if the field has correct type
-   * Tests if the field has the correct modifier
-  * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+ 
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+ 
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
 * **ProfileTest**
-  * **Class**
-   * Tests whether the class exists or not
-   * Tests if the class inherits correctly
-  * **Fields**
-   * Tests whether the fields exist or not
-   * Tests if the field has correct type
-   * Tests if the field has the correct modifier
-  * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+  
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
 * **ProfileClientTest**
-  * **Class**
-   * Tests whether the class exists or not
-   * Tests if the class inherits correctly
-  * **Fields**
-   * Tests whether the fields exist or not
-   * Tests if the field has correct type
-   * Tests if the field has the correct modifier
-  * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
 * **ServerTest**
-  * **Class**
-   * Tests whether the class exists or not
-   * Tests if the class inherits correctly
-  * **Fields**
-   * Tests whether the fields exist or not
-   * Tests if the field has correct type
-   * Tests if the field has the correct modifier
-  * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
 * **ServerRequestHandlerTest**
-  * **Class**
-   * Test whether the class exists or not
-   * Test if the class inherits correctly
-  * **Fields**
-   * Test whether the fields exist or not
-   * Test if the field has correct type
-   * Test if the field has the correct modifier
-  * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
