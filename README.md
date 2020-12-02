@@ -16,9 +16,11 @@
 
 ## Description of Each Class
 * **Account**
-  * Creates an Account object with user's name and password
-  * Contains generic getter and setter methods
-  * Implements Serializable
+  * Creates an Account object with the client's username and password
+  * Methods:
+   * **getPassword()**: returns client's password
+   * **getUsername()**: returns client's username
+  * Implements Serializable for ObjectInputStream and ObjectOutputStream classes
 * **Profile**
   * Creates a Profile object with user's name, account, email, aboutMe, likes and interests, and an array of friend usernames
   * Contains generic getter and setter methods
