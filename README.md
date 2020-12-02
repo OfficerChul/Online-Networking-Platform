@@ -43,3 +43,89 @@
   * Implements synchronization while handling the request to control the access of multiple threads
   
  *Note: More to be added*
+
+## Testcases
+* **AccountTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
+* **FriendRequestTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
+* **ProfileTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
+* **ProfileClientTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
+* **ServerTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
+* **ServerRequestHandlerTest**
+  [Class]
+  * Test if the class exists or not
+  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  [Field]
+  * Test if the field exists or not
+  * Test if the field has correct type or not
+  * Test if the field has the correct modifier or not
+  [Getters and Setters]
+  * Test if the method exists or not
+  * Test if the method has correct parameters or not
+  * Test if the method has correct modifiers or not
+  * Test if the method has correct return type or not
+  * Test if the method retrives properly or not
