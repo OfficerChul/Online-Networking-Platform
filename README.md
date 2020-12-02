@@ -46,84 +46,84 @@
 
 ## Testcases
 * **AccountTest**
-  \n[Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  \n[Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  \n[Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
 * **FriendRequestTest**
-  [Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  [Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  [Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
 * **ProfileTest**
-  [Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  [Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  [Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
 * **ProfileClientTest**
-  [Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  [Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  [Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
 * **ServerTest**
-  [Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  [Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  [Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
 * **ServerRequestHandlerTest**
-  [Class]
+  *[Class]
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
-  [Field]
+  *[Field]
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
-  [Getters and Setters]
+  *[Getters and Setters]
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
