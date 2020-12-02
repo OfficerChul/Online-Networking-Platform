@@ -13,13 +13,6 @@
 * **The application supports simultaneous use by multiple users over a network. Changes to profiles and friend requests appears in real-time as users add them.**
 * **All user interactions are GUI based.**
 * **Data persists regardless of whether or not a user is connected. If a user disconnects and reconnects, their data are still present.**
-  
-## Optional Features:
-* Indicating whether a User is online.
-* Adding profile photos.
-* Allow accounts to be set to "private", where no other user can view them, and "protected", where only current friends can view them.
-
-*Note: Yet to be added*
 
 ## Description of Each Class
 * **Account**
@@ -44,7 +37,7 @@
   
  *Note: More to be added*
 
-## Testcases
+## Testing
 * **AccountTest**
   
   * Test if the class exists or not
@@ -59,6 +52,7 @@
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
+  
 * **FriendRequestTest**
  
   * Test if the class exists or not
@@ -73,6 +67,7 @@
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
+  
 * **ProfileTest**
   
   * Test if the class exists or not
@@ -87,6 +82,7 @@
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
+  
 * **ProfileClientTest**
 
   * Test if the class exists or not
@@ -115,6 +111,7 @@
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
   * Test if the method retrives properly or not
+  
 * **ServerRequestHandlerTest**
 
   * Test if the class exists or not
