@@ -37,22 +37,24 @@
   
  *Note: More to be added*
 
-## Testcases
+## Testing
+
 *Most test cases are done via JUnit except for the GUI interactions*
-* **Account**
+
+* **AccountTest**
   * **Class**
-   * Tests whether the class exists or not
-   * Tests if the class inherits correctly
+    * Tests whether the class exists or not
+    * Tests if the class inherits correctly
   * **Fields** 
-   * Tests whether the fields exist or not
-   * Tests if the field has correct type
-   * Tests if the field has the correct modifier
+    * Tests whether the fields exist or not
+    * Tests if the field has correct type
+    * Tests if the field has the correct modifier
   * **Accessor and Mutator methods**
-   * Tests whether the methods exist or not
-   * Tests if the method has correct parameters
-   * Tests if the method has correct modifiers
-   * Tests if the method has correct return type
-   * Tests if the method retrives properly
+    * Tests whether the methods exist or not
+    * Tests if the method has correct parameters
+    * Tests if the method has correct modifiers
+    * Tests if the method has correct return type
+    * Tests if the method retrives properly
 * **FriendRequestTest**
   * **Class**
    * Tests whether the class exists or not
