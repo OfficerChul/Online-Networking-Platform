@@ -4,79 +4,84 @@
 
 ## GUI Interactions
 
-- Note: Since pop-up message boxes are implemented by using `JOptionPane`, the text of buttons is default to be the language of your local computer.
-1. When `Server` is running properly, the `ProfileClient` first tries to connect to the server on port `6868`. 
-    - If connection is successfully established, you will receive a notification
+- **Note: Since pop-up message boxes are implemented by using `JOptionPane`, the text of buttons is default to be the language of your local computer.**
 
-        ![Images\0._Successfully_Connected.png](Images\0._Successfully_Connected.png)
+### 1. Connection Check
 
-    - If connection is not established, you will receive an error message, and the program will end.
+- When `Server` is running properly, the `ProfileClient` first tries to connect to the server on port `6868`.
 
-        ![Images\0._Connection_Failed.png](Images\0._Connection_Failed.png)
+  - If connection is successfully established, you will receive a notification:
 
-2. **Login** Frame is shown then.
+      ![Images\0._Successfully_Connected.png](Images\0._Successfully_Connected.png)
 
-    ![Images/1_Login.png](Images/1_Login.png)
+  - If connection is not established, you will receive an error message, and the program will end.
 
-    - **Username** Field: Enter your username
-    - **Password** Field: Enter your password
-    - **Login** Button: Login with entered username and password
-    - **Register** Button:
-        - A new frame will be displayed.
+      ![Images\0._Connection_Failed.png](Images\0._Connection_Failed.png)
 
-            ![Images/1._Register.png](Images/1._Register.png)
+### 2. **Login** Frame is shown then
 
-            - **Username** Field: Enter your username
-            - **Password** Field: Enter your password
-            - **Register** Button: Create your account with entered username and password. *Note: a blank profile is created when a new account is created.*
-                - Username should be no longer than 15 characters, only English letters and numbers are applicable
-                - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
-            - **Cancel** Button: Close this box and return to **Login** Frame.
-3. **Main** Frame is shown you are logged in.
+- ![Images/1_Login.png](Images/1_Login.png)
 
-    ![2._Main.png](Images/2._Main.png)
+  - **Username** Field: Enter your username
+  - **Password** Field: Enter your password
+  - **Login** Button: Login with entered username and password
+  - **Register** Button:
+    - A new frame will be displayed.
 
-    - **Delete Profile** Button:
-        - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
-    - **Delete Account** Button:
-        - If you choose "Yes" on the following confirmation message box, you will be asked to enter your password to confirm your deletion. If the password is correct, you will be ask to confirm again.
+      ![Images/1._Register.png](Images/1._Register.png)
 
-            ![Images/4._Delete_account2.png](Images/4._Delete_account2.png)
+      - **Username** Field: Enter your username
+      - **Password** Field: Enter your password
+      - **Register** Button: Create your account with entered username and password. *Note: a blank profile is created when a new account is created.*
+        - Username should be no longer than 15 characters, only English letters and numbers are applicable
+        - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
+      - **Cancel** Button: Close this box and return to **Login** Frame.
 
-        - If you ultimately confirm the deletion, your account is removed from the server database, and you can no longer login with your username and password unless you create a new account. You are logged out and the program exits immediately.
-    - **My Profile** Button: Load my profile. This button is used to "load my profile" if you are visiting someone else's profile.
-        - Your profile is automatically updated from the server every 0.5 second.
-        - You can always go back to your profile with this button.
-    - **List Users** Button:
-        - You can see all the other users from this frame.
+### 3. **Main** Frame is shown you are logged in
 
-        ![Images/3._List_All_Users.png](Images/3._List_All_Users.png)
+![2._Main.png](Images/2._Main.png)
 
-        - You can view someone's profile if you click on the button with one's username. Profile file will be loaded on the **Main** Frame
+- **Delete Profile** Button:
+  - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
+- **Delete Account** Button:
+  - If you choose "Yes" on the following confirmation message box, you will be asked to enter your password to confirm your deletion. If the password is correct, you will be ask to confirm again.
 
-            ![Images/3._View_Others_Profile.png](Images/3._View_Others_Profile.png)
+    ![Images/4._Delete_account2.png](Images/4._Delete_account2.png)
 
-            - **Add Friend** Button: Send a friend request to the person whose profile you are visiting. If a friend request is sent already, you will be notified that request is already sent.
-                - The button will not be visible if you are visiting your personal profile or someone else's profile if one is already your friend.
-            - You can always go back to your profile with **My Profile** button.
-    - **Requests** Button:
-        - You can choose either to view the request you sent or view the request you received by clicking on respective buttons.
-            - In **Received Request**, you can accept or reject a request by clicking on the button. *Either accepted or rejected will make the friend request not visible to both users. There will be a temporary indication for accepting or rejecting a request.*
+    - If you ultimately confirm the deletion, your account is removed from the server database, and you can no longer login with your username and password unless you create a new account. You are logged out and the program exits immediately.
+- **My Profile** Button: Load my profile. This button is used to "load my profile" if you are visiting someone else's profile.
+  - Your profile is automatically updated from the server every 0.5 second.
+  - You can always go back to your profile with this button.
+- **List Users** Button:
+  - You can see all the other users from this frame.
 
-                ![Images/5._Accept.png](Images/5._Accept.png)
+     ![Images/3._List_All_Users.png](Images/3._List_All_Users.png)
 
-                ![Images/5._Accepted.png](Images/5._Accepted.png)
+    - You can view someone's profile if you click on the button with one's username. Profile file will be loaded on the **Main** Frame
 
-                - If accepted, both can see their newly added friend in their **Friend List**.
-                    - You can click on the button with your friend's username to view his/hers profile. You can always go back to your profile with **My Profile** button.
-            - In **Sent Request**, you can see the requests you already send. If the request is either accepted or rejected you will not long see it.
+        ![Images/3._View_Others_Profile.png](Images/3._View_Others_Profile.png)
 
-                ![Images/5._Sent_requests.png](Images/5._Sent_requests.png)
+      - **Add Friend** Button: Send a friend request to the person whose profile you are visiting. If a friend request is sent already, you will be notified that request is already sent.
+        - The button will not be visible if you are visiting your personal profile or someone else's profile if one is already your friend.
+        - You can always go back to your profile with **My Profile** button.
+- **Requests** Button:
+  - You can choose either to view the request you sent or view the request you received by clicking on respective buttons.
+    - In **Received Request**, you can accept or reject a request by clicking on the button. *Either accepted or rejected will make the friend request not visible to both users. There will be a temporary indication for accepting or rejecting a request.*
 
-    - **Save** Button: Save your current modification on your personal profile and upload it to the server.
-        - The button will not be visible if you are visiting someone else's profile
-    - **Cancel** Button: Discard your current modification on your personal profile and reload your profile.
-        - The button will not be visible if you are visiting someone else's profile
+      ![Images/5._Accept.png](Images/5._Accept.png)
+
+      ![Images/5._Accepted.png](Images/5._Accepted.png)
+
+      - If accepted, both can see their newly added friend in their **Friend List**.
+        - You can click on the button with your friend's username to view his/hers profile. You can always go back to your profile with **My Profile** button.
+    - In **Sent Request**, you can see the requests you already send. If the request is either accepted or rejected you will not long see it.
+
+        ![Images/5._Sent_requests.png](Images/5._Sent_requests.png)
+
+- **Save** Button: Save your current modification on your personal profile and upload it to the server.
+  - The button will not be visible if you are visiting someone else's profile
+- **Cancel** Button: Discard your current modification on your personal profile and reload your profile.
+  - The button will not be visible if you are visiting someone else's profile
 
 ## Description of Each Class
 
