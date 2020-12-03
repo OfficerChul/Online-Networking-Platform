@@ -1,11 +1,13 @@
-# CS 180 Project 5 - A Social Network "Profile" Application 
-## Implementations:
+# CS 180 Project 5 - A Social Network "Profile" Application
+
+## Implementations
+
 * **Users can create, edit, and delete accounts for themselves.**
 * **Users can create, edit, and delete profiles.**
 * **Users can create a friends list of other users of the application.**
-  * To be friends, both users must have an account, and both must confirm to be friends with one another. 
+  * To be friends, both users must have an account, and both must confirm to be friends with one another.
   
-* **Users can see a list of their sent and received friend requests. They can rescind friend requests or confirm them.** 
+* **Users can see a list of their sent and received friend requests. They can rescind friend requests or confirm them.**
   * If a friend request is rescinded, it will no longer appear for the recipient or the sender.
   * If a friend request is confirmed, it will no longer appear for the recipient or the sender. Both users will be added to each other's friend list.
   
@@ -58,7 +60,7 @@
   * Client class that is capable of simultaneous use by multiple users over the same network
   * Manages all the GUI interfaces
   * Methods in the ActionListener:
-  * Other methods: 
+  * Other methods:
     * **userLogin(String username, String password)**: lets the user to login with the given username and password by sending the request to the server. If either username or password is incorrect, it displays an error message. Otherwise, a new Profile object is created with the given username and password.
     * **userRegister(String username, String password)**: lets the user to register with the given username and password by sending the request to the server. If there's a username that already exists, it displays an error message. Then, it returns to the login page.
     * **showLoginPanel()**: displays the login page
@@ -88,11 +90,12 @@
  *Note: More to be added*
 
 ## Testing
+
 * **AccountTest**
   
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
- 
+
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
@@ -104,14 +107,14 @@
   * Test if the method retrives properly or not
   
 * **FriendRequestTest**
- 
+
   * Test if the class exists or not
   * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
   * Test if the field exists or not
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
- 
+
   * Test if the method exists or not
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
