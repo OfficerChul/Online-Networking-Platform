@@ -2,21 +2,61 @@
 
 ## Implementations
 
-* **Users can create, edit, and delete accounts for themselves.**
-* **Users can create, edit, and delete profiles.**
-* **Users can create a friends list of other users of the application.**
-  * To be friends, both users must have an account, and both must confirm to be friends with one another.
-  
-* **Users can see a list of their sent and received friend requests. They can rescind friend requests or confirm them.**
-  * If a friend request is rescinded, it will no longer appear for the recipient or the sender.
-  * If a friend request is confirmed, it will no longer appear for the recipient or the sender. Both users will be added to each other's friend list.
-  
-* **Users can view a list of all the application's users and send any given individual a friend request or view their profile.**
-* **The application supports simultaneous use by multiple users over a network. Changes to profiles and friend requests appears in real-time as users add them.**
-* **All user interactions are GUI based.**
-* **Data persists regardless of whether or not a user is connected. If a user disconnects and reconnects, their data are still present.**
 
-*Should delete the stuff above and add in the general run-down on how to run the program*
+## GUI Interactions
+
+- Note: Since pop-up message boxes are implemented by using `JOptionPane`, the text of buttons is default to be the language of your local computer.
+1. When `Server` is running properly, the `ProfileClient` first tries to connect to the server on port `6868`. 
+    - If connection is successfully established, you will receive a notification
+
+        ![Images/Untitled.png](Images/Untitled.png)
+
+    - If connection is not established, you will receive an error message, and the program will end.
+
+        ![Images/Untitled%201.png](Images/Untitled%201.png)
+
+2. **Login** Frame is shown then.
+
+    ![Images/Untitled%202.png](Images/Untitled%202.png)
+
+    - **Username** Field: Enter your username
+    - **Password** Field: Enter your password
+    - **Login** Button: Login with entered username and password
+    - **Register** Button:
+        - A new frame will be displayed.
+
+            ![Images/Untitled%203.png](Images/Untitled%203.png)
+
+            - **Username** Field: Enter your username
+            - **Password** Field: Enter your password
+            - **Register** Button: Create your account with entered username and password. *Note: a blank profile is created when a new account is created.*
+                - Username should be no longer than 15 characters, only English letters and numbers are applicable
+                - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
+            - **Cancel** Button: Close this box and return to **Login** Frame.
+3. **Main** Frame is shown you are logged in.
+
+    ![Images/Untitled%204.png](Images/Untitled%204.png)
+
+    - **Delete Profile** Button:
+        - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
+    - **Delete Account** Button:
+        - If you choose "Yes" on the following confirmation message box, you will be asked to enter your password to confirm your deletion. If the password is correct, you will be ask to confirm again.
+        - If you ultimately confirm the deletion, your account is removed from the server database, and you can no longer login with your username and password unless you create a new account. You are logged out and the program exits immediately.
+    - **My Profile** Button: Load my profile. This button is used to "load my profile" if you are visiting someone else's profile.
+        - Your profile is automatically updated from the server every 0.5 second.
+    - **List Users** Button:
+        - You can see all the other users from this frame.
+
+        ![Images/Untitled%205.png](Images/Untitled%205.png)
+
+        - You can view someone's profile if you click on the button with one's username. Profile file will be loaded on the **Main** Frame
+
+            ![Images/Untitled%206.png](Images/Untitled%206.png)
+
+            - **Add Friend** Button: Send a friend request to the person whose profile you are visiting. If a friend request is sent already, you will be notified that request is already sent.
+    - **Requests** Button:
+    - **Save** Button:
+    - **Cancel** Button:
 
 ## Description of Each Class
 
