@@ -76,15 +76,40 @@
     * **loadInfo(Profile profile)**: updates the text fields with the currently saved info in the user's profile.
     * **updateMyProfile()**: sends a request to the server for the profile to be updated.
     * **isConnectionLost()**: returns false when the connection between the client and the server is lost.
-    * **run()**: connects the server by invoking the **initializeNetwork()** method and displays the login panel by invoking the **showLoginPanel()**.
+    * **run()**: connects to the server by invoking the **initializeNetwork()** method and displays the login panel by invoking the **showLoginPanel()** method.
     * **main(String[] args)**: excutes the **run()** method asynchronously.
   * Implements Serializable for ObjectInputStream and ObjectOutputStream classes
 * **Server**
-  * Server class that is able to simulatenously hold multiple users using a separate thread for each client
+  * Server class that is able to simulatenously hold multiple users by using assignging a new thread for each client
   * All the saved data during the use of the application persists regardless of whether or not a user is connected to the server
-  * Implements Object Input/Output Stream to read and write any type of data transferred between each client and the server to a file
+  * Methods:
+    * **serveClients()**: 
+    * **closeServer()**: writes all the array of data back to the files, then closes the server.
+    * **writeProfilesToFile(String filename)**: writes any type of data in the Profile object to the file using the ObjectOuputStream
+    * **readProfilesFromFile(String filename)**: reads a Profile object from the file using the ObjectInputStream. Catches any possible exceptions in the process.
+    * **getProfiles()**: returns an array of Profile objects
+    * **setProfiles(Profile[] profiles)**: updates an array of Profile objects with the given new array of Profile objects
+    * **main(String[] args)**: creates a new Server object using the designated port number. Saves server data when the server is interrupted at any point. Invokes the **serveClients()** method to run a new thread for the client.
 * **ServerRequestHandler**
   * Request Handler used for the server to handle the requests sent from the client
+  * Implements Runnable interface 
+  * Methods:
+    * **getResponse(Object request)**: synchronized to avoid race conditions. Updates the ServerRequestHandler data from Server. Handles all the requests made from the client. All responses are either Profile or String objects
+    * **run()**: overridden **run()** method using the ObjectInputStream as the reader and ObjectOutputStream as the writer
+    * **login(String username, String password)**:
+    * **returnProfileFromUsername(String username)**:
+    * **updateProfile(Profile profileToUpdate)**:
+    * **usernameIsTaken(String username)**:
+    * **profileRequest(Profile profile)**:
+    * **deleteProfile(String username)**:
+    * **deleteAccount(String username)**:
+    * **acceptFriendRequest(String senderUsername, String recipientUsername)**:
+    * **rejectFriendRequest(String senderUsername, String recipientUsername)**:
+    * **sendFriendRequest(String senderUsername, String recipientUsername)**:
+    * **rescindFriendRequest(String senderUsername, String recipientUsername)**:
+    * **friendRequestAlreadyExists(String senderUsername, String recipientUsername**:
+    * **userAreFriends(String username1, String username2)**:
+    * **removeSpaceAtStart(String input)**: removes the first character in the given String if it is blank
   * Implements synchronization while handling the request to control the access of multiple threads
   
  *Note: More to be added*
@@ -93,48 +118,48 @@
 
 * **AccountTest**
   
-  * Test if the class exists or not
-  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  * Tests if the class exists or not
+  * Tests if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
-  * Test if the field exists or not
-  * Test if the field has correct type or not
-  * Test if the field has the correct modifier or not
+  * Tests if the field exists or not
+  * Tests if the field has correct type or not
+  * Tests if the field has the correct modifier or not
   
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Tests if the method exists or not
+  * Tests if the method has correct parameters or not
+  * Tests if the method has correct modifiers or not
+  * Tests if the method has correct return type or not
+  * Tests if the method retrives properly or not
   
 * **FriendRequestTest**
 
-  * Test if the class exists or not
-  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  * Tests if the class exists or not
+  * Tests if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
-  * Test if the field exists or not
-  * Test if the field has correct type or not
-  * Test if the field has the correct modifier or not
+  * Tests if the field exists or not
+  * Tests if the field has correct type or not
+  * Tests if the field has the correct modifier or not
 
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Tests if the method exists or not
+  * Tests if the method has correct parameters or not
+  * Tests if the method has correct modifiers or not
+  * Tests if the method has correct return type or not
+  * Tests if the method retrives properly or not
   
 * **ProfileTest**
   
-  * Test if the class exists or not
-  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  * Tests if the class exists or not
+  * Tests if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
-  * Test if the field exists or not
-  * Test if the field has correct type or not
-  * Test if the field has the correct modifier or not
+  * Tests if the field exists or not
+  * Tests if the field has correct type or not
+  * Tests if the field has the correct modifier or not
 
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Tests if the method exists or not
+  * Tests if the method has correct parameters or not
+  * Tests if the method has correct modifiers or not
+  * Tests if the method has correct return type or not
+  * Tests if the method retrives properly or not
   
 * **ProfileClientTest**
 
@@ -152,30 +177,30 @@
   * Test if the method retrives properly or not
 * **ServerTest**
 
-  * Test if the class exists or not
-  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  * Tests if the class exists or not
+  * Tests if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
-  * Test if the field exists or not
-  * Test if the field has correct type or not
-  * Test if the field has the correct modifier or not
+  * Tests if the field exists or not
+  * Tests if the field has correct type or not
+  * Tests if the field has the correct modifier or not
 
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Tests if the method exists or not
+  * Tests if the method has correct parameters or not
+  * Tests if the method has correct modifiers or not
+  * Tests if the method has correct return type or not
+  * Tests if the method retrives properly or not
   
 * **ServerRequestHandlerTest**
 
-  * Test if the class exists or not
-  * Test if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
+  * Tests if the class exists or not
+  * Tests if the class inherits correctly or not(if it doesn't inherit any classm then it mean it inherits Object class)
 
-  * Test if the field exists or not
-  * Test if the field has correct type or not
-  * Test if the field has the correct modifier or not
+  * Tests if the field exists or not
+  * Tests if the field has correct type or not
+  * Tests if the field has the correct modifier or not
 
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Tests if the method exists or not
+  * Tests if the method has correct parameters or not
+  * Tests if the method has correct modifiers or not
+  * Tests if the method has correct return type or not
+  * Tests if the method retrives properly or not
