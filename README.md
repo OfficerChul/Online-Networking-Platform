@@ -8,15 +8,15 @@
 1. When `Server` is running properly, the `ProfileClient` first tries to connect to the server on port `6868`. 
     - If connection is successfully established, you will receive a notification
 
-        ![Images/Untitled.png](Images/Untitled.png)
+        ![Images\0._Successfully_Connected.png](Images\0._Successfully_Connected.png)
 
     - If connection is not established, you will receive an error message, and the program will end.
 
-        ![Images/Untitled%201.png](Images/Untitled%201.png)
+        ![Images\0._Connection_Failed.png](Images\0._Connection_Failed.png)
 
 2. **Login** Frame is shown then.
 
-    ![Images/Untitled%202.png](Images/Untitled%202.png)
+    ![Images/1_Login.png](Images/1_Login.png)
 
     - **Username** Field: Enter your username
     - **Password** Field: Enter your password
@@ -24,7 +24,7 @@
     - **Register** Button:
         - A new frame will be displayed.
 
-            ![Images/Untitled%203.png](Images/Untitled%203.png)
+            ![Images/1._Register.png](Images/1._Register.png)
 
             - **Username** Field: Enter your username
             - **Password** Field: Enter your password
@@ -34,7 +34,7 @@
             - **Cancel** Button: Close this box and return to **Login** Frame.
 3. **Main** Frame is shown you are logged in.
 
-    ![Images/Untitled%204.png](Images/Untitled%204.png)
+    ![2._Main.png](Images/2._Main.png)
 
     - **Delete Profile** Button:
         - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
@@ -50,11 +50,11 @@
     - **List Users** Button:
         - You can see all the other users from this frame.
 
-        ![Images/Untitled%205.png](Images/Untitled%205.png)
+        ![Images/3._List_All_Users.png](Images/3._List_All_Users.png)
 
         - You can view someone's profile if you click on the button with one's username. Profile file will be loaded on the **Main** Frame
 
-            ![Images/Untitled%206.png](Images/Untitled%206.png)
+            ![Images/3._View_Others_Profile.png](Images/3._View_Others_Profile.png)
 
             - **Add Friend** Button: Send a friend request to the person whose profile you are visiting. If a friend request is sent already, you will be notified that request is already sent.
                 - The button will not be visible if you are visiting your personal profile or someone else's profile if one is already your friend.
