@@ -16,6 +16,8 @@
 * **All user interactions are GUI based.**
 * **Data persists regardless of whether or not a user is connected. If a user disconnects and reconnects, their data are still present.**
 
+*Should delete the stuff above and add in the general run-down on how to run the program*
+
 ## Description of Each Class
 
 * **Account**
@@ -95,24 +97,22 @@
   * Implements Runnable interface 
   * Methods:
     * **getResponse(Object request)**: synchronized to avoid race conditions. Updates the ServerRequestHandler data from Server. Handles all the requests made from the client. All responses are either Profile or String objects
-    * **run()**: overridden **run()** method using the ObjectInputStream as the reader and ObjectOutputStream as the writer
-    * **login(String username, String password)**:
-    * **returnProfileFromUsername(String username)**:
-    * **updateProfile(Profile profileToUpdate)**:
-    * **usernameIsTaken(String username)**:
-    * **profileRequest(Profile profile)**:
-    * **deleteProfile(String username)**:
-    * **deleteAccount(String username)**:
-    * **acceptFriendRequest(String senderUsername, String recipientUsername)**:
-    * **rejectFriendRequest(String senderUsername, String recipientUsername)**:
-    * **sendFriendRequest(String senderUsername, String recipientUsername)**:
-    * **rescindFriendRequest(String senderUsername, String recipientUsername)**:
-    * **friendRequestAlreadyExists(String senderUsername, String recipientUsername**:
-    * **userAreFriends(String username1, String username2)**:
+    * **run()**: overridden **run()** method using the ObjectInputStream as the reader and ObjectOutputStream as the writer. If there is any TCP error, catches the Exception and prints an error message.
+    * **login(String username, String password)**: checks for credentials from the arraylist, then returns user details if the given info (username and password) is valid.
+    * **returnProfileFromUsername(String username)**: returns the Profile object that belongs to the given username
+    * **updateProfile(Profile profileToUpdate)**: updates the given Profile object 
+    * **usernameIsTaken(String username)**: returns true if the given username is already taken. Otherwise, returns false
+    * **profileRequest(Profile profile)**: if the username already exists, updates it with the new profile. If the username does not exist, profile is added. Returns the indnex of the new or updated profile.
+    * **deleteProfile(String username)**: deletes the profile of the given username by removing the user from the array of all users.
+    * **deleteAccount(String username)**: deletes an account of the given username by removing the user from the array of all users.
+    * **acceptFriendRequest(String senderUsername, String recipientUsername)**: deletes friendRequest from sender's and recipient's records. Adds to both users' friend lists
+    * **rejectFriendRequest(String senderUsername, String recipientUsername)**: deletes friendRequest from the sender's and  recipient's records
+    * **sendFriendRequest(String senderUsername, String recipientUsername)**: creates a new FriendRequest object, then adds it to both users' respective arrays. Returns false if either username is invalid.
+    * **rescindFriendRequest(String senderUsername, String recipientUsername)**: invokes the **rejectFriendRequest(String senderUsername, String recipientUsername)** method with the given parameters. Deletes the friendRequest from sender's and recipient's records.
+    * **friendRequestAlreadyExists(String senderUsername, String recipientUsername**: returns true if the friend request has already been sent. Otherwise, returns false.
+    * **userAreFriends(String username1, String username2)**: returns true if the given two users are friended. Otherwise, returns false.
     * **removeSpaceAtStart(String input)**: removes the first character in the given String if it is blank
   * Implements synchronization while handling the request to control the access of multiple threads
-  
- *Note: More to be added*
 
 ## Testing
 
