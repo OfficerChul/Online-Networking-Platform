@@ -12,11 +12,11 @@
 
   - If connection is successfully established, you will receive a notification:
 
-      ![Images\0._Successfully_Connected.png](Images\0._Successfully_Connected.png)
+      ![Images\0._Successfully_Connected.png](Images/0._Successfully_Connected.png)
 
   - If connection is not established, you will receive an error message, and the program will end.
 
-      ![Images\0._Connection_Failed.png](Images\0._Connection_Failed.png)
+      ![Images\0._Connection_Failed.png](Images/0._Connection_Failed.png)
 
 ### 2. **Login** Frame is shown then
 
