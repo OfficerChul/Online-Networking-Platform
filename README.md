@@ -80,8 +80,16 @@
     * **main(String[] args)**: excutes the **run()** method asynchronously.
   * Implements Serializable for ObjectInputStream and ObjectOutputStream classes
 * **Server**
-  * Server class that is able to simulatenously hold multiple users using a separate thread for each client
+  * Server class that is able to simulatenously hold multiple users by using assignging a new thread for each client
   * All the saved data during the use of the application persists regardless of whether or not a user is connected to the server
+  * Methods:
+    * **serveClients()**: 
+    * **closeServer()**: writes all the array of data back to the files, then closes the server.
+    * **writeProfilesToFile(String filename)**: writes any type of data in the Profile object to the file using the ObjectOuputStream
+    * **readProfilesFromFile(String filename)**: reads a Profile object from the file using the ObjectInputStream. Catches any possible exceptions in the process.
+    * **getProfiles()**: returns an array of Profile objects
+    * **setProfiles(Profile[] profiles)**: updates an array of Profile objects with the given new array of Profile objects
+    * **main(String[] args)**: creates a new Server object using the designated port number. Saves server data when the server is interrupted at any point. Invokes the **serveClients()** method to run a new thread for the client.
   * Implements Object Input/Output Stream to read and write any type of data transferred between each client and the server to a file
 * **ServerRequestHandler**
   * Request Handler used for the server to handle the requests sent from the client
