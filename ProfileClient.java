@@ -509,7 +509,7 @@ public class ProfileClient extends JComponent implements Runnable {
         profilePanel.setLayout(null);
 
         profileUsernameLabel = new JLabel("");
-		profileUsernameLabel.setBounds(325, 29, 66, 15);
+		profileUsernameLabel.setBounds(325, 29, 200, 15);
 		profilePanel.add(profileUsernameLabel);
 
         profileNameLabel = new JLabel("Name: ");
