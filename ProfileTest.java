@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.Assert.assertEquals;
@@ -60,6 +60,7 @@ public class ProfileTest {
     Profile newProfile = new Profile("Kyochul Jang", newAccount, "email@email.com", "aboutMe", "likesAndInterests", b);
     String className = "Profile";
     Method method;
+
 
 
     //test class
@@ -571,7 +572,8 @@ public class ProfileTest {
         Field field = newProfile.getClass().getDeclaredField("account");
         field.setAccessible(true);
 
-        newProfile.setAccount(new Account("Yeju", "girlFriend"));
+        Account yeju = new Account("Yeju", "girlFriend");
+        newProfile.setAccount(yeju);
 
         String methodName = "setAccount";
 
@@ -594,7 +596,7 @@ public class ProfileTest {
 
         Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
-        assertEquals("Fields didn't match", field.get(newProfile), new Account("Yeju", "girlFriend"));
+        Assert.assertEquals("Fields didn't match", field.get(newProfile), yeju);
 
     }
 
@@ -771,77 +773,11 @@ public class ProfileTest {
             ,"","","", new String[]{""});
 
     @Test
-    void setName() {
-        profileEx.setName("name");
-        String expected = "name";
-        String actual = profileEx.getName();
-        assertEquals(expected,actual);
-        fail();
-    }
-
-    @Test
-    void setAboutMe() {
-        profileEx.setAboutMe("about me");
-        String expected = "about me";
-        String actual = profileEx.getAboutMe();
-        assertEquals(expected,actual);
-    }
-
-    @Test
-    void setEmail() {
-        profileEx.setEmail("email");
-        String expected = "email";
-        String actual = profileEx.getEmail();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void setFriendUserNames() {
-        profileEx.setFriendUserNames(new String[] {"friendOne", "friendTwo", "friendThree"});
-        String expected = new String[] {"friendOne", "friendTwo", "friendThree"}.toString();
-        String actual = profileEx.getFriendUserNames().toString();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void setLikesAndInterests() {
-        profileEx.setLikesAndInterests("like and interest");
-        String expected = "like and interest";
-        String actual = profileEx.getLikesAndInterests();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void setReceivedFriendRequests() {
-        FriendRequest[] friendRequestEx = new FriendRequest[1];
-        friendRequestEx[0] = new FriendRequest("sent", "receive");
-        profileEx.setReceivedFriendRequests(friendRequestEx);
-        String expected = "receive";
-        String actual = profileEx.getReceivedFriendRequests()[0].getUsernameWhoReceive();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void setSentFriendRequests() {
-        FriendRequest[] friendRequestEx = new FriendRequest[1];
-        friendRequestEx[0] = new FriendRequest("sent", "receive");
-        profileEx.setReceivedFriendRequests(friendRequestEx);
-        String expected = "sent";
-        String actual = profileEx.getReceivedFriendRequests()[0].getUsernameWhoSent();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void addToFriendUsernames() {
+    public void addToFriendUsernames() {
         profileEx.addToFriendUsernames("usernameAdd");
         String expected = "usernameAdd";
         String actual = profileEx.getFriendUserNames()[profileEx.getFriendUserNames().length - 1];
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void addToFriendUsernames() {
-//
-//
-//    }
 }
