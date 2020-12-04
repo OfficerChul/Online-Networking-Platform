@@ -53,7 +53,7 @@ public class ServerTest {
     Method method;
 
     //test class
-    @org.junit.Test
+    @Test
     public void testServer() {
         Class<?> object = Object.class;
 
@@ -125,23 +125,8 @@ public class ServerTest {
 
 
     }
-    //test getters and setters
-//    @Test
-//    void serveClients() {
-//    }
-//
-//    @Test
-//    void main() {
-//    }
-//
-//    @Test
-//    void writeProfilesToFile() {
-//    }
-//
-//    @Test
-//    void readProfilesFromFile() {
-//    }
 
+    //test getters and setters
     @Test
     void getProfiles() throws NoSuchFieldException {
 
@@ -155,7 +140,7 @@ public class ServerTest {
             method = server.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter or does not exist!");
             return;
         } //end try catch
 
@@ -186,7 +171,7 @@ public class ServerTest {
             method = server.getDeclaredMethod(methodName, Profile[].class);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter or does not exist!");
             return;
         } //end try catch
 
