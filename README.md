@@ -43,8 +43,10 @@
 
 - **Delete Profile** Button:
   - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
+    - Deleting your profile will NOT remove you from your friends' friend list.
 - **Delete Account** Button:
   - If you choose "Yes" on the following confirmation message box, you will be asked to enter your password to confirm your deletion. If the password is correct, you will be ask to confirm again.
+  - Deleting your account will remove you from your friends' friend list.
 
     ![Images/4._Delete_account2.png](Images/4._Delete_account2.png)
 

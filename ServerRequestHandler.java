@@ -222,7 +222,6 @@ public final class ServerRequestHandler implements Runnable {
     private void deleteAccount(String username) {
         for (int i = 0; i < profiles.length; i++) {
             if (profiles[i].getAccount().getUsername().equals(username)) {
-                // profiles.remove(i);
                 profiles[i] = profiles[profiles.length - 1];
                 profiles = Arrays.copyOf(profiles, profiles.length - 1);
             }
@@ -234,6 +233,16 @@ public final class ServerRequestHandler implements Runnable {
                     String[] tempFriendUsernames = Arrays.copyOf(profile.getFriendUserNames(), profile.getFriendUserNames().length);
                     tempFriendUsernames[i] = tempFriendUsernames[tempFriendUsernames.length - 1];
                     profile.setFriendUserNames(Arrays.copyOf(tempFriendUsernames, tempFriendUsernames.length - 1));
+
+                    
+                }
+            }
+
+            for (int i = 0; i < profile.getReceivedFriendRequests().length; i++) {
+                if (profile.getReceivedFriendRequests()[i].getUsernameWhoSent().equals(username)) {
+                    FriendRequest[] tempReceivedFriendRequests = Arrays.copyOf(profile.getReceivedFriendRequests(), profile.getReceivedFriendRequests().length);
+                    tempReceivedFriendRequests[i] = tempReceivedFriendRequests[tempReceivedFriendRequests.length - 1];
+                    profile.setReceivedFriendRequests(Arrays.copyOf(tempReceivedFriendRequests, tempReceivedFriendRequests.length - 1));;
                 }
             }
         }
