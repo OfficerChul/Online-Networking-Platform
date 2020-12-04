@@ -187,7 +187,7 @@ public class ServerRequestHandlerTest {
             method = clazz.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameters!");
+                    " has no parameters or does not exist!");
             return;
         } //end try catch
         // Perform tests
