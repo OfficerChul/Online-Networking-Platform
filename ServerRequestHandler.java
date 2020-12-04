@@ -263,6 +263,16 @@ public final class ServerRequestHandler implements Runnable {
                 profiles = Arrays.copyOf(profiles, profiles.length - 1);
             }
         }
+
+        for (Profile profile : profiles) {
+            for (int i = 0; i < profile.getFriendUserNames().length; i++) {
+                if (profile.getFriendUserNames()[i].equals(username)) {
+                    String[] tempFriendUsernames = Arrays.copyOf(profile.getFriendUserNames(), profile.getFriendUserNames().length);
+                    tempFriendUsernames[i] = tempFriendUsernames[tempFriendUsernames.length - 1];
+                    profile.setFriendUserNames(Arrays.copyOf(tempFriendUsernames, tempFriendUsernames.length - 1));
+                }
+            }
+        }
     }
 
     private void acceptFriendRequest(String senderUsername, String recipientUsername) {
