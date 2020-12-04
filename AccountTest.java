@@ -134,7 +134,7 @@ public class AccountTest {
             method = account.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter or does not exist!");
             return;
         } //end try catch
 
@@ -165,7 +165,7 @@ public class AccountTest {
             method = account.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter or does not exist!");
             return;
         } //end try catch
 
