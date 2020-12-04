@@ -19,17 +19,17 @@ public class ProfileClient extends JComponent implements Runnable {
      */
     private static final long serialVersionUID = 5597188023823293381L;
     
+    // Declare networking-related fields for global usage
     Socket socket;
     String hostName = "localhost";
     int portNumber = 6868;
-
     ObjectOutputStream oos;
     ObjectInputStream ois;
 
-    ProfileClient profileClient;
-    Profile currentProfile;
-    Profile myProfile;
+    Profile currentProfile; // the profile that is displaying
+    Profile myProfile; // the profile of the logged-in user
 
+    // Declare frames (windows) that will be used
     JFrame loginFrame;
     JFrame registerFrame;
     JFrame mainFrame;
@@ -37,12 +37,11 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame friendRequestFrame;
     JFrame requestHistoryFrame;
 
+    // Delcare elements of GUI that will be used globally
     JPanel friendListPanel;
-
     JButton profileAddFriendButton;
     JButton profileCancelButton;
     JButton profileSaveButton;
-
     JTextField profileEmailText;
     JTextField profileLikesAndInterestsText;
     JTextField profileNameText;
@@ -50,6 +49,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JTextArea profileAboutMeArea;
     JLabel profileUsernameLabel;
 
+    // Method that deals with login
     public int userLogin(String username, String password) {
         String loginRequest = String.format("Req1: %s: %s", username, password);
         Object loginResponse;
@@ -69,6 +69,7 @@ public class ProfileClient extends JComponent implements Runnable {
         return 0;
     }
 
+    // Method that deals with register
     public int userRegister(String username, String password) {
         String registrationRequest = String.format("Req2: %s: %s", username, password);
         String checkUsernameResponse;
@@ -107,10 +108,11 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     public void run() {
-        initializeNetwork();
-        showLoginPanel();
+        initializeNetwork(); // Establish network connection
+        showLoginPanel(); // Show login window
     }
 
+    // Show login window
     private void showLoginPanel() {
         JLabel userLabel;
         JLabel passwordLabel;
