@@ -14,8 +14,6 @@ import java.util.Arrays;
 
 public final class Server {
     private final ServerSocket serverSocket;
-    // private String[] userNames;
-    // private String[] onlineUsers;
     private static Profile[] profiles;
 
     public Server(int port) throws IOException {
@@ -49,14 +47,8 @@ public final class Server {
         port = this.serverSocket.getLocalPort();
         System.out.printf("<Host Name: %s, Port: %d>%n", hostName, port);
         System.out.println("<Now serving clients...>");
-        // System.out.println("To close the server: Input a character below");;
 
         while (true) {
-            // Scanner scan = new Scanner(System.in);
-            // if (scan.hasNext()) {
-            // CloseServer();
-            // break;
-            // }
             try {
                 clientSocket = this.serverSocket.accept();
             } catch (IOException e) {
@@ -101,7 +93,6 @@ public final class Server {
             fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             for (int i = 0; i < profiles.length; i++) {
-                // oos.writeObject(profiles[i]);
                 oos.writeUnshared(profiles[i]);
             }
             oos.close();

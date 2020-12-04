@@ -124,11 +124,6 @@ public class Profile implements Serializable {
         this.sentFriendRequests = sentFriendRequests;
     }
 
-    // public void addToLikesAndInterests(String interest) {
-    //     likesAndInterests = Arrays.copyOf(likesAndInterests, likesAndInterests.length + 1);
-    //     likesAndInterests[likesAndInterests.length - 1] = interest;
-    // }
-
     // adds a username to the friend list
     public void addToFriendUsernames(String username) {
         friendUserNames = Arrays.copyOf(friendUserNames, friendUserNames.length + 1);

@@ -76,7 +76,6 @@ public class ProfileClient extends JComponent implements Runnable {
 
     ProfileClient profileClient;
     Profile currentProfile;
-    // final Profile myProfile = profileA;
 
     ActionListener actionListener = new ActionListener() {
         @Override
@@ -237,8 +236,6 @@ public class ProfileClient extends JComponent implements Runnable {
                                                     "Friend Request", JOptionPane.INFORMATION_MESSAGE);
                 }
                 
-                
-
             }
 
             if (e.getSource() == profileCancelButton) {
@@ -291,7 +288,6 @@ public class ProfileClient extends JComponent implements Runnable {
         }
 
         return 0;
-
     }
 
     public int userRegister(String username, String password) {
@@ -324,9 +320,7 @@ public class ProfileClient extends JComponent implements Runnable {
             JOptionPane.showMessageDialog(null, (String) (checkUsernameResponse), "User Login",
                     JOptionPane.ERROR_MESSAGE);
         }
-
         return 0;
-
     }
 
     public static void main(String[] args) {
@@ -335,7 +329,6 @@ public class ProfileClient extends JComponent implements Runnable {
 
     public void run() {
         initializeNetwork();
-
         showLoginPanel();
     }
 
@@ -426,7 +419,6 @@ public class ProfileClient extends JComponent implements Runnable {
         mainFrame = new JFrame();
         JPanel panel = new JPanel();
 
-        // mainFrame.setLocationRelativeTo(null);
         mainFrame.setSize(900, 700);
         mainFrame.setVisible(true);
         mainFrame.setTitle("Profile!");
@@ -729,17 +721,12 @@ public class ProfileClient extends JComponent implements Runnable {
             }
         });
         friendRequestUpperPanel.add(friendRequestReceivedRequestButton);
-		
-
-	
     }
 
     private String[] requestUserList() {
         String request = "Req9: Request all users";
         String[] response = new String[0];
-        
         response = ((String) sendRequest(request)).split(",");
-
         return response;
     }
 
