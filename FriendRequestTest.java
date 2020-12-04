@@ -1,7 +1,8 @@
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -132,7 +133,7 @@ public class FriendRequestTest {
 
     //test getters and setters
     @Test
-    void getUsernameWhoReceive() throws NoSuchFieldException {
+    public void getUsernameWhoReceive() throws NoSuchFieldException {
 
         String result = newFriendRequest.getUsernameWhoReceive();
 
@@ -143,7 +144,7 @@ public class FriendRequestTest {
             method = friendRequest.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter or does not exist!");
             return;
         } //end try catch
 
@@ -161,7 +162,7 @@ public class FriendRequestTest {
     }
 
     @Test
-    void getUsernameWhoSent() {
+    public void getUsernameWhoSent() {
         String result = newFriendRequest.getUsernameWhoSent();
 
         String methodName = "getUsernameWhoSent";
@@ -171,7 +172,7 @@ public class FriendRequestTest {
             method = friendRequest.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter  or does not exist!");
             return;
         } //end try catch
 
@@ -189,7 +190,7 @@ public class FriendRequestTest {
     }
 
     @Test
-    void getStatus() {
+    public void getStatus() {
         int result = newFriendRequest.getStatus();
 
         String methodName = "getStatus";
@@ -199,7 +200,7 @@ public class FriendRequestTest {
             method = friendRequest.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
             Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has no parameter!");
+                    " has no parameter  or does not exist!");
             return;
         } //end try catch
 
@@ -217,7 +218,7 @@ public class FriendRequestTest {
     }
 
     @Test
-    void setStatus() throws NoSuchFieldException, IllegalAccessException {
+    public void setStatus() throws NoSuchFieldException, IllegalAccessException {
         newFriendRequest.setStatus(1);
 
         final Field field = friendRequest.getDeclaredField("status");
