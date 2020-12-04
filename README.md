@@ -184,18 +184,19 @@
 ## Testing
 
 * **AccountTest**
+
   * **Class**
     * Tests if the class exists or not
     * Tests if the class inherits correctly or not(if it doesn't inherit any class then it mean it inherits Object class)
   * **Field**
     * Tests if the field exists or not
-    * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct type or not
+    * Tests if the field has a correct modifier or not
   * **Method**
     * Tests if the method exists or not
     * Tests if the method has correct parameters or not
     * Tests if the method has correct modifiers or not
-    * Tests if the method has correct return type or not
+    * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
   
 * **FriendRequestTest**
@@ -205,13 +206,13 @@
     * Tests if the class inherits correctly or not(if it doesn't inherit any class then it mean it inherits Object class)
   * **Field**
     * Tests if the field exists or not
-    * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct type or not
+    * Tests if the field has a correct modifier or not
   * **Method**
     * Tests if the method exists or not
     * Tests if the method has correct parameters or not
     * Tests if the method has correct modifiers or not
-    * Tests if the method has correct return type or not
+    * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
   
 * **ProfileTest**
@@ -221,13 +222,13 @@
     * Tests if the class inherits correctly or not(if it doesn't inherit any class then it mean it inherits Object class)
   * **Field**
     * Tests if the field exists or not
-    * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct type or not
+    * Tests if the field has a correct modifier or not
   * **Method**
     * Tests if the method exists or not
     * Tests if the method has correct parameters or not
     * Tests if the method has correct modifiers or not
-    * Tests if the method has correct return type or not
+    * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
   
 * **ProfileClientTest**
@@ -238,7 +239,7 @@
   * **Field**
     * Tests if the field exists or not
     * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct modifier or not
 
 * **ServerTest**
 
@@ -247,13 +248,13 @@
     * Tests if the class inherits correctly or not(if it doesn't inherit any class then it mean it inherits Object class)
   * **Field**
     * Tests if the field exists or not
-    * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct type or not
+    * Tests if the field has a correct modifier or not
   * **Method**
     * Tests if the method exists or not
     * Tests if the method has correct parameters or not
     * Tests if the method has correct modifiers or not
-    * Tests if the method has correct return type or not
+    * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
   
 * **ServerRequestHandlerTest**
@@ -263,11 +264,11 @@
     * Tests if the class inherits correctly or not(if it doesn't inherit any class then it mean it inherits Object class)
   * **Field**
     * Tests if the field exists or not
-    * Tests if the field has correct type or not
-    * Tests if the field has the correct modifier or not
+    * Tests if the field has a correct type or not
+    * Tests if the field has a correct modifier or not
   * **Method**
     * Tests if the method exists or not
     * Tests if the method has correct parameters or not
     * Tests if the method has correct modifiers or not
-    * Tests if the method has correct return type or not
+    * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
