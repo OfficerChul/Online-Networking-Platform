@@ -54,6 +54,7 @@ public class FriendRequestTest {
     FriendRequest newFriendRequest = new FriendRequest("sentUser","receivedUser");
 
     //test class
+    @Test
     public void testFriendRequest() {
         //check if FriendRequest class exists or not
         try {
