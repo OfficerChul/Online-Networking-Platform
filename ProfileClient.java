@@ -19,11 +19,15 @@ public class ProfileClient extends JComponent implements Runnable {
      */
     private static final long serialVersionUID = 5597188023823293381L;
     
-    Boolean loggedIn = false;
     Socket socket;
     String hostName = "localhost";
     int portNumber = 6868;
 
+    ObjectOutputStream oos;
+    ObjectInputStream ois;
+
+    ProfileClient profileClient;
+    Profile currentProfile;
     Profile myProfile;
 
     JFrame loginFrame;
@@ -33,243 +37,18 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame friendRequestFrame;
     JFrame requestHistoryFrame;
 
-    // BufferedReader reader;
-    // PrintWriter writer;
-    ObjectOutputStream oos;
-    ObjectInputStream ois;
-
-    JLabel userLabel;
-    JLabel passwordLabel;
-    JTextField userLoginText;
-    JPasswordField passwordLoginText;
-    JTextField userRegistrationText;
-    JPasswordField passwordRegistrationText;
-    JButton loginButton;
-    JButton registerButton;
-    JButton registerButton2;
-    JButton registerCancelButton;
-    JButton listAllUserButton;
-    JButton backToMeButton;
     JPanel friendListPanel;
-    JScrollPane friendListScrollPanel;
-    JButton friendsButton;
-    JLabel phoneLabel;
-    JLabel profileAboutMeLabel;
+
     JButton profileAddFriendButton;
     JButton profileCancelButton;
-    JLabel profileEmailLabel;
+    JButton profileSaveButton;
+
     JTextField profileEmailText;
-    JLabel profileInterestsLabel;
     JTextField profileLikesAndInterestsText;
-    JLabel profileNameLabel;
     JTextField profileNameText;
     JTextField profilePhoneText;
-    JButton profileSaveButton;
-    JPanel profilePanel;
     JTextArea profileAboutMeArea;
-    JPanel lowerRightPanel;
-    JScrollPane profileAboutMeScrollPanel;
-    JButton friendRequestButton;
     JLabel profileUsernameLabel;
-    JButton deleteProfileButton;
-    JButton deleteAccountButton;
-
-    ProfileClient profileClient;
-    Profile currentProfile;
-
-    ActionListener actionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == loginButton) {
-                String username = userLoginText.getText();
-                String password = String.valueOf(passwordLoginText.getPassword());
-                
-                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
-                    if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
-                        if (password.length() >= 8) {
-                            if (userLogin(username, password) == 1) {
-                                loginFrame.dispose();
-                                loggedIn = true;
-                                showMainPanel();
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
-                                                            "Login", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.",
-                                                        "Login", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.",
-                                                    "Login", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-            if (e.getSource() == registerButton) {
-                showRegisterPanel();
-            }
-
-            if (e.getSource() == registerButton2) {
-                String username = userRegistrationText.getText();
-                String password = String.valueOf(passwordRegistrationText.getPassword());
-
-                if (!username.isBlank() && username.length() < 16 && username.matches("^[a-zA-Z0-9]*$")) {
-                    if (!password.isBlank() && password.length() < 21 && password.matches("^[a-zA-Z0-9]*$")) {
-                        if (password.length() >= 8) {
-                            if (userRegister(username, password) == 1) {
-                                registerFrame.dispose();
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                "Your password should be at least 8 characters long.",
-                                "Login", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                            "Your password should be alphanumeric and no more than 21 characters.",
-                            "Login", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                        "Your username should be alphanumeric and no more than 15 characters.",
-                        "Login", JOptionPane.ERROR_MESSAGE);
-                }
-
-            }
-
-            if (e.getSource() == registerCancelButton) {
-                registerFrame.dispose();
-            }
-
-            if (e.getSource() == listAllUserButton) {
-                showListAllUserPanel();
-            }
-
-            if (e.getSource() == friendRequestButton) {
-                showFriendRequestPanel();
-            }
-
-            if (e.getSource() == backToMeButton) {
-                loadInfo(myProfile);
-                profileSaveButton.setVisible(true);
-                profileCancelButton.setVisible(true);
-                updateUI();
-            }
-
-            if (e.getSource() == deleteProfileButton) {
-                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you profile?",
-                                                            "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
-                if (choice == JOptionPane.YES_OPTION) {
-                    Profile blankProfile = new Profile("", myProfile.getAccount(), "", "", "", new String[0]);
-                    Object deleteProfileResponse = sendRequest(blankProfile);
-                    if (deleteProfileResponse instanceof Profile) {
-                        JOptionPane.showMessageDialog(null, "Successfully deleted your profile",
-                                                        "Profile - Delete Profile",
-                                                        JOptionPane.INFORMATION_MESSAGE);
-                        myProfile = (Profile) deleteProfileResponse;
-                        loadInfo(myProfile);
-                    } else {
-                        JOptionPane.showMessageDialog(null, (String) deleteProfileResponse, "User Login",
-                            JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-
-            if (e.getSource() == deleteAccountButton) {
-                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete you Account?",
-                                                            "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
-                if (choice == JOptionPane.YES_OPTION) {
-                    JPasswordField password = new JPasswordField();
-                    Object[] passwordField = {"You are trying to delete your account. " + 
-                                                "Enter your password to confirm.", password};
-                    int result = JOptionPane.showConfirmDialog(null, passwordField,
-                                                                "Profile - Delete Account",
-                                                                JOptionPane.OK_CANCEL_OPTION,
-                                                                JOptionPane.WARNING_MESSAGE);
-
-                    if (result == JOptionPane.OK_OPTION) {
-                        if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
-                            int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, " + 
-                                                    "you can no longer login with this account. Please confirm.",
-                                                    "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
-
-                            if (secondChoice == JOptionPane.YES_OPTION) {
-                                String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
-                                if (response.split(": ")[0].equals("Res4")) {
-                                    mainFrame.dispose();
-                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.",
-                                                                            "Profile - Delete Account",
-                                                                            JOptionPane.INFORMATION_MESSAGE);
-                                    System.exit(0);    
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.",
-                                                                    "Profile - Delete Account",
-                                                                    JOptionPane.INFORMATION_MESSAGE);
-                                }
-                                
-                            }
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Wrong password",
-                                                            "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                }
-            }
-
-            if (e.getSource() == profileAddFriendButton) {
-                String username = myProfile.getAccount().getUsername();
-                String targetUsername = currentProfile.getAccount().getUsername();
-                
-                String request = String.format("Req6: %s: %s", username, targetUsername);
-                String response;
-            
-                response = (String) sendRequest(request);
-
-                if (response.split(": ")[0].equals("Res6")) {
-                    JOptionPane.showMessageDialog(null, "Request Sent",
-                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
-                    updateMyProfile();
-                } else {
-                    JOptionPane.showMessageDialog(null, response.split(": ")[2],
-                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
-                }
-                
-            }
-
-            if (e.getSource() == profileCancelButton) {
-                loadInfo(myProfile);
-                profileSaveButton.setVisible(false);
-                profileCancelButton.setVisible(false);
-                updateUI();
-            }
-
-            if (e.getSource() == profileSaveButton) {
-                String name = profileNameText.getText();
-                Account myAccount = myProfile.getAccount();
-                String email = profileEmailText.getText();
-                String aboutMe = profileAboutMeArea.getText();
-                String likesAndInterestsText = profileLikesAndInterestsText.getText();
-                String[] myFriendUserNames = myProfile.getFriendUserNames();
-                Profile tempProfile = new Profile(name, myAccount, email, aboutMe,
-                                                    likesAndInterestsText, myFriendUserNames);
-                tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
-                tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
-
-                Object response = sendRequest(tempProfile);
-
-                if (response instanceof Profile) {
-                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile",
-                                                    JOptionPane.INFORMATION_MESSAGE);
-                    myProfile = (Profile) response;
-                } else {
-                    JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-        }
-    };
 
     public int userLogin(String username, String password) {
         String loginRequest = String.format("Req1: %s: %s", username, password);
@@ -333,6 +112,13 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     private void showLoginPanel() {
+        JLabel userLabel;
+        JLabel passwordLabel;
+        JTextField userLoginText;
+        JPasswordField passwordLoginText;
+        JButton loginButton;
+        JButton registerButton;
+
         loginFrame = new JFrame("User Login");
         JPanel panel = new JPanel();
 
@@ -359,11 +145,40 @@ public class ProfileClient extends JComponent implements Runnable {
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 110, 90, 25);
-        loginButton.addActionListener(actionListener);
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = userLoginText.getText();
+                String password = String.valueOf(passwordLoginText.getPassword());
+                
+                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
+                    if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
+                        if (password.length() >= 8) {
+                            if (userLogin(username, password) == 1) {
+                                loginFrame.dispose();
+                                showMainPanel();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
+                                                            "Login", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.",
+                                                        "Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.",
+                                                    "Login", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         registerButton = new JButton("Register");
         registerButton.setBounds(170, 110, 90, 25);
-        registerButton.addActionListener(actionListener);
+        registerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showRegisterPanel();
+            }
+        });
 
         panel.add(userLabel);
         panel.add(userLoginText);
@@ -375,6 +190,13 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     private void showRegisterPanel() {
+        JLabel userLabel;
+        JLabel passwordLabel;
+        JTextField userRegistrationText;
+        JPasswordField passwordRegistrationText;
+        JButton registerButton;
+        JButton registerCancelButton;
+        
         registerFrame = new JFrame("Register");
         JPanel panel = new JPanel();
 
@@ -399,23 +221,70 @@ public class ProfileClient extends JComponent implements Runnable {
         passwordRegistrationText = new JPasswordField(15);
         passwordRegistrationText.setBounds(110, 60, 165, 25);
 
-        registerButton2 = new JButton("Register");
-        registerButton2.setBounds(30, 110, 90, 25);
-        registerButton2.addActionListener(actionListener);
+        registerButton = new JButton("Register");
+        registerButton.setBounds(30, 110, 90, 25);
+        registerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = userRegistrationText.getText();
+                String password = String.valueOf(passwordRegistrationText.getPassword());
+
+                if (!username.isBlank() && username.length() < 16 && username.matches("^[a-zA-Z0-9]*$")) {
+                    if (!password.isBlank() && password.length() < 21 && password.matches("^[a-zA-Z0-9]*$")) {
+                        if (password.length() >= 8) {
+                            if (userRegister(username, password) == 1) {
+                                registerFrame.dispose();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                "Your password should be at least 8 characters long.",
+                                "Login", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                            "Your password should be alphanumeric and no more than 21 characters.",
+                            "Login", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                        "Your username should be alphanumeric and no more than 15 characters.",
+                        "Login", JOptionPane.ERROR_MESSAGE);
+                }
+            } 
+        });
 
         registerCancelButton = new JButton("Cancel");
         registerCancelButton.setBounds(170, 110, 90, 25);
-        registerCancelButton.addActionListener(actionListener);
+        registerCancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                registerFrame.dispose();
+            }
+        });
 
         panel.add(userLabel);
         panel.add(userRegistrationText);
         panel.add(passwordLabel);
         panel.add(passwordRegistrationText);
-        panel.add(registerButton2);
+        panel.add(registerButton);
         panel.add(registerCancelButton);
     }
 
     private void showMainPanel() {
+        JButton listAllUserButton;
+        JButton backToMeButton;
+        JButton friendRequestButton;
+        JButton deleteProfileButton;
+        JButton deleteAccountButton;
+
+        JLabel profileAboutMeLabel;
+        JLabel profileEmailLabel;
+        JLabel profileInterestsLabel;
+        JLabel profileNameLabel;
+        
+        JScrollPane profileAboutMeScrollPanel;
+        JPanel profilePanel;
+        JPanel lowerRightPanel;
+        JScrollPane friendListScrollPanel;
+
         mainFrame = new JFrame();
         JPanel panel = new JPanel();
 
@@ -444,12 +313,73 @@ public class ProfileClient extends JComponent implements Runnable {
 
         deleteProfileButton = new JButton("Delete Profile");
         deleteProfileButton.setBounds(10, 97, 120, 23);
-        deleteProfileButton.addActionListener(actionListener);
+        deleteProfileButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your profile?",
+                                                            "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    Profile blankProfile = new Profile("", myProfile.getAccount(), "", "", "", new String[0]);
+                    Object deleteProfileResponse = sendRequest(blankProfile);
+                    if (deleteProfileResponse instanceof Profile) {
+                        JOptionPane.showMessageDialog(null, "Successfully deleted your profile",
+                                                        "Profile - Delete Profile",
+                                                        JOptionPane.INFORMATION_MESSAGE);
+                        myProfile = (Profile) deleteProfileResponse;
+                        loadInfo(myProfile);
+                    } else {
+                        JOptionPane.showMessageDialog(null, (String) deleteProfileResponse, "User Login",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
 		upperLeftPanel.add(deleteProfileButton);
 		
 		deleteAccountButton = new JButton("Delete Account");
         deleteAccountButton.setBounds(155, 97, 120, 23);
-        deleteAccountButton.addActionListener(actionListener);
+        deleteAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your account?",
+                                                            "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    JPasswordField password = new JPasswordField();
+                    Object[] passwordField = {"You are trying to delete your account. " + 
+                                                "Enter your password to confirm.", password};
+                    int result = JOptionPane.showConfirmDialog(null, passwordField,
+                                                                "Profile - Delete Account",
+                                                                JOptionPane.OK_CANCEL_OPTION,
+                                                                JOptionPane.WARNING_MESSAGE);
+
+                    if (result == JOptionPane.OK_OPTION) {
+                        if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
+                            int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, " + 
+                                                    "you can no longer login with this account. Please confirm.",
+                                                    "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
+
+                            if (secondChoice == JOptionPane.YES_OPTION) {
+                                String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
+                                if (response.split(": ")[0].equals("Res4")) {
+                                    mainFrame.dispose();
+                                    JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.",
+                                                                            "Profile - Delete Account",
+                                                                            JOptionPane.INFORMATION_MESSAGE);
+                                    System.exit(0);    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.",
+                                                                    "Profile - Delete Account",
+                                                                    JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                
+                            }
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Wrong password",
+                                                            "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        });
 		upperLeftPanel.add(deleteAccountButton);
 
         JPanel lowerLeftPanel = new JPanel();
@@ -461,19 +391,34 @@ public class ProfileClient extends JComponent implements Runnable {
         listAllUserButton = new JButton("List Users");
         listAllUserButton.setFont(new Font("Arial", Font.BOLD, 12));
         listAllUserButton.setBounds(145, 20, 95, 30);
-        listAllUserButton.addActionListener(actionListener);
+        listAllUserButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showListAllUserPanel();
+            }
+        });
         lowerLeftPanel.add(listAllUserButton);
 
         backToMeButton = new JButton("My Profile");
         backToMeButton.setFont(new Font("Arial", Font.BOLD, 12));
         backToMeButton.setBounds(29, 20, 95, 30);
-        backToMeButton.addActionListener(actionListener);
+        backToMeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                loadInfo(myProfile);
+                profileSaveButton.setVisible(true);
+                profileCancelButton.setVisible(true);
+                updateUI();
+            }
+        });
         lowerLeftPanel.add(backToMeButton);
 
         friendRequestButton = new JButton("Requests");
         friendRequestButton.setFont(new Font("Arial", Font.BOLD, 12));
         friendRequestButton.setBounds(29, 60, 95, 30);
-        friendRequestButton.addActionListener(actionListener);
+        friendRequestButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showFriendRequestPanel();
+            }
+        });
         lowerLeftPanel.add(friendRequestButton);
 
         friendListScrollPanel = new JScrollPane();
@@ -546,7 +491,26 @@ public class ProfileClient extends JComponent implements Runnable {
         profileAddFriendButton = new JButton("Add Friend");
         profileAddFriendButton.setVisible(false);
         profileAddFriendButton.setBounds(462, 443, 110, 23);
-        profileAddFriendButton.addActionListener(actionListener);
+        profileAddFriendButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = myProfile.getAccount().getUsername();
+                String targetUsername = currentProfile.getAccount().getUsername();
+                
+                String request = String.format("Req6: %s: %s", username, targetUsername);
+                String response;
+            
+                response = (String) sendRequest(request);
+
+                if (response.split(": ")[0].equals("Res6")) {
+                    JOptionPane.showMessageDialog(null, "Request Sent",
+                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                    updateMyProfile();
+                } else {
+                    JOptionPane.showMessageDialog(null, response.split(": ")[2],
+                                                    "Friend Request", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
         profilePanel.add(profileAddFriendButton);
 
         lowerRightPanel = new JPanel();
@@ -556,12 +520,42 @@ public class ProfileClient extends JComponent implements Runnable {
 
         profileCancelButton = new JButton("Cancel");
         profileCancelButton.setBounds(476, 32, 93, 23);
-        profileCancelButton.addActionListener(actionListener);
+        profileCancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                loadInfo(myProfile);
+                profileSaveButton.setVisible(false);
+                profileCancelButton.setVisible(false);
+                updateUI();
+            }
+        });
         lowerRightPanel.add(profileCancelButton);
 
         profileSaveButton = new JButton("Save");
         profileSaveButton.setBounds(362, 32, 93, 23);
-        profileSaveButton.addActionListener(actionListener);
+        profileSaveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String name = profileNameText.getText();
+                Account myAccount = myProfile.getAccount();
+                String email = profileEmailText.getText();
+                String aboutMe = profileAboutMeArea.getText();
+                String likesAndInterestsText = profileLikesAndInterestsText.getText();
+                String[] myFriendUserNames = myProfile.getFriendUserNames();
+                Profile tempProfile = new Profile(name, myAccount, email, aboutMe,
+                                                    likesAndInterestsText, myFriendUserNames);
+                tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
+                tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
+
+                Object response = sendRequest(tempProfile);
+
+                if (response instanceof Profile) {
+                    JOptionPane.showMessageDialog(null, "Successfully Saved", "Profile",
+                                                    JOptionPane.INFORMATION_MESSAGE);
+                    myProfile = (Profile) response;
+                } else {
+                    JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         lowerRightPanel.add(profileSaveButton);
 
         loadInfo(myProfile);
@@ -616,10 +610,12 @@ public class ProfileClient extends JComponent implements Runnable {
 		listAllUserMainPanel.setMaximumSize(new Dimension(600, 32767));
         listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
 
+        listAllUserMainPanel.removeAll();
         String[] userList = requestUserList();
         for (String username : userList) {
             addUsernameButton(username, listAllUserMainPanel);
         }
+        listAllUserMainPanel.updateUI();
 
     }
 
@@ -652,25 +648,33 @@ public class ProfileClient extends JComponent implements Runnable {
         {
             public void actionPerformed(ActionEvent e)
             {
-                friendRequestPanel.removeAll();
-                friendRequestPanel.updateUI();
-                for (FriendRequest sentRequest : myProfile.getSentFriendRequests()) {
-                    int status = sentRequest.getStatus();
-                    String statusString;
-                    if (status == 0) {
-                        statusString = "Pending";
-                    } else if (status == 1) {
-                        statusString = "Accepted";
-                    } else {
-                        statusString = "Rejected";
+                Timer timer = new Timer(500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        friendRequestPanel.removeAll();
+                        friendRequestPanel.updateUI();
+                        for (FriendRequest sentRequest : myProfile.getSentFriendRequests()) {
+                            int status = sentRequest.getStatus();
+                            String statusString;
+                            if (status == 0) {
+                                statusString = "Pending";
+                            } else if (status == 1) {
+                                statusString = "Accepted";
+                            } else {
+                                statusString = "Rejected";
+                            }
+                            String record = String.format("%s: %s", sentRequest.getUsernameWhoReceive(), statusString);
+                            JLabel labelToAdd = new JLabel(record);
+                            
+                            labelToAdd.setPreferredSize(new Dimension(250, 25));
+                            friendRequestPanel.add(labelToAdd);
+                        }
+                        friendRequestPanel.updateUI();
                     }
-                    String record = String.format("%s: %s", sentRequest.getUsernameWhoReceive(), statusString);
-                    JLabel labelToAdd = new JLabel(record);
-                    
-                    labelToAdd.setPreferredSize(new Dimension(250, 25));
-                    friendRequestPanel.add(labelToAdd);
-                }
-                friendRequestPanel.updateUI();
+                });
+                timer.setRepeats(true);
+                timer.setCoalesce(true);
+                timer.setInitialDelay(0);
+                timer.start();
             }
         });
         friendRequestUpperPanel.add(friendRequestSentRequestButton);
@@ -680,44 +684,52 @@ public class ProfileClient extends JComponent implements Runnable {
         {
             public void actionPerformed(ActionEvent e)
             {
-                friendRequestPanel.removeAll();
-                friendRequestPanel.updateUI();
-                for (FriendRequest receivedRequest : myProfile.getReceivedFriendRequests()) {
-                    String record = receivedRequest.getUsernameWhoSent();
-                    JButton buttonToAdd = new JButton(record);
-                    buttonToAdd.setPreferredSize(new Dimension(250, 25));
-                    buttonToAdd.addActionListener(new ActionListener()
-                    {
-                        public void actionPerformed(ActionEvent e) {
-                            int choice = JOptionPane.showConfirmDialog(null,
-                                                                        "Do you want to accept the friend request?",
-                                                                        "Friend Request",
-                                                                        JOptionPane.YES_NO_CANCEL_OPTION,
-                                                                        JOptionPane.QUESTION_MESSAGE);
-                            String username = myProfile.getAccount().getUsername();
-                            String request;
-                            Profile response;
-                            
-                            if (choice == JOptionPane.YES_OPTION) {
-                                request = String.format("Req7: %s: %s", record, username);
-                                response = (Profile) sendRequest(request);
-                                myProfile = response;
-                                loadInfo(myProfile);
-                                buttonToAdd.setEnabled(false);
-                                buttonToAdd.setText("Accepted:" + buttonToAdd.getText());
-                            } else if (choice == JOptionPane.NO_OPTION) {
-                                request = String.format("Req8: %s: %s", record, username);
-                                response = (Profile) sendRequest(request);
-                                myProfile = response;
-                                loadInfo(myProfile);
-                                buttonToAdd.setEnabled(false);
-                                buttonToAdd.setText("Refused:" + buttonToAdd.getText());
-                            }
+                Timer timer = new Timer(500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {     
+                        friendRequestPanel.removeAll();
+                        friendRequestPanel.updateUI();
+                        for (FriendRequest receivedRequest : myProfile.getReceivedFriendRequests()) {
+                            String record = receivedRequest.getUsernameWhoSent();
+                            JButton buttonToAdd = new JButton(record);
+                            buttonToAdd.setPreferredSize(new Dimension(250, 25));
+                            buttonToAdd.addActionListener(new ActionListener()
+                            {
+                                public void actionPerformed(ActionEvent e) {
+                                    int choice = JOptionPane.showConfirmDialog(null,
+                                                                                "Do you want to accept the friend request?",
+                                                                                "Friend Request",
+                                                                                JOptionPane.YES_NO_CANCEL_OPTION,
+                                                                                JOptionPane.QUESTION_MESSAGE);
+                                    String username = myProfile.getAccount().getUsername();
+                                    String request;
+                                    Profile response;
+                                    
+                                    if (choice == JOptionPane.YES_OPTION) {
+                                        request = String.format("Req7: %s: %s", record, username);
+                                        response = (Profile) sendRequest(request);
+                                        myProfile = response;
+                                        loadInfo(myProfile);
+                                        buttonToAdd.setEnabled(false);
+                                        buttonToAdd.setText("Accepted:" + buttonToAdd.getText());
+                                    } else if (choice == JOptionPane.NO_OPTION) {
+                                        request = String.format("Req8: %s: %s", record, username);
+                                        response = (Profile) sendRequest(request);
+                                        myProfile = response;
+                                        loadInfo(myProfile);
+                                        buttonToAdd.setEnabled(false);
+                                        buttonToAdd.setText("Refused:" + buttonToAdd.getText());
+                                    }
+                                }
+                            });
+                            friendRequestPanel.add(buttonToAdd);
+                            friendRequestPanel.updateUI();
                         }
-                    });
-                    friendRequestPanel.add(buttonToAdd);
-                    friendRequestPanel.updateUI();
-                }
+                    }
+                });
+                timer.setRepeats(true);
+                timer.setCoalesce(true);
+                timer.setInitialDelay(0);
+                timer.start();
             }
         });
         friendRequestUpperPanel.add(friendRequestReceivedRequestButton);
