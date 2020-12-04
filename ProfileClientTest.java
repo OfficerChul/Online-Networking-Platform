@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +25,7 @@ class ProfileClientTest {
 
     @SuppressWarnings("FieldCanBeLocal")
     private ByteArrayOutputStream testOut;
+    private long a;
 
     @Before
     public void outputStart() {
@@ -49,8 +52,8 @@ class ProfileClientTest {
     String className = "ProfileClient";
 
     //test class
-    @org.junit.Test
-    public void testAllClasses() {
+    @Test
+    public void testProfileClientTest() {
         Class<?> object = Object.class;
         Class<?> profileClient = ProfileClient.class;
 
@@ -72,7 +75,7 @@ class ProfileClientTest {
 
     //test fields
     @Test
-    public void testAllFields() {
+    public void testAllFields() throws NoSuchFieldException {
         //fields in ProfileClient class
         Field serialVersionUIDField;
         Field loggedInField;
@@ -92,7 +95,11 @@ class ProfileClientTest {
         //check if serialVersionUID field has correct type or not
 
         int modifiers = serialVersionUIDField.getModifiers();
-        Class<?> expectedType = Long.class;
+
+        long a = 1l;
+        Field a1 = ProfileClientTest.class.getDeclaredField("a");
+
+        Class<?> Expected = a1.getType();
         Class<?> type = serialVersionUIDField.getType();
         Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is `private`!", Modifier.isPrivate(modifiers));
 
@@ -100,23 +107,8 @@ class ProfileClientTest {
 
         Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is `static`!", Modifier.isStatic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is the correct type!", expectedType, type);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is the correct type!", Expected, serialVersionUIDField.getType());
 
-        //check if loggedIn field exists or not
-        try {
-            loggedInField = ProfileClient.class.getDeclaredField("loggedIn");
-        } catch (NoSuchFieldException e) {
-            System.out.println("loggedIn field does not exist.");
-            Assert.fail();
-            return;
-        }
-        //check if loggedIn field has correct type or not
-        if (loggedInField.getType().equals(Boolean.class)) {
-            //success
-        } else {
-            System.out.println("loggedIn field has wrong type");
-            Assert.fail();
-        }
 
         //check if socket field exists or not
         try {
