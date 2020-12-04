@@ -237,11 +237,6 @@
   * Test if the field has correct type or not
   * Test if the field has the correct modifier or not
 
-  * Test if the method exists or not
-  * Test if the method has correct parameters or not
-  * Test if the method has correct modifiers or not
-  * Test if the method has correct return type or not
-  * Test if the method retrieves properly or not
 * **ServerTest**
 
   * Tests if the class exists or not
