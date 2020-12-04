@@ -18,7 +18,7 @@
 
       ![Images\0._Connection_Failed.png](Images/0._Connection_Failed.png)
 
-### 2. **Login** Frame is shown then
+### 2. **Login** Frame is shown
 
 - ![Images/1_Login.png](Images/1_Login.png)
 
@@ -37,7 +37,7 @@
         - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
       - **Cancel** Button: Close this box and return to **Login** Frame.
 
-### 3. **Main** Frame is shown you are logged in
+### 3. **Main** Frame is shown when you are logged in
 
 ![2._Main.png](Images/2._Main.png)
 
