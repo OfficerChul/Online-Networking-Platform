@@ -53,7 +53,7 @@ class ProfileClientTest {
 
     //test class
     @Test
-    public void testProfileClientTest() {
+    public void testProfileClient() {
         Class<?> object = Object.class;
         Class<?> profileClient = ProfileClient.class;
 
