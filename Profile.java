@@ -39,11 +39,6 @@ public class Profile implements Serializable {
         this.receivedFriendRequests = new FriendRequest[0];
     }
     
-    //Constructs without any parameters for making testcases
-    public Profile() {
-        
-    }
-
     // return an Account object
     public Account getAccount() {
         return account;
