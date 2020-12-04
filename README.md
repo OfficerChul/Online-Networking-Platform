@@ -196,7 +196,7 @@
   * Tests if the method has correct parameters or not
   * Tests if the method has correct modifiers or not
   * Tests if the method has correct return type or not
-  * Tests if the method retrives properly or not
+  * Tests if the method retrieves properly or not
   
 * **FriendRequestTest**
 
@@ -211,7 +211,7 @@
   * Tests if the method has correct parameters or not
   * Tests if the method has correct modifiers or not
   * Tests if the method has correct return type or not
-  * Tests if the method retrives properly or not
+  * Tests if the method retrieves properly or not
   
 * **ProfileTest**
   
@@ -226,7 +226,7 @@
   * Tests if the method has correct parameters or not
   * Tests if the method has correct modifiers or not
   * Tests if the method has correct return type or not
-  * Tests if the method retrives properly or not
+  * Tests if the method retrieves properly or not
   
 * **ProfileClientTest**
 
@@ -241,7 +241,7 @@
   * Test if the method has correct parameters or not
   * Test if the method has correct modifiers or not
   * Test if the method has correct return type or not
-  * Test if the method retrives properly or not
+  * Test if the method retrieves properly or not
 * **ServerTest**
 
   * Tests if the class exists or not
@@ -255,7 +255,7 @@
   * Tests if the method has correct parameters or not
   * Tests if the method has correct modifiers or not
   * Tests if the method has correct return type or not
-  * Tests if the method retrives properly or not
+  * Tests if the method retrieves properly or not
   
 * **ServerRequestHandlerTest**
 
@@ -270,4 +270,4 @@
   * Tests if the method has correct parameters or not
   * Tests if the method has correct modifiers or not
   * Tests if the method has correct return type or not
-  * Tests if the method retrives properly or not
+  * Tests if the method retrieves properly or not
