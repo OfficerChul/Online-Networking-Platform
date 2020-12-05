@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * PJ05 Option 2 - Server
+ * PJ05 Option 2 - FriendRequestTest
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -161,9 +161,11 @@ public class FriendRequestTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "receivedUser");
     }
@@ -189,9 +191,11 @@ public class FriendRequestTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "sentUser");
     }
@@ -217,9 +221,11 @@ public class FriendRequestTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName
+                + "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, 0);
     }
@@ -248,9 +254,11 @@ public class FriendRequestTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newFriendRequest), 1);
     }

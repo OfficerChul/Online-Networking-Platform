@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * PJ05 Option 2 - Server
+ * PJ05 Option 2 - ProfileTest
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -119,7 +119,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int accountModifier = accountField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "account" + "` field is `private`!", Modifier.isPrivate(accountModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "account" + "`" +
+                "field is `private`!", Modifier.isPrivate(accountModifier));
 
         //check if email field exists or not
         try {
@@ -138,7 +139,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int emailModifier = emailField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "email" + "` field is `private`!", Modifier.isPrivate(emailModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "email" +
+                "` field is `private`!", Modifier.isPrivate(emailModifier));
 
         //check if aboutMe field exists or not
         try {
@@ -157,7 +159,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int aboutMeModifier = aboutMeField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "aboutMe" + "` field is `private`!", Modifier.isPrivate(aboutMeModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "aboutMe" +
+                "` field is `private`!", Modifier.isPrivate(aboutMeModifier));
 
         //check if name field exists or not
         try {
@@ -176,7 +179,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int nameModifier = nameField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "name" + "` field is `private`!", Modifier.isPrivate(nameModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "name" +
+                "` field is `private`!", Modifier.isPrivate(nameModifier));
 
         //check if likesAndInterests field exists or not
         try {
@@ -196,7 +200,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int likesAndInterestsModifier = likesAndInterestsField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "likesAndInterests" + "` field is `private`!", Modifier.isPrivate(likesAndInterestsModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "likesAndInterests" +
+                "` field is `private`!", Modifier.isPrivate(likesAndInterestsModifier));
 
         //check if friendUserNames field exists or not
         try {
@@ -216,7 +221,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int friendUserNamesModifier = friendUserNamesField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "friendUserNames" + "` field is `private`!", Modifier.isPrivate(friendUserNamesModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "friendUserNames" +
+                "` field is `private`!", Modifier.isPrivate(friendUserNamesModifier));
 
         //check if sentFriendRequests field exists or not
         try {
@@ -235,7 +241,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int sentFriendRequestsModifier = sentFriendRequestsField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "sentFriendRequests" + "` field is `private`!", Modifier.isPrivate(sentFriendRequestsModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "sentFriendRequests" +
+                "` field is `private`!", Modifier.isPrivate(sentFriendRequestsModifier));
 
         //check if receivedFriendRequests field exists or not
         try {
@@ -255,7 +262,8 @@ public class ProfileTest {
         }
         //check if the field is private
         int receivedFriendRequestsModifier = receivedFriendRequestsField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "receivedFriendRequests" + "` field is `private`!", Modifier.isPrivate(receivedFriendRequestsModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "receivedFriendRequests" +
+                "` field is `private`!", Modifier.isPrivate(receivedFriendRequestsModifier));
 
     }
 
@@ -284,9 +292,11 @@ public class ProfileTest {
 
 
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, newAccount);
     }
@@ -316,9 +326,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals(result, new FriendRequest[]{newFriendRequest}, "Field wasn't retrieved properly");
 
@@ -349,9 +361,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals(result, newFriendRequestArray, "Field wasn't retrieved properly");
 
@@ -379,9 +393,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals(result, new String[]{"a"}, "Field wasn't retrieved properly");
 
@@ -409,9 +425,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "likesAndInterests");
 
@@ -439,9 +457,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "aboutMe");
 
@@ -469,9 +489,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "email@email.com");
 
@@ -499,9 +521,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "Kyochul Jang");
 
@@ -532,9 +556,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), "Yeju Kim");
 
@@ -565,9 +591,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), "myGirlFriend");
 
@@ -599,9 +627,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         Assert.assertEquals("Fields didn't match", field.get(newProfile), yeju);
 
@@ -632,9 +662,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), "Yeju_Kim@email.com");
 
@@ -665,9 +697,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertArrayEquals((Object[]) field.get(newProfile), new String[]{"myGirlLOL"}, "Fields didn't match");
 
@@ -699,9 +733,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), "ILikeHer");
 
@@ -732,9 +768,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), newFriendRequestArray);
 
@@ -754,7 +792,8 @@ public class ProfileTest {
         try {
             method = profile.getDeclaredMethod(methodName, FriendRequest[].class);
         } catch (NoSuchMethodException e) {
-            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
+            Assert.fail("Ensure that `" + className + "` declares a method named `" +
+                    methodName + "` that" +
                     " has one parameter!");
             return;
         } //end try catch
@@ -765,9 +804,11 @@ public class ProfileTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Fields didn't match", field.get(newProfile), newFriendRequestArray);
 

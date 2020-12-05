@@ -14,7 +14,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.Assert.assertEquals;
 
 /**
- * PJ05 Option 2 - Server
+ * PJ05 Option 2 - AccountTest
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -102,7 +102,8 @@ public class AccountTest {
         }
         //check if the field is private
         int usernameModifier = usernameField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "password" + "` field is `private`!", Modifier.isPrivate(usernameModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" +
+                "password" + "` field is `private`!", Modifier.isPrivate(usernameModifier));
 
         //check if password field exists or not
         try {
@@ -121,7 +122,8 @@ public class AccountTest {
         }
         //check if the field is private
         int passwordModifier = passwordField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "password" + "` field is `private`!", Modifier.isPrivate(passwordModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "password" +
+                "` field is `private`!", Modifier.isPrivate(passwordModifier));
 
     }
 
@@ -151,9 +153,11 @@ public class AccountTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "12345678");
     }
@@ -182,9 +186,11 @@ public class AccountTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
 
         assertEquals("Field wasn't retrieved properly", result, "abc");
     }

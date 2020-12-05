@@ -17,7 +17,7 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * PJ05 Option 2 - Server
+ * PJ05 Option 2 - ServerRequestHandlerTest
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -100,9 +100,11 @@ public class ServerRequestHandlerTest {
         }
         //check if the field is private and final
         int clientSocketModifier = clientSocketField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "clientSocket" + "` field is `private`!", Modifier.isPrivate(clientSocketModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "clientSocket" +
+                "` field is `private`!", Modifier.isPrivate(clientSocketModifier));
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "clientSocket" + "` field is `final`!", Modifier.isFinal(clientSocketModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "clientSocket" +
+                "` field is `final`!", Modifier.isFinal(clientSocketModifier));
 
         //check if profiles field exists or not
         try {
@@ -121,7 +123,8 @@ public class ServerRequestHandlerTest {
         }
         //check if the field is private and final
         int profilesModifier = profilesField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" + "` field is `private`!", Modifier.isPrivate(profilesModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" +
+                "` field is `private`!", Modifier.isPrivate(profilesModifier));
     }
 
     Class<?> clazz = ServerRequestHandler.class;
@@ -134,7 +137,8 @@ public class ServerRequestHandlerTest {
         try {
             constructor = clazz.getDeclaredConstructor(Socket.class);
         } catch (NoSuchMethodException e) {
-            Assert.fail("Ensure that `" + className + "` declares a constructor that is `public` and has one parameters of type Socket!");
+            Assert.fail("Ensure that `" + className +
+                    "` declares a constructor that is `public` and has one parameters of type Socket!");
             return;
         } //end try catch
 
@@ -170,9 +174,12 @@ public class ServerRequestHandlerTest {
 
         modifiers = method.getModifiers();
         actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `private`!", Modifier.isPrivate(modifiers));
-        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName + "` method is NOT `static`!", Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                "` method is `private`!", Modifier.isPrivate(modifiers));
+        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName +
+                "` method is NOT `static`!", Modifier.isStatic(modifiers));
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
     @org.junit.Test
@@ -201,9 +208,12 @@ public class ServerRequestHandlerTest {
 
         modifiers = method.getModifiers();
         actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
-        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName + "` method is NOT `static`!", Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName
+                + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName
+                + "` method is NOT `static`!", Modifier.isStatic(modifiers));
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName
+                + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
     @org.junit.Test
@@ -232,9 +242,12 @@ public class ServerRequestHandlerTest {
 
         modifiers = method.getModifiers();
         actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `private`!", Modifier.isPrivate(modifiers));
-        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName + "` method is NOT `static`!", Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName
+                + "` method is `private`!", Modifier.isPrivate(modifiers));
+        Assert.assertFalse("Ensure that `" + className + "`'s `" + methodName
+                + "` method is NOT `static`!", Modifier.isStatic(modifiers));
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName
+                + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
     @org.junit.Test

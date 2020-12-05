@@ -15,6 +15,13 @@ import java.net.ServerSocket;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PJ05 Option 2 - ServerTest
+ *
+ * @author Gilbert Hsu, Kyochul Jang
+ * @version November 30, 2020
+ */
+
 public class ServerTest {
 
     private final PrintStream originalOutput = System.out;
@@ -98,9 +105,11 @@ public class ServerTest {
         }
         //check if the field is private
         int serverSocketModifier = serverSocketField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serverSocket" + "` field is `private`!", Modifier.isPrivate(serverSocketModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serverSocket" +
+                        "` field is `private`!", Modifier.isPrivate(serverSocketModifier));
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serverSocket" + "` field is `final`!", Modifier.isFinal(serverSocketModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serverSocket" +
+                        "` field is `final`!", Modifier.isFinal(serverSocketModifier));
 
         //check if profiles field exists or not
         try {
@@ -119,9 +128,11 @@ public class ServerTest {
         }
         //check if the field is private
         int profilesModifier = profilesField.getModifiers();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" + "` field is `private`!", Modifier.isPrivate(profilesModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" +
+                        "` field is `private`!", Modifier.isPrivate(profilesModifier));
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" + "` field is `static`!", Modifier.isStatic(profilesModifier));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "profiles" +
+                    "` field is `static`!", Modifier.isStatic(profilesModifier));
 
 
     }
@@ -150,11 +161,14 @@ public class ServerTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                    "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                    "` method has the correct return type!", expectedReturnType, actualReturnType);
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `static`!", Modifier.isStatic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                    "` method is `static`!", Modifier.isStatic(modifiers));
 
     }
 
@@ -181,11 +195,14 @@ public class ServerTest {
         // Perform tests
         int modifiers = method.getModifiers();
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `public`!", Modifier.isPublic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                        "` method is `public`!", Modifier.isPublic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName + "` method has the correct return type!", expectedReturnType, actualReturnType);
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + methodName +
+                        "` method has the correct return type!", expectedReturnType, actualReturnType);
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName + "` method is `static`!", Modifier.isStatic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + methodName +
+                        "` method is `static`!", Modifier.isStatic(modifiers));
 
     }
 }

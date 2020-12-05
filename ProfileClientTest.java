@@ -16,7 +16,7 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * PJ05 Option 2 - Server
+ * PJ05 Option 2 - ProfileClientTest
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -108,13 +108,17 @@ class ProfileClientTest {
 
         Class<?> Expected = a1.getType();
         Class<?> type = serialVersionUIDField.getType();
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is `private`!", Modifier.isPrivate(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" +
+                "` field is `private`!", Modifier.isPrivate(modifiers));
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is `final`!", Modifier.isFinal(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" +
+                "` field is `final`!", Modifier.isFinal(modifiers));
 
-        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is `static`!", Modifier.isStatic(modifiers));
+        Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" +
+                "` field is `static`!", Modifier.isStatic(modifiers));
 
-        Assert.assertEquals("Ensure that `" + className + "`'s `" + "serialVersionUID" + "` field is the correct type!", Expected, serialVersionUIDField.getType());
+        Assert.assertEquals("Ensure that `" + className + "`'s `" + "serialVersionUID" +
+                "` field is the correct type!", Expected, serialVersionUIDField.getType());
 
 
         //check if socket field exists or not
