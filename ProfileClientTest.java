@@ -32,7 +32,7 @@ class ProfileClientTest {
 
     @SuppressWarnings("FieldCanBeLocal")
     private ByteArrayOutputStream testOut;
-    private long a;
+    private long testA;
 
     @Before
     public void outputStart() {
@@ -103,10 +103,10 @@ class ProfileClientTest {
 
         int modifiers = serialVersionUIDField.getModifiers();
 
-        long a = 1L;
+        long testA = 1L;
         Field a1 = ProfileClientTest.class.getDeclaredField("a");
 
-        Class<?> Expected = a1.getType();
+        Class<?> expected = a1.getType();
         Class<?> type = serialVersionUIDField.getType();
         Assert.assertTrue("Ensure that `" + className + "`'s `" + "serialVersionUID" +
                 "` field is `private`!", Modifier.isPrivate(modifiers));
