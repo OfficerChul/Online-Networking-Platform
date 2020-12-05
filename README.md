@@ -235,10 +235,10 @@
   - Tests invalid username and password input
     - ![Images/0.%20Register%20-%20username.png](Images/0.%20Register%20-%20username.png)
     - ![Images/0.%20Register%20-%20username2.png](Images/0.%20Register%20-%20username2.png)
-    - ![images/0.%20Register%20-%20password.png](images/0.%20Register%20-%20password.png)
+    - ![images/0.%20Register%20-%20password.png](Images/0.%20Register%20-%20password.png)
     - ![Images/0.%20Register%20-%20password2.png](Images/0.%20Register%20-%20password2.png)
     - ![Images/1.%20Wrong%20username%20format.png](Images/1.%20Wrong%20username%20format.png)
-    - ![images/1.%20Wrong%20password%20format.png](images/1.%20Wrong%20password%20format.png)
+    - ![images/1.%20Wrong%20password%20format.png](Images/1.%20Wrong%20password%20format.png)
 
   - Tests wrong combinations of username and password
     - ![mages/1.%20Wrong%20username%20or%20password.png](Images/1.%20Wrong%20username%20or%20password.png)
