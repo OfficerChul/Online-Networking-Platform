@@ -244,19 +244,19 @@ public class ProfileClient extends JComponent implements Runnable {
                         } else {
                             JOptionPane.showMessageDialog(null,
                                 "Your password should be at least 8 characters long.",
-                                "Login", JOptionPane.ERROR_MESSAGE);
+                                "Creating New Account", JOptionPane.ERROR_MESSAGE);
 			                passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                         }
                     } else {
                         JOptionPane.showMessageDialog(null,
                             "Your password should be alphanumeric and no more than 21 characters.",
-                            "Login", JOptionPane.ERROR_MESSAGE);
+                            "Creating New Account", JOptionPane.ERROR_MESSAGE);
 			                passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                     }
                 } else {
                     JOptionPane.showMessageDialog(null,
                         "Your username should be alphanumeric and no more than 15 characters.",
-                        "Login", JOptionPane.ERROR_MESSAGE);
+                        "Creating New Account", JOptionPane.ERROR_MESSAGE);
 		            userRegistrationText.setText(""); // Reset usernamefield for convenience
                     passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                 }
