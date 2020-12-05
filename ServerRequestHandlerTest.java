@@ -130,7 +130,7 @@ public class ServerRequestHandlerTest {
     Class<?> clazz = ServerRequestHandler.class;
 
     @org.junit.Test
-    public void ServerRequestHandlerConstructorDeclarationTest() {
+    public void serverRequestHandlerConstructorDeclarationTest() {
         Constructor<?> constructor;
         int modifiers;
 
@@ -149,7 +149,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void GetResponseTest() {
+    public void getResponseTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -183,7 +183,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void RunTest() {
+    public void runTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -217,7 +217,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void LoginTest() {
+    public void loginTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -251,7 +251,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void ReturnProfileFromUsernameTest() {
+    public void returnProfileFromUsernameTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -290,7 +290,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void UpdateProfileTest() {
+    public void updateProfileTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -329,7 +329,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void UsernameIsTakenTest() {
+    public void usernameIsTakenTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -368,7 +368,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void ProfileRequestTest() {
+    public void profileRequestTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -407,7 +407,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void DeleteProfileTest() {
+    public void deleteProfileTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -446,7 +446,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void DeleteAccountTest() {
+    public void deleteAccountTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -485,7 +485,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void AcceptFriendRequestTest() {
+    public void acceptFriendRequestTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -524,7 +524,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void RejectFriendRequestTest() {
+    public void rejectFriendRequestTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -563,7 +563,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void SendFriendRequestTest() {
+    public void sendFriendRequestTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -602,7 +602,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void RescindFriendRequestTest() {
+    public void rescindFriendRequestTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -641,7 +641,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void FriendRequestAlreadyExistsTest() {
+    public void friendRequestAlreadyExistsTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
@@ -680,7 +680,7 @@ public class ServerRequestHandlerTest {
     }
 
     @org.junit.Test
-    public void UsersAreFriendsTest() {
+    public void usersAreFriendsTest() {
         Method method;
         int modifiers;
         Class<?> actualReturnType;
