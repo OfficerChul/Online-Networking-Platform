@@ -246,7 +246,7 @@ public final class ServerRequestHandler implements Runnable {
                             profile.getReceivedFriendRequests().length);
                     tempReceivedFriendRequests[i] = tempReceivedFriendRequests[tempReceivedFriendRequests.length - 1];
                     profile.setReceivedFriendRequests(Arrays.copyOf(tempReceivedFriendRequests,
-                            tempReceivedFriendRequests.length - 1));;
+                            tempReceivedFriendRequests.length - 1));
                 }
             }
         }
