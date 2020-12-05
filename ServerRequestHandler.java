@@ -45,7 +45,7 @@ public final class ServerRequestHandler implements Runnable {
             String[] requestVals = req.split(":");
             switch (requestVals[0]) {
                 case "Req0": {
-                    response = "Res0: Connection Esablished";
+                    response = "Res0: Connection Established";
                     break;
                 }
                 case "Req1": { // Login: “Req1: <username>: <password>”
@@ -230,9 +230,11 @@ public final class ServerRequestHandler implements Runnable {
         for (Profile profile : profiles) {
             for (int i = 0; i < profile.getFriendUserNames().length; i++) {
                 if (profile.getFriendUserNames()[i].equals(username)) {
-                    String[] tempFriendUsernames = Arrays.copyOf(profile.getFriendUserNames(), profile.getFriendUserNames().length);
+                    String[] tempFriendUsernames = Arrays.copyOf(profile.getFriendUserNames(),
+                            profile.getFriendUserNames().length);
                     tempFriendUsernames[i] = tempFriendUsernames[tempFriendUsernames.length - 1];
-                    profile.setFriendUserNames(Arrays.copyOf(tempFriendUsernames, tempFriendUsernames.length - 1));
+                    profile.setFriendUserNames(Arrays.copyOf(tempFriendUsernames,
+                            tempFriendUsernames.length - 1));
 
                     
                 }
@@ -240,9 +242,11 @@ public final class ServerRequestHandler implements Runnable {
 
             for (int i = 0; i < profile.getReceivedFriendRequests().length; i++) {
                 if (profile.getReceivedFriendRequests()[i].getUsernameWhoSent().equals(username)) {
-                    FriendRequest[] tempReceivedFriendRequests = Arrays.copyOf(profile.getReceivedFriendRequests(), profile.getReceivedFriendRequests().length);
+                    FriendRequest[] tempReceivedFriendRequests = Arrays.copyOf(profile.getReceivedFriendRequests(),
+                            profile.getReceivedFriendRequests().length);
                     tempReceivedFriendRequests[i] = tempReceivedFriendRequests[tempReceivedFriendRequests.length - 1];
-                    profile.setReceivedFriendRequests(Arrays.copyOf(tempReceivedFriendRequests, tempReceivedFriendRequests.length - 1));;
+                    profile.setReceivedFriendRequests(Arrays.copyOf(tempReceivedFriendRequests,
+                            tempReceivedFriendRequests.length - 1));;
                 }
             }
         }
@@ -252,7 +256,7 @@ public final class ServerRequestHandler implements Runnable {
         // deletes friendRequest from sender & recipient records
         // adds to both users' friend lists
         FriendRequest[] senderSentRequests;
-        FriendRequest[] recipientreceivedRequests;
+        FriendRequest[] recipientReceivedRequests;
 
         int senderIndex = -1;
         int recipientIndex = -1;
@@ -277,16 +281,16 @@ public final class ServerRequestHandler implements Runnable {
         }
         profiles[senderIndex].setSentFriendRequests(senderSentRequests);
 
-        recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
-        for (int i = 0; i < recipientreceivedRequests.length; i++) {
-            if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
-                recipientreceivedRequests[i].setStatus(1);
-                recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
-                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
-                        recipientreceivedRequests.length - 1);
+        recipientReceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
+        for (int i = 0; i < recipientReceivedRequests.length; i++) {
+            if (recipientReceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
+                recipientReceivedRequests[i].setStatus(1);
+                recipientReceivedRequests[i] = recipientReceivedRequests[recipientReceivedRequests.length - 1];
+                recipientReceivedRequests = Arrays.copyOf(recipientReceivedRequests,
+                        recipientReceivedRequests.length - 1);
             }
         }
-        profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
+        profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
 
         profiles[senderIndex].addToFriendUsernames(recipientUsername);
         profiles[recipientIndex].addToFriendUsernames(senderUsername);
@@ -295,7 +299,7 @@ public final class ServerRequestHandler implements Runnable {
     private void rejectFriendRequest(String senderUsername, String recipientUsername) {
         // deletes friendRequest from sender & recipient records
         FriendRequest[] senderSentRequests;
-        FriendRequest[] recipientreceivedRequests;
+        FriendRequest[] recipientReceivedRequests;
         int senderIndex = -1;
         int recipientIndex = -1;
         for (int i = 0; i < profiles.length; i++) {
@@ -319,16 +323,16 @@ public final class ServerRequestHandler implements Runnable {
         }
         profiles[senderIndex].setSentFriendRequests(senderSentRequests);
 
-        recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
-        for (int i = 0; i < recipientreceivedRequests.length; i++) {
-            if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
-                recipientreceivedRequests[i].setStatus(-1);
-                recipientreceivedRequests[i] = recipientreceivedRequests[recipientreceivedRequests.length - 1];
-                recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests,
-                        recipientreceivedRequests.length - 1);
+        recipientReceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
+        for (int i = 0; i < recipientReceivedRequests.length; i++) {
+            if (recipientReceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
+                recipientReceivedRequests[i].setStatus(-1);
+                recipientReceivedRequests[i] = recipientReceivedRequests[recipientReceivedRequests.length - 1];
+                recipientReceivedRequests = Arrays.copyOf(recipientReceivedRequests,
+                        recipientReceivedRequests.length - 1);
             }
         }
-        profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
+        profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
     }
 
     private boolean sendFriendRequest(String senderUsername, String recipientUsername) {
@@ -341,7 +345,7 @@ public final class ServerRequestHandler implements Runnable {
         boolean invalidRecipientUsername = true;
 
         FriendRequest[] senderSentRequests;
-        FriendRequest[] recipientreceivedRequests;
+        FriendRequest[] recipientReceivedRequests;
         int senderIndex = -1;
         int recipientIndex = -1;
         for (int i = 0; i < profiles.length; i++) {
@@ -365,17 +369,17 @@ public final class ServerRequestHandler implements Runnable {
             senderSentRequests[senderSentRequests.length - 1] = thisFriendRequest;
             profiles[senderIndex].setSentFriendRequests(senderSentRequests);
 
-            recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
-            recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length + 1);
-            recipientreceivedRequests[recipientreceivedRequests.length - 1] = thisFriendRequest;
-            profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
+            recipientReceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
+            recipientReceivedRequests = Arrays.copyOf(recipientReceivedRequests, recipientReceivedRequests.length + 1);
+            recipientReceivedRequests[recipientReceivedRequests.length - 1] = thisFriendRequest;
+            profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
             return true;
         }
     }
 
     private boolean friendRequestAlreadyExists(String senderUsername, String recipientUsername) {
         FriendRequest[] senderSentRequests;
-        FriendRequest[] recipientreceivedRequests;
+        FriendRequest[] recipientReceivedRequests;
         boolean exists = false;
         Boolean existsInSenderRecords = false;
         Boolean existsInRecipientRecords = false;
@@ -402,23 +406,23 @@ public final class ServerRequestHandler implements Runnable {
         }
         profiles[senderIndex].setSentFriendRequests(senderSentRequests);
 
-        recipientreceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
-        for (int i = 0; i < recipientreceivedRequests.length; i++) {
-            if (recipientreceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
+        recipientReceivedRequests = profiles[recipientIndex].getReceivedFriendRequests();
+        for (int i = 0; i < recipientReceivedRequests.length; i++) {
+            if (recipientReceivedRequests[i].usernameWhoSent.equals(senderUsername)) {
                 existsInRecipientRecords = true;
             }
         }
-        profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
+        profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
 
         if (existsInRecipientRecords && existsInSenderRecords) {
             // if request exists on records of both sides
             exists = true;
         } else if (!existsInRecipientRecords && existsInSenderRecords) {
             // if request only exists on records of one side, update other side
-            recipientreceivedRequests = Arrays.copyOf(recipientreceivedRequests, recipientreceivedRequests.length + 1);
-            recipientreceivedRequests[recipientreceivedRequests.length - 1] = new FriendRequest(senderUsername,
+            recipientReceivedRequests = Arrays.copyOf(recipientReceivedRequests, recipientReceivedRequests.length + 1);
+            recipientReceivedRequests[recipientReceivedRequests.length - 1] = new FriendRequest(senderUsername,
                     recipientUsername);
-            profiles[recipientIndex].setReceivedFriendRequests(recipientreceivedRequests);
+            profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
             exists = true;
         } else if (existsInRecipientRecords && !existsInSenderRecords) {
             // if request only exists on records of one side, update other side

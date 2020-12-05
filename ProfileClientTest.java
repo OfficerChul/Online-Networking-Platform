@@ -103,7 +103,7 @@ class ProfileClientTest {
 
         int modifiers = serialVersionUIDField.getModifiers();
 
-        long a = 1l;
+        long a = 1L;
         Field a1 = ProfileClientTest.class.getDeclaredField("a");
 
         Class<?> Expected = a1.getType();

@@ -37,7 +37,7 @@ public class ProfileClient extends JComponent implements Runnable {
     JFrame friendRequestFrame;
     JFrame requestHistoryFrame;
 
-    // Delcare elements of GUI that will be used globally
+    // Declare elements of GUI that will be used globally
     JPanel friendListPanel;
     JButton profileAddFriendButton;
     JButton profileCancelButton;
@@ -76,9 +76,7 @@ public class ProfileClient extends JComponent implements Runnable {
         Object registrationResponse;
 
         checkUsernameResponse = (String) sendRequest(registrationRequest);
-        if (((String) (checkUsernameResponse)).split(": ")[0].equals("Res2")) {
-            // JOptionPane.showMessageDialog(null, "Registered Successfully!", "User Login",
-            //         JOptionPane.INFORMATION_MESSAGE);
+        if (checkUsernameResponse.split(": ")[0].equals("Res2")) {
             Account newAccount = new Account(username, password);
             Profile blankProfile = new Profile("", newAccount, "", "", "", new String[0]);
             registrationResponse = sendRequest(blankProfile);
@@ -92,7 +90,6 @@ public class ProfileClient extends JComponent implements Runnable {
                             JOptionPane.ERROR_MESSAGE);
                 return 0;
             }
-
         } else if (((String) (checkUsernameResponse)).split(": ")[0].equals("E2")) {
             JOptionPane.showMessageDialog(null, "The username already exists.", "User Login",
                     JOptionPane.ERROR_MESSAGE);
@@ -628,7 +625,7 @@ public class ProfileClient extends JComponent implements Runnable {
 		listAllUserMainPanel.setMaximumSize(new Dimension(600, 32767));
         listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
 
-        // To uodate
+        // To update
         listAllUserMainPanel.removeAll(); // remove all buttons first
         String[] userList = requestUserList(); // request list
         for (String username : userList) {
@@ -767,7 +764,7 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     // method for adding username buttons to specified panel
     private void addUsernameButton(String username, JPanel targetPanel) {
-        // skip if username is the loggin user
+        // skip if username is the logged in user
         if (username.equals(myProfile.getAccount().getUsername())) {
             return;
         }
