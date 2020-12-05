@@ -14,8 +14,15 @@ import java.util.Arrays;
 
 public final class Server {
     private final ServerSocket serverSocket;
-    private static Profile[] profiles;
+    private static Profile[] profiles; // data of all the profiles
 
+    /**
+     * Server Constructor
+     *
+     * if it exists, reads all profiles from serverData file, and instantiates Profile array
+     * @param port
+     * @throws IOException
+     */
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
         File serverDataFile = new File("serverData.txt");
@@ -24,10 +31,15 @@ public final class Server {
         } else {
             profiles = new Profile[0];
         }
-        // read all usernames from username file, instantiates userName arraylist
-        // instantiates profiles arraylist
     } // server constructor
 
+    /**
+     * serveClients
+     *
+     * allow server to serve multiple clients simultaneously,
+     * by starting a new ServerRequestHandler thread for each client in
+     * an endless loop until server is closed.
+     */
     public void serveClients() {
         InetAddress address;
         String hostName;
@@ -60,6 +72,15 @@ public final class Server {
         } // end while
     } // serveClients
 
+    /**
+     * main
+     *
+     * invokes constructor and instantiates a serversocket object
+     * invokes serveclients so clients can connect to server
+     * and requests can be hendled
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Server server;
         try {
@@ -72,20 +93,26 @@ public final class Server {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 closeServer();
-                
+
                 System.out.println("Shutting down...");
             }
         }); // save server data when server is interrupted
-
         server.serveClients();
     } // main
 
+    /**
+     * closeServer
+     * write all the Profiles array data back to the file
+     */
     private static void closeServer() {
         writeProfilesToFile("serverData.txt");
-        // write all the arraylist data back to the files
-        // close the server
     }
 
+    /**
+     * writeProfilesToFile
+     * write all the Profiles array data back to the file
+     * @param filename
+     */
     public static void writeProfilesToFile(String filename) {
         File f = new File(filename);
         FileOutputStream fos = null;
@@ -103,6 +130,12 @@ public final class Server {
         }
     }
 
+    /**
+     * readProfilesFromFile
+     *
+     * reads profiles from server file upon call
+     * @param filename
+     */
     public void readProfilesFromFile(String filename) {
         File f = new File(filename);
         FileInputStream fis = null;
@@ -131,10 +164,22 @@ public final class Server {
         }
     }
 
+    /**
+     * getProfiles
+     *
+     * accessor method for profiles array
+     * @return
+     */
     public static Profile[] getProfiles() {
         return profiles;
     }
 
+    /**
+     * setProfiles
+     *
+     * modifier method for profiles array
+     * @param profiles
+     */
     public static void setProfiles(Profile[] profiles) {
         Server.profiles = profiles;
     }
