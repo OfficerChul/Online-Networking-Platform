@@ -159,22 +159,22 @@ public class ProfileClient extends JComponent implements Runnable {
                                 loginFrame.dispose();
                                 showMainPanel();
                             } else {
-                                passwordLoginText.setText("");// clear textfield for convenience
+                                passwordLoginText.setText(""); // clear textfield for convenience
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
                                                             "Login", JOptionPane.ERROR_MESSAGE);
-			    passwordLoginText.setText(""); //added
+			                passwordLoginText.setText("");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.",
                                                         "Login", JOptionPane.ERROR_MESSAGE);
-			passwordLoginText.setText(""); //added
+			            passwordLoginText.setText("");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Your username should be alphanumeric.",
                                                     "Login", JOptionPane.ERROR_MESSAGE);
-		    userLoginText.setText(""); //added
+		            userLoginText.setText("");
                 }
             }
         });
@@ -717,10 +717,10 @@ public class ProfileClient extends JComponent implements Runnable {
                             {
                                 public void actionPerformed(ActionEvent e) {
                                     int choice = JOptionPane.showConfirmDialog(null,
-                                                                                "Do you want to accept the friend request?",
-                                                                                "Friend Request",
-                                                                                JOptionPane.YES_NO_CANCEL_OPTION,
-                                                                                JOptionPane.QUESTION_MESSAGE);
+                                                            "Do you want to accept the friend request?",
+                                                            "Friend Request",
+                                                            JOptionPane.YES_NO_CANCEL_OPTION,
+                                                            JOptionPane.QUESTION_MESSAGE);
                                     String username = myProfile.getAccount().getUsername();
                                     String request;
                                     Profile response;

@@ -59,7 +59,7 @@ public class FriendRequestTest {
     Method method;
     Class<?> object = Object.class;
     Class<?> friendRequest = FriendRequest.class;
-    FriendRequest newFriendRequest = new FriendRequest("sentUser","receivedUser");
+    FriendRequest newFriendRequest = new FriendRequest("sentUser", "receivedUser");
 
     //test class
     @Test

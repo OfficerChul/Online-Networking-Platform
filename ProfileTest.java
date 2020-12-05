@@ -776,8 +776,8 @@ public class ProfileTest {
     /**
      * The test below are testing whether the methods are workable
      */
-        Profile profileEx = new Profile("",new Account("","")
-            ,"","","", new String[]{""});
+    Profile profileEx = new Profile("", new Account("", "")
+        , "", "", "", new String[]{""});
 
     @Test
     public void addToFriendUsernames() {
