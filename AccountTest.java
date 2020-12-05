@@ -13,6 +13,13 @@ import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * PJ05 Option 2 - Server
+ *
+ * @author Gilbert Hsu, Kyochul Jang
+ * @version November 30, 2020
+ */
+
 public class AccountTest {
 
     private final PrintStream originalOutput = System.out;
