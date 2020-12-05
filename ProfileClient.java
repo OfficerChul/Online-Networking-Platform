@@ -62,8 +62,6 @@ public class ProfileClient extends JComponent implements Runnable {
         } else if (((String) loginResponse).split(": ")[0].equals("E1")) {
             JOptionPane.showMessageDialog(null, "Wrong username or password", "User Login",
                                                 JOptionPane.INFORMATION_MESSAGE);
-	    userLoginText.setText(""); //added
-            passwordLoginText.setText(""); //added
         } else {
             JOptionPane.showMessageDialog(null, (String) loginResponse, "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -98,8 +96,6 @@ public class ProfileClient extends JComponent implements Runnable {
         } else if (((String) (checkUsernameResponse)).split(": ")[0].equals("E2")) {
             JOptionPane.showMessageDialog(null, "The username already exists.", "User Login",
                     JOptionPane.ERROR_MESSAGE);
-	    userLoginText.setText(""); //added
-            passwordLoginText.setText(""); //added
         } else {
             JOptionPane.showMessageDialog(null, (String) (checkUsernameResponse), "User Login",
                     JOptionPane.ERROR_MESSAGE);
@@ -162,6 +158,8 @@ public class ProfileClient extends JComponent implements Runnable {
                             if (userLogin(username, password) == 1) {
                                 loginFrame.dispose();
                                 showMainPanel();
+                            } else {
+                                passwordLoginText.setText("");// clear textfield for convenience
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
@@ -247,20 +245,20 @@ public class ProfileClient extends JComponent implements Runnable {
                             JOptionPane.showMessageDialog(null,
                                 "Your password should be at least 8 characters long.",
                                 "Login", JOptionPane.ERROR_MESSAGE);
-			    passwordRegistrationText.setText(""); //added
+			                passwordRegistrationText.setText("");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null,
                             "Your password should be alphanumeric and no more than 21 characters.",
                             "Login", JOptionPane.ERROR_MESSAGE);
-			passwordRegistrationText.setText(""); //added
+			                passwordRegistrationText.setText("");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null,
                         "Your username should be alphanumeric and no more than 15 characters.",
                         "Login", JOptionPane.ERROR_MESSAGE);
-		    userRegistrationText.setText(""); //added
-                    passwordRegistrationText.setText(""); //added
+		            userRegistrationText.setText("");
+                    passwordRegistrationText.setText("");
                 }
             } 
         });
