@@ -20,22 +20,22 @@
 
 ### 2. **Login** Frame is then shown
 
-- ![Images/1_Login.png](Images/1_Login.png)
+![Images/1_Login.png](Images/1_Login.png)
 
-  - **Username** Field: Enter your username
-  - **Password** Field: Enter your password
-  - **Login** Button: Login with entered username and password
-  - **Register** Button:
-    - A new frame will be displayed.
+- **Username** Field: Enter your username
+- **Password** Field: Enter your password
+- **Login** Button: Login with entered username and password
+- **Register** Button:
+  - A new frame will be displayed.
 
-      ![Images/1._Register.png](Images/1._Register.png)
+    ![Images/1._Register.png](Images/1._Register.png)
 
-      - **Username** Field: Enter your username
-      - **Password** Field: Enter your password
-      - **Register** Button: Create your account with entered username and password. *Note: a blank profile is created when a new account is created.*
-        - Username should be no longer than 15 characters, only English letters and numbers are applicable
-        - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
-      - **Cancel** Button: Close this box and return to **Login** Frame.
+    - **Username** Field: Enter your username
+    - **Password** Field: Enter your password
+    - **Register** Button: Create your account with entered username and password. *Note: a blank profile is created when a new account is created.*
+      - Username should be no longer than 15 characters, only English letters and numbers are applicable
+      - Password should be at least 8 characters and no longer than 21 characters, only English letters and numbers are applicable
+    - **Cancel** Button: Close this box and return to **Login** Frame.
 
 ### 3. **Main** Frame is shown once you are logged in
 
@@ -46,7 +46,7 @@
     - Deleting your profile will NOT remove you from your friends' friend list.
 - **Delete Account** Button:
   - If you choose "Yes" on the following confirmation message box, you will be asked to enter your password to confirm your deletion. If the password is correct, you will be ask to confirm again.
-  - Deleting your account will remove you from your friends' friend list.
+    - Deleting your account will remove you from your friends' friend list.
 
     ![Images/4._Delete_account2.png](Images/4._Delete_account2.png)
 
@@ -230,6 +230,33 @@
     * Tests if the method has correct modifiers or not
     * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
+  
+- **Profile GUI Test**
+  - Tests invalid username and password input
+    - ![Images/0.%20Register%20-%20username.png](Images/0.%20Register%20-%20username.png)
+    - ![Images/0.%20Register%20-%20username2.png](Images/0.%20Register%20-%20username2.png)
+    - ![images/0.%20Register%20-%20password.png](images/0.%20Register%20-%20password.png)
+    - ![Images/0.%20Register%20-%20password2.png](Images/0.%20Register%20-%20password2.png)
+    - ![Images/1.%20Wrong%20username%20format.png](Images/1.%20Wrong%20username%20format.png)
+    - ![images/1.%20Wrong%20password%20format.png](images/1.%20Wrong%20password%20format.png)
+
+  - Tests wrong combinations of username and password
+    - ![mages/1.%20Wrong%20username%20or%20password.png](Images/1.%20Wrong%20username%20or%20password.png)
+  - Tests profile update and restoration
+    - ![mages/2.%20Profile%20Update.png](Images/2.%20Profile%20Update.png)
+  - Tests deleting profile: all information resets to blank
+    - ![Images/3.%20Delete%20profile.png](Images/3.%20Delete%20profile.png)
+  - Tests wrong password when deleting an account
+    - ![Images/4.%20Delete%20account2.png](Images/4.%20Delete%20account2.png)
+    - ![Images/4.%20Delete%20account3.png](Images/4.%20Delete%20account3.png)
+    - ![Images/4.%20Delete%20account4.png](Images/4.%20Delete%20account4.png)
+  - Tests friend requests sending and receiving
+    - ![Images/5.%20Friend%20request%20already%20sent.png](Images/5.%20Friend%20request%20already%20sent.png)
+    - ![Images/5.%20Accept.png](Images/5.%20Accept.png)
+    - ![Images/5.%20Accepted.png](Images/5.%20Accepted.png)
+    - ![Images/5.%20Sent%20requests.png](Images/5.%20Sent%20requests.png)
+  - Tests a remote server down
+    - ![Images/6.%20Connection%20Failed.png](Images/6.%20Connection%20Failed.png)
   
 * **ProfileClientTest**
 
