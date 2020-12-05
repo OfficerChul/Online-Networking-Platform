@@ -196,6 +196,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
     }
 
+    // Show the window for creating a new account
     private void showRegisterPanel() {
         JLabel userLabel;
         JLabel passwordLabel;
@@ -233,8 +234,10 @@ public class ProfileClient extends JComponent implements Runnable {
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = userRegistrationText.getText();
-                String password = String.valueOf(passwordRegistrationText.getPassword());
+                String password = String.valueOf(passwordRegistrationText.getPassword()); // Get input password
 
+                // Username and password should be composed of letters and numbers.
+                // Username can be no more than 15 characters, and password should be 8-20 characters long.
                 if (!username.isBlank() && username.length() < 16 && username.matches("^[a-zA-Z0-9]*$")) {
                     if (!password.isBlank() && password.length() < 21 && password.matches("^[a-zA-Z0-9]*$")) {
                         if (password.length() >= 8) {
@@ -245,20 +248,20 @@ public class ProfileClient extends JComponent implements Runnable {
                             JOptionPane.showMessageDialog(null,
                                 "Your password should be at least 8 characters long.",
                                 "Login", JOptionPane.ERROR_MESSAGE);
-			                passwordRegistrationText.setText("");
+			                passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                         }
                     } else {
                         JOptionPane.showMessageDialog(null,
                             "Your password should be alphanumeric and no more than 21 characters.",
                             "Login", JOptionPane.ERROR_MESSAGE);
-			                passwordRegistrationText.setText("");
+			                passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                     }
                 } else {
                     JOptionPane.showMessageDialog(null,
                         "Your username should be alphanumeric and no more than 15 characters.",
                         "Login", JOptionPane.ERROR_MESSAGE);
-		            userRegistrationText.setText("");
-                    passwordRegistrationText.setText("");
+		            userRegistrationText.setText(""); // Reset usernamefield for convenience
+                    passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                 }
             } 
         });
@@ -267,7 +270,7 @@ public class ProfileClient extends JComponent implements Runnable {
         registerCancelButton.setBounds(170, 110, 90, 25);
         registerCancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                registerFrame.dispose();
+                registerFrame.dispose(); // Close register window
             }
         });
 
@@ -279,6 +282,7 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.add(registerCancelButton);
     }
 
+    // Show the main window where most of the operations can be done
     private void showMainPanel() {
         JButton listAllUserButton;
         JButton backToMeButton;
@@ -303,22 +307,22 @@ public class ProfileClient extends JComponent implements Runnable {
         mainFrame.setVisible(true);
         mainFrame.setTitle("Profile!");
         mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Once closed, end the program entirely
 
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         mainFrame.setContentPane(panel);
         panel.setLayout(null);
 
         JPanel upperLeftPanel = new JPanel();
-        upperLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border"));
-        upperLeftPanel.setBounds(10, 10, 285, 130);
+        upperLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border")); // set border
+        upperLeftPanel.setBounds(10, 10, 285, 130); // set position and size
         panel.add(upperLeftPanel);
         upperLeftPanel.setLayout(null);
 
         JLabel myNameLabel = new JLabel(myProfile.getAccount().getUsername());
-        myNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        myNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		myNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myNameLabel.setFont(new Font("Arial", Font.BOLD, 18)); // set font style
+        myNameLabel.setHorizontalAlignment(SwingConstants.CENTER); // set alignment
+		myNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // set alignment
         myNameLabel.setBounds(55, 10, 175, 40);
         upperLeftPanel.add(myNameLabel);
 
@@ -329,6 +333,7 @@ public class ProfileClient extends JComponent implements Runnable {
                 int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your profile?",
                                                             "Profile - Delete Profile", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
+                    // If yes, create a black profile with same account and replace.
                     Profile blankProfile = new Profile("", myProfile.getAccount(), "", "", "", new String[0]);
                     Object deleteProfileResponse = sendRequest(blankProfile);
                     if (deleteProfileResponse instanceof Profile) {
@@ -353,7 +358,7 @@ public class ProfileClient extends JComponent implements Runnable {
                 int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your account?",
                                                             "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
-                    JPasswordField password = new JPasswordField();
+                    JPasswordField password = new JPasswordField(); // Require password to confirm operation.
                     Object[] passwordField = {"You are trying to delete your account. " + 
                                                 "Enter your password to confirm.", password};
                     int result = JOptionPane.showConfirmDialog(null, passwordField,
@@ -370,17 +375,17 @@ public class ProfileClient extends JComponent implements Runnable {
                             if (secondChoice == JOptionPane.YES_OPTION) {
                                 String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
                                 if (response.split(": ")[0].equals("Res4")) {
+                                    // Account deleted, and there's force quit.
                                     mainFrame.dispose();
                                     JOptionPane.showMessageDialog(null, "Successfully Deleted. You are logged out now.",
                                                                             "Profile - Delete Account",
                                                                             JOptionPane.INFORMATION_MESSAGE);
-                                    System.exit(0);    
+                                    System.exit(0);
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Unable to proceed. Try again later.",
                                                                     "Profile - Delete Account",
                                                                     JOptionPane.INFORMATION_MESSAGE);
                                 }
-                                
                             }
                             
                         } else {
@@ -434,6 +439,7 @@ public class ProfileClient extends JComponent implements Runnable {
 
         friendListScrollPanel = new JScrollPane();
         friendListScrollPanel.setBounds(10, 149, 285, 391);
+        // Vertically scrollbar as need, horizontally no scrollbar
         friendListScrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         friendListScrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.add(friendListScrollPanel);
@@ -506,7 +512,7 @@ public class ProfileClient extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String username = myProfile.getAccount().getUsername();
                 String targetUsername = currentProfile.getAccount().getUsername();
-                
+                // Send request to the server: Req6: username1, username 2
                 String request = String.format("Req6: %s: %s", username, targetUsername);
                 String response;
             
@@ -545,6 +551,7 @@ public class ProfileClient extends JComponent implements Runnable {
         profileSaveButton.setBounds(362, 32, 93, 23);
         profileSaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Create a new profile with currently input data and replace to update
                 String name = profileNameText.getText();
                 Account myAccount = myProfile.getAccount();
                 String email = profileEmailText.getText();
@@ -570,7 +577,7 @@ public class ProfileClient extends JComponent implements Runnable {
         lowerRightPanel.add(profileSaveButton);
 
         loadInfo(myProfile);
-
+        // Set a timer to automatically pull the latest Profile
         Timer timer = new Timer(500, new ActionListener() {
             public void actionPerformed(ActionEvent e) {                    
                 updateMyProfile();
@@ -588,7 +595,7 @@ public class ProfileClient extends JComponent implements Runnable {
         timer.setInitialDelay(0);
         timer.start();
     }
-
+    // Show the window where all users are listed
     private void showListAllUserPanel() {
         listAllUserFrame = new JFrame();
         JPanel panel = new JPanel();
@@ -621,15 +628,16 @@ public class ProfileClient extends JComponent implements Runnable {
 		listAllUserMainPanel.setMaximumSize(new Dimension(600, 32767));
         listAllUserMainScrollPanel.setViewportView(listAllUserMainPanel);
 
-        listAllUserMainPanel.removeAll();
-        String[] userList = requestUserList();
+        // To uodate
+        listAllUserMainPanel.removeAll(); // remove all buttons first
+        String[] userList = requestUserList(); // request list
         for (String username : userList) {
-            addUsernameButton(username, listAllUserMainPanel);
+            addUsernameButton(username, listAllUserMainPanel); // add the button
         }
-        listAllUserMainPanel.updateUI();
+        listAllUserMainPanel.updateUI(); // update the GUI
 
     }
-
+    // show the window where one can view sent or received friend requests
     private void showFriendRequestPanel() {
         friendRequestFrame = new JFrame();
         JPanel panel = new JPanel();
@@ -658,7 +666,8 @@ public class ProfileClient extends JComponent implements Runnable {
         friendRequestSentRequestButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
-            {
+            {   
+                // set a timer to automatically update the latest data
                 Timer timer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         friendRequestPanel.removeAll();
@@ -695,6 +704,7 @@ public class ProfileClient extends JComponent implements Runnable {
         {
             public void actionPerformed(ActionEvent e)
             {
+                // set a timer to automatically update the latest data
                 Timer timer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {     
                         friendRequestPanel.removeAll();
@@ -716,10 +726,12 @@ public class ProfileClient extends JComponent implements Runnable {
                                     Profile response;
                                     
                                     if (choice == JOptionPane.YES_OPTION) {
+                                        // request: Req7: username, username
                                         request = String.format("Req7: %s: %s", record, username);
                                         response = (Profile) sendRequest(request);
                                         myProfile = response;
                                         loadInfo(myProfile);
+                                        // disable the button and show the result temporarily
                                         buttonToAdd.setEnabled(false);
                                         buttonToAdd.setText("Accepted:" + buttonToAdd.getText());
                                     } else if (choice == JOptionPane.NO_OPTION) {
@@ -727,6 +739,7 @@ public class ProfileClient extends JComponent implements Runnable {
                                         response = (Profile) sendRequest(request);
                                         myProfile = response;
                                         loadInfo(myProfile);
+                                        // disable the button and show the result temporarily
                                         buttonToAdd.setEnabled(false);
                                         buttonToAdd.setText("Refused:" + buttonToAdd.getText());
                                     }
@@ -745,15 +758,16 @@ public class ProfileClient extends JComponent implements Runnable {
         });
         friendRequestUpperPanel.add(friendRequestReceivedRequestButton);
     }
-
+    // method for getting all users
     private String[] requestUserList() {
         String request = "Req9: Request all users";
         String[] response = new String[0];
         response = ((String) sendRequest(request)).split(",");
         return response;
     }
-
+    // method for adding username buttons to specified panel
     private void addUsernameButton(String username, JPanel targetPanel) {
+        // skip if username is the loggin user
         if (username.equals(myProfile.getAccount().getUsername())) {
             return;
         }
@@ -790,20 +804,20 @@ public class ProfileClient extends JComponent implements Runnable {
         resizePanel(targetPanel);
         updateUI();
     }
-
+    // resize the panel to allow scroll panel to work properly
     private void resizePanel(JPanel targetPanel) {
-        int numberOfComponents = targetPanel.getComponentCount();
+        int numberOfComponents = targetPanel.getComponentCount(); // get number of buttons
         int height;
         if (targetPanel.equals(friendListPanel)) {
-            height = (numberOfComponents / 2) * (30) + 10;
+            height = (numberOfComponents / 2) * (30) + 10; // 2 col, each row is 30, plus 10 redundancy
         } else {
             height = (numberOfComponents / 4) * 30 + 10;
         }
-        
+        // update the size and UI
         targetPanel.setPreferredSize(new Dimension(0, height)); 
         updateUI();
     }
-
+    // try to connect to the server and setup the global writer and reader
     private void initializeNetwork() {
         String initializationRequest = "Req0: Initialization";
         String initializationResponse;
@@ -828,10 +842,11 @@ public class ProfileClient extends JComponent implements Runnable {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Connecting to the server failed. Please check you internet connection",
                     "Connection Failed", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+            System.exit(0); // force quit since its a connection issue
         }
     }
-
+    // method that will handle request sending and response receiving. Object in Object out
+    // Object can either be String for requests or Profile for updates
     private Object sendRequest(Object request) {
         Object response;
         try {
@@ -839,23 +854,28 @@ public class ProfileClient extends JComponent implements Runnable {
             oos.flush();
             response = ois.readObject();
         } catch (UnknownHostException e) {
+            JOptionPane.showMessageDialog(null, "Connection Failed. Quiting...",
+                                            "Profile", JOptionPane.ERROR_MESSAGE);
+            System.exit(0); // force quit since its a connection issue
             response = "Unknown Host";
-            // e.printStackTrace();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Connection Failed. Quiting...",
                                             "Profile", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+            System.exit(0); // force quit since its a connection issue
             response = "Connection Failed";
-            // e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Fatal error on server: Class Not Found. Quiting...",
+                                            "Profile", JOptionPane.ERROR_MESSAGE);
             response = "Class Not Found";
-            // e.printStackTrace();
         } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Connection Failed. Quiting...",
+                                            "Profile", JOptionPane.ERROR_MESSAGE);
+            System.exit(0); // force quit since its a connection issue
             response = "Connection Failed";
         }
         return response;
     }
-
+    // load a Profile object to the GUI main window
     private void loadInfo(Profile profile) {
         currentProfile = profile;
         profileUsernameLabel.setText("User: " + profile.getAccount().getUsername());
@@ -864,22 +884,24 @@ public class ProfileClient extends JComponent implements Runnable {
         profileAboutMeArea.setText(profile.getAboutMe());
 
         profileLikesAndInterestsText.setText(profile.getLikesAndInterests());
-
+        // if personal profile save and cancel button are visible, else they are not shown
         if (currentProfile.getAccount().getUsername().equals(myProfile.getAccount().getUsername())) {
             profileAddFriendButton.setVisible(false);
             profileSaveButton.setVisible(true);
             profileCancelButton.setVisible(true);
+            // prepare for friendlist update
             friendListPanel.removeAll();
             friendListPanel.updateUI();
+            // none to display since this is "my account"
             profileUsernameLabel.setText("");
-
+            // add friends button to friendlist panel
             for (String friendUsername : myProfile.getFriendUserNames()) {
                 addUsernameButton(friendUsername, friendListPanel);
                 friendListPanel.updateUI();
             }
         }
     }
-
+    // pull my profile and update the friendlist panel
     private void updateMyProfile() {
         String request = "Req10: " + myProfile.getAccount().getUsername();
         Object response = sendRequest(request);
@@ -892,7 +914,7 @@ public class ProfileClient extends JComponent implements Runnable {
             addUsernameButton(friendUsername, friendListPanel);
         }
     }
-
+    // check socket connection
     private boolean isConnectionLost() {
         return !socket.isConnected();
     }
