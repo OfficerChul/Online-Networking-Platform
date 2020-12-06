@@ -241,7 +241,9 @@ public class ProfileClient extends JComponent implements Runnable {
                         if (password.length() >= 8) {
                             if (userRegister(username, password) == 1) {
                                 registerFrame.dispose();
-                            }
+                            } else {
+                                userRegistrationText.setText(""); // Reset usernamefield for convenience
+                                passwordRegistrationText.setText(""); // Reset passwordfield for convenience
                         } else {
                             JOptionPane.showMessageDialog(null,
                                 "Your password should be at least 8 characters long.",
