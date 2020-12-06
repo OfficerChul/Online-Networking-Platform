@@ -58,6 +58,7 @@ public class ServerRequestHandlerTest {
 
     String className = "ServerRequestHandler";
     Class<?> serverRequestHandler = ServerRequestHandler.class;
+
     //test class
     @org.junit.Test
     public void testServerRequestHandler() {
@@ -277,15 +278,15 @@ public class ServerRequestHandlerTest {
         modifiers = method.getModifiers();
         actualReturnType = method.getReturnType();
         Assert.assertTrue("Ensure that `" + className
-                + "`'s `" + methodName + "` method is `private`!"
+                        + "`'s `" + methodName + "` method is `private`!"
                 , Modifier.isPrivate(modifiers));
         Assert.assertFalse("Ensure that `"
-                + className + "`'s `" + methodName
-                + "` method is NOT `static`!"
+                        + className + "`'s `" + methodName
+                        + "` method is NOT `static`!"
                 , Modifier.isStatic(modifiers));
         Assert.assertEquals("Ensure that `"
-                + className + "`'s `" + methodName
-                + "` method has the correct return type!"
+                        + className + "`'s `" + methodName
+                        + "` method has the correct return type!"
                 , expectedReturnType, actualReturnType);
     }
 
@@ -341,84 +342,6 @@ public class ServerRequestHandlerTest {
         // Use the type + .class
         // For example, String.class or int.class
         Class<?> expectedReturnType = boolean.class;
-
-        // Attempt to access the class method
-        try {
-            method = clazz.getDeclaredMethod(methodName, String.class);
-        } catch (NoSuchMethodException e) {
-            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has one parameter of type String!");
-            return;
-        } //end try catch
-        // Perform tests
-
-        modifiers = method.getModifiers();
-        actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className
-                        + "`'s `" + methodName + "` method is `private`!"
-                , Modifier.isPrivate(modifiers));
-        Assert.assertFalse("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method is NOT `static`!"
-                , Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method has the correct return type!"
-                , expectedReturnType, actualReturnType);
-    }
-
-    @org.junit.Test
-    public void profileRequestTest() {
-        Method method;
-        int modifiers;
-        Class<?> actualReturnType;
-
-        // Set the method that you want to test
-        String methodName = "profileRequest";
-
-        // Set the return type of the method you want to test
-        // Use the type + .class
-        // For example, String.class or int.class
-        Class<?> expectedReturnType = void.class;
-
-        // Attempt to access the class method
-        try {
-            method = clazz.getDeclaredMethod(methodName, Profile.class);
-        } catch (NoSuchMethodException e) {
-            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has one parameter of type Profile!");
-            return;
-        } //end try catch
-        // Perform tests
-
-        modifiers = method.getModifiers();
-        actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className
-                        + "`'s `" + methodName + "` method is `private`!"
-                , Modifier.isPrivate(modifiers));
-        Assert.assertFalse("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method is NOT `static`!"
-                , Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method has the correct return type!"
-                , expectedReturnType, actualReturnType);
-    }
-
-    @org.junit.Test
-    public void deleteProfileTest() {
-        Method method;
-        int modifiers;
-        Class<?> actualReturnType;
-
-        // Set the method that you want to test
-        String methodName = "deleteProfile";
-
-        // Set the return type of the method you want to test
-        // Use the type + .class
-        // For example, String.class or int.class
-        Class<?> expectedReturnType = void.class;
 
         // Attempt to access the class method
         try {
@@ -575,45 +498,6 @@ public class ServerRequestHandlerTest {
         // Use the type + .class
         // For example, String.class or int.class
         Class<?> expectedReturnType = boolean.class;
-
-        // Attempt to access the class method
-        try {
-            method = clazz.getDeclaredMethod(methodName, String.class, String.class);
-        } catch (NoSuchMethodException e) {
-            Assert.fail("Ensure that `" + className + "` declares a method named `" + methodName + "` that" +
-                    " has two parameters of type String!");
-            return;
-        } //end try catch
-        // Perform tests
-
-        modifiers = method.getModifiers();
-        actualReturnType = method.getReturnType();
-        Assert.assertTrue("Ensure that `" + className
-                        + "`'s `" + methodName + "` method is `private`!"
-                , Modifier.isPrivate(modifiers));
-        Assert.assertFalse("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method is NOT `static`!"
-                , Modifier.isStatic(modifiers));
-        Assert.assertEquals("Ensure that `"
-                        + className + "`'s `" + methodName
-                        + "` method has the correct return type!"
-                , expectedReturnType, actualReturnType);
-    }
-
-    @org.junit.Test
-    public void rescindFriendRequestTest() {
-        Method method;
-        int modifiers;
-        Class<?> actualReturnType;
-
-        // Set the method that you want to test
-        String methodName = "rescindFriendRequest";
-
-        // Set the return type of the method you want to test
-        // Use the type + .class
-        // For example, String.class or int.class
-        Class<?> expectedReturnType = void.class;
 
         // Attempt to access the class method
         try {
