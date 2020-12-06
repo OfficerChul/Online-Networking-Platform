@@ -295,6 +295,7 @@ public class ProfileClient extends JComponent implements Runnable {
         JButton friendRequestButton;
         JButton deleteProfileButton;
         JButton deleteAccountButton;
+        JButton editPasswordButton;
 
         JLabel profileAboutMeLabel;
         JLabel profileEmailLabel;
@@ -304,6 +305,7 @@ public class ProfileClient extends JComponent implements Runnable {
         JScrollPane profileAboutMeScrollPanel;
         JPanel profilePanel;
         JPanel lowerRightPanel;
+        JPanel lowerLeftPanel;
         JScrollPane friendListScrollPanel;
 
         mainFrame = new JFrame();
@@ -333,7 +335,7 @@ public class ProfileClient extends JComponent implements Runnable {
         upperLeftPanel.add(myNameLabel);
 
         deleteProfileButton = new JButton("Delete Profile");
-        deleteProfileButton.setBounds(10, 97, 120, 23);
+        deleteProfileButton.setBounds(155, 60, 120, 23);
         deleteProfileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your profile?",
@@ -358,7 +360,7 @@ public class ProfileClient extends JComponent implements Runnable {
 		upperLeftPanel.add(deleteProfileButton);
 		
 		deleteAccountButton = new JButton("Delete Account");
-        deleteAccountButton.setBounds(155, 97, 120, 23);
+        deleteAccountButton.setBounds(10, 97, 265, 23);
         deleteAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete your account?",
@@ -401,9 +403,62 @@ public class ProfileClient extends JComponent implements Runnable {
                 }
             }
         });
-		upperLeftPanel.add(deleteAccountButton);
+        upperLeftPanel.add(deleteAccountButton);
+        
+        editPasswordButton = new JButton("Edit Password");
+        editPasswordButton.setBounds(10, 60, 120, 23);
+        editPasswordButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JPasswordField password = new JPasswordField();
+                Object[] passwordField = {"Enter your current password:", password};
+                int result = JOptionPane.showConfirmDialog(null, passwordField,
+                                                            "Profile - Editing Password",
+                                                            JOptionPane.OK_CANCEL_OPTION,
+                                                            JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.OK_OPTION) {
+                    if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
+                        JPasswordField newPassword = new JPasswordField();
+                        Object[] newPasswordField = {"Enter your new password:", newPassword};
+                        int result2 = JOptionPane.showConfirmDialog(null, newPasswordField,
+                                                            "Profile - Editing Password",
+                                                            JOptionPane.OK_CANCEL_OPTION,
+                                                            JOptionPane.QUESTION_MESSAGE);
+                        if (result2 == JOptionPane.OK_OPTION) {
+                            String username = myProfile.getAccount().getUsername();
+                            String newPasswordString = String.valueOf(newPassword.getPassword());
+                            Account newAccount = new Account(username, newPasswordString);
 
-        JPanel lowerLeftPanel = new JPanel();
+                            String name = myProfile.getName();
+                            String email = myProfile.getEmail();
+                            String aboutMe = myProfile.getAboutMe();
+                            String likesAndInterestsText = myProfile.getLikesAndInterests();
+                            String[] myFriendUserNames = myProfile.getFriendUserNames();
+                            Profile tempProfile = new Profile(name, newAccount, email, aboutMe,
+                                                                likesAndInterestsText, myFriendUserNames);
+                            tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
+                            tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
+            
+                            Object response = sendRequest(tempProfile);
+
+                            if (response instanceof Profile) {
+                                JOptionPane.showMessageDialog(null, "Successfully Updated", "Profile",
+                                                                JOptionPane.INFORMATION_MESSAGE);
+                                myProfile = (Profile) response;
+                            } else {
+                                JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Wrong password",
+                                                            "Profile", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+		upperLeftPanel.add(editPasswordButton);
+
+        lowerLeftPanel = new JPanel();
         lowerLeftPanel.setBorder(UIManager.getBorder("ScrollPane.border"));
         lowerLeftPanel.setBounds(10, 550, 285, 111);
         panel.add(lowerLeftPanel);
