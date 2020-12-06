@@ -104,7 +104,7 @@ class ProfileClientTest {
         int modifiers = serialVersionUIDField.getModifiers();
 
         long testA = 1L;
-        Field a1 = ProfileClientTest.class.getDeclaredField("a");
+        Field a1 = ProfileClientTest.class.getDeclaredField("testA");
 
         Class<?> expected = a1.getType();
         Class<?> type = serialVersionUIDField.getType();
@@ -118,7 +118,7 @@ class ProfileClientTest {
                 "` field is `static`!", Modifier.isStatic(modifiers));
 
         Assert.assertEquals("Ensure that `" + className + "`'s `" + "serialVersionUID" +
-                "` field is the correct type!", Expected, serialVersionUIDField.getType());
+                "` field is the correct type!", a1.getType(), serialVersionUIDField.getType());
 
 
         //check if socket field exists or not
