@@ -162,7 +162,7 @@ public class ProfileClient extends JComponent implements Runnable {
                                 showMainPanel(); // show the main window
                             } else {
                                 passwordLoginText.setText(""); // clear textfield for convenience
-				userLoginText.setText("");
+				                userLoginText.setText("");
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
@@ -447,7 +447,8 @@ public class ProfileClient extends JComponent implements Runnable {
                                                                 JOptionPane.INFORMATION_MESSAGE);
                                 myProfile = (Profile) response; // set response to my profile
                             } else {
-                                JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, (String) response, "Profile",
+                                                                JOptionPane.ERROR_MESSAGE);
                             }
 
                         }
