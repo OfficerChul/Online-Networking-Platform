@@ -1,7 +1,5 @@
 # CS 180 Project 5 - A Social Network "Profile" Application
 
-## Implementations
-
 ## GUI Interactions
 
 - **Note: Since pop-up message boxes are implemented by using `JOptionPane`, the text of buttons is default to be the language of your local computer.**
