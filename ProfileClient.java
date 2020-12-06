@@ -157,6 +157,7 @@ public class ProfileClient extends JComponent implements Runnable {
                                 showMainPanel();
                             } else {
                                 passwordLoginText.setText(""); // clear textfield for convenience
+				userLoginText.setText("");
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
