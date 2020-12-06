@@ -32,7 +32,7 @@ class ProfileClientTest {
 
     @SuppressWarnings("FieldCanBeLocal")
     private ByteArrayOutputStream testOut;
-    private long testA;
+    private long testB;
 
     @Before
     public void outputStart() {
@@ -103,7 +103,7 @@ class ProfileClientTest {
 
         int modifiers = serialVersionUIDField.getModifiers();
 
-        long testB = 1L;
+
         Field a1 = ProfileClientTest.class.getDeclaredField("testB");
 
         Class<?> expected = a1.getType();
