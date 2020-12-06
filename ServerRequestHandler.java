@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
-// import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -18,11 +17,25 @@ public final class ServerRequestHandler implements Runnable {
     // private String[] onlineUsers;
     private Profile[] profiles;
 
+    /**
+     * ServerRequestHandler
+     *
+     * Constructor that instantiates the client socket instance object
+     * @param clientSocket
+     */
     public ServerRequestHandler(Socket clientSocket) {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
         this.clientSocket = clientSocket;
     } // ServerRequestHandler
 
+    /**
+     * getResponse
+     *
+     * According to request, returns the appropriate response
+     *
+     * @param request
+     * @return
+     */
     private synchronized Object getResponse(Object request) { // synchronized to avoid race conditions
         profiles = Server.getProfiles(); // updates ServerRequestHandler data from Server
         Object response = null;
@@ -139,8 +152,10 @@ public final class ServerRequestHandler implements Runnable {
     } // getResponse
 
     /**
+     * run
+     *
      * Serves the request made by the client connected to this request handler's
-     * client socket.
+     * client socket by calling the getResponse method and sending back that response.
      */
     @Override
     public void run() {
@@ -148,9 +163,9 @@ public final class ServerRequestHandler implements Runnable {
         Object response;
 
         try (var inputStream = this.clientSocket.getInputStream();
-                var reader = new ObjectInputStream(inputStream);
-                var outputStream = this.clientSocket.getOutputStream();
-                var writer = new ObjectOutputStream(outputStream)) {
+             var reader = new ObjectInputStream(inputStream);
+             var outputStream = this.clientSocket.getOutputStream();
+             var writer = new ObjectOutputStream(outputStream)) {
             while (true) {
                 request = reader.readObject();
                 response = this.getResponse(request);
@@ -169,6 +184,15 @@ public final class ServerRequestHandler implements Runnable {
         } // end try catch
     } // run
 
+    /**
+     * login
+     *
+     * verifies credentials and returns a boolean accordingly.
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     private boolean login(String username, String password) {
         // check credentials from arraylist, return user details if correct
         boolean login = false;
@@ -188,6 +212,14 @@ public final class ServerRequestHandler implements Runnable {
         return login;
     }
 
+    /**
+     * returnProfileFromUsername
+     *
+     * Finds profile object through unique identifier (username),
+     * then returns its values accordingly.
+     * @param username
+     * @return
+     */
     private Profile returnProfileFromUsername(String username) {
         Profile profile = null;
         for (int i = 0; i < profiles.length; i++) {
@@ -198,6 +230,13 @@ public final class ServerRequestHandler implements Runnable {
         return profile;
     }
 
+    /**
+     * updateProfile
+     *
+     * Replaces the object in the profiles array of the same username with
+     * the parameter profile object
+     * @param profileToUpdate
+     */
     private void updateProfile(Profile profileToUpdate) {
         String username = profileToUpdate.getAccount().getUsername();
         for (int i = 0; i < profiles.length; i++) {
@@ -208,6 +247,13 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
+    /**
+     * usernameIsTaken
+     *
+     * Takes in a String username, returns boolean according to availability
+     * @param username
+     * @return
+     */
     private boolean usernameIsTaken(String username) {
         boolean usernameExists = false;
         for (int i = 0; i < profiles.length; i++) {
@@ -218,7 +264,12 @@ public final class ServerRequestHandler implements Runnable {
         return usernameExists;
     }
 
-
+    /**
+     * deleteAccount
+     *
+     * Deletes profile according to username String parameter
+     * @param username
+     */
     private void deleteAccount(String username) {
         for (int i = 0; i < profiles.length; i++) {
             if (profiles[i].getAccount().getUsername().equals(username)) {
@@ -236,7 +287,7 @@ public final class ServerRequestHandler implements Runnable {
                     profile.setFriendUserNames(Arrays.copyOf(tempFriendUsernames,
                             tempFriendUsernames.length - 1));
 
-                    
+
                 }
             }
 
@@ -252,9 +303,15 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
+    /**
+     * acceptFriendRequest
+     *
+     * deletes friendRequest from sender & recipient records
+     * adds users to both users' friend lists respectively
+     * @param senderUsername
+     * @param recipientUsername
+     */
     private void acceptFriendRequest(String senderUsername, String recipientUsername) {
-        // deletes friendRequest from sender & recipient records
-        // adds to both users' friend lists
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientReceivedRequests;
 
@@ -296,8 +353,14 @@ public final class ServerRequestHandler implements Runnable {
         profiles[recipientIndex].addToFriendUsernames(senderUsername);
     }
 
+    /**
+     * rejectFriendRequest
+     *
+     * deletes friendRequest from sender & recipient records
+     * @param senderUsername
+     * @param recipientUsername
+     */
     private void rejectFriendRequest(String senderUsername, String recipientUsername) {
-        // deletes friendRequest from sender & recipient records
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientReceivedRequests;
         int senderIndex = -1;
@@ -335,10 +398,17 @@ public final class ServerRequestHandler implements Runnable {
         profiles[recipientIndex].setReceivedFriendRequests(recipientReceivedRequests);
     }
 
+    /**
+     * sendFriendRequest
+     *
+     * Creates a new FriendRequest Object, adds this to both users' respective
+     * arrays
+     * returns false if either username is invalid
+     * @param senderUsername
+     * @param recipientUsername
+     * @return
+     */
     private boolean sendFriendRequest(String senderUsername, String recipientUsername) {
-        // creates a new FriendRequest Object, adds this to both users' respective
-        // arraylists
-        // returns false if either username is invalid
 
         FriendRequest thisFriendRequest = new FriendRequest(senderUsername, recipientUsername);
         boolean invalidSenderUsername = true;
@@ -377,6 +447,15 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
+    /**
+     * friendRequestAlreadyExists
+     *
+     * checks if a friend request has already been sent and returns boolean accordingly
+     * 
+     * @param senderUsername
+     * @param recipientUsername
+     * @return
+     */
     private boolean friendRequestAlreadyExists(String senderUsername, String recipientUsername) {
         FriendRequest[] senderSentRequests;
         FriendRequest[] recipientReceivedRequests;
@@ -439,6 +518,16 @@ public final class ServerRequestHandler implements Runnable {
         return exists;
     }
 
+    /**
+     * usersAreFriends
+     *
+     * Checks if user usernames are in each others' friends lists,
+     * Returns either "true", "false", or "Invalid Username" string values
+     *
+     * @param username1
+     * @param username2
+     * @return
+     */
     private String usersAreFriends(String username1, String username2) {
         Profile profile1 = returnProfileFromUsername(username1);
         Profile profile2 = returnProfileFromUsername(username2);
