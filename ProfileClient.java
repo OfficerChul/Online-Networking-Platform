@@ -301,6 +301,7 @@ public class ProfileClient extends JComponent implements Runnable {
         JLabel profileEmailLabel;
         JLabel profileInterestsLabel;
         JLabel profileNameLabel;
+        JLabel friendListTitleLabel;
         
         JScrollPane profileAboutMeScrollPanel;
         JPanel profilePanel;
@@ -411,13 +412,13 @@ public class ProfileClient extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 JPasswordField password = new JPasswordField();
                 Object[] passwordField = {"Enter your current password:", password};
-                int result = JOptionPane.showConfirmDialog(null, passwordField,
+                int result = JOptionPane.showConfirmDialog(null, passwordField, // ask for current password
                                                             "Profile - Editing Password",
                                                             JOptionPane.OK_CANCEL_OPTION,
                                                             JOptionPane.QUESTION_MESSAGE);
                 if (result == JOptionPane.OK_OPTION) {
                     if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
-                        JPasswordField newPassword = new JPasswordField();
+                        JPasswordField newPassword = new JPasswordField(); // if match, ask for new password
                         Object[] newPasswordField = {"Enter your new password:", newPassword};
                         int result2 = JOptionPane.showConfirmDialog(null, newPasswordField,
                                                             "Profile - Editing Password",
@@ -433,17 +434,18 @@ public class ProfileClient extends JComponent implements Runnable {
                             String aboutMe = myProfile.getAboutMe();
                             String likesAndInterestsText = myProfile.getLikesAndInterests();
                             String[] myFriendUserNames = myProfile.getFriendUserNames();
+                            // create a profile with modified account
                             Profile tempProfile = new Profile(name, newAccount, email, aboutMe,
                                                                 likesAndInterestsText, myFriendUserNames);
                             tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
                             tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
-            
+                            // send new profile for update
                             Object response = sendRequest(tempProfile);
 
                             if (response instanceof Profile) {
                                 JOptionPane.showMessageDialog(null, "Successfully Updated", "Profile",
                                                                 JOptionPane.INFORMATION_MESSAGE);
-                                myProfile = (Profile) response;
+                                myProfile = (Profile) response; // set response to my profile
                             } else {
                                 JOptionPane.showMessageDialog(null, (String) response, "Profile", JOptionPane.ERROR_MESSAGE);
                             }
@@ -509,7 +511,7 @@ public class ProfileClient extends JComponent implements Runnable {
         friendListScrollPanel.setViewportView(friendListPanel);
         friendListPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JLabel friendListTitleLabel = new JLabel("Friend List");
+        friendListTitleLabel = new JLabel("Friend List");
         friendListTitleLabel.setPreferredSize(new Dimension(0, 35));
 		friendListTitleLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		friendListTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
