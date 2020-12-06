@@ -39,6 +39,11 @@
 
 ![2._Main.png](Images/2._Main.png)
 
+- **Edit Password** Button:
+  - Edit the password of the current account.
+    - ![Images/4._Editing%20Password.png](Images/4._Editing%20Password.png)
+    - ![Images/4._Editing%20Password%202.png](Images/4._Editing%20Password%202.png)
+
 - **Delete Profile** Button:
   - If you choose "Yes" on the following confirmation message box, all your data will be reset to blank.
     - Deleting your profile will NOT remove you from your friends' friend list.
