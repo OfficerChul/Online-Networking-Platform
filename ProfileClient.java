@@ -13,6 +13,10 @@ import java.net.*;
  * @version November 23, 2020
  */
 
+ // The position of GUI is commented only once
+ // GUI part with a message box indicating what's happening is not commented.
+ 
+
 public class ProfileClient extends JComponent implements Runnable {
     /**
      *
@@ -54,15 +58,15 @@ public class ProfileClient extends JComponent implements Runnable {
         String loginRequest = String.format("Req1: %s: %s", username, password);
         Object loginResponse;
         
-        loginResponse = sendRequest(loginRequest);
+        loginResponse = sendRequest(loginRequest); // send login request
         if (loginResponse instanceof Profile) {
             JOptionPane.showMessageDialog(null, "Login Successfully", "User Login", JOptionPane.INFORMATION_MESSAGE);
-            myProfile = (Profile) loginResponse;
+            myProfile = (Profile) loginResponse; // set my profile
             return 1;
-        } else if (((String) loginResponse).split(": ")[0].equals("E1")) {
+        } else if (((String) loginResponse).split(": ")[0].equals("E1")) { // wrong
             JOptionPane.showMessageDialog(null, "Wrong username or password", "User Login",
                                                 JOptionPane.INFORMATION_MESSAGE);
-        } else {
+        } else { // unexpected response goes here
             JOptionPane.showMessageDialog(null, (String) loginResponse, "User Login", JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -75,33 +79,33 @@ public class ProfileClient extends JComponent implements Runnable {
         String checkUsernameResponse;
         Object registrationResponse;
 
-        checkUsernameResponse = (String) sendRequest(registrationRequest);
-        if (checkUsernameResponse.split(": ")[0].equals("Res2")) {
+        checkUsernameResponse = (String) sendRequest(registrationRequest); // send checking request
+        if (checkUsernameResponse.split(": ")[0].equals("Res2")) { // if checking passed
             Account newAccount = new Account(username, password);
             Profile blankProfile = new Profile("", newAccount, "", "", "", new String[0]);
-            registrationResponse = sendRequest(blankProfile);
+            registrationResponse = sendRequest(blankProfile); // send creating account request
 
-            if (registrationResponse instanceof Profile) {
-                JOptionPane.showMessageDialog(null, "Successfully created a new account", "User Login",
+            if (registrationResponse instanceof Profile) { // success
+                JOptionPane.showMessageDialog(null, "Successfully created a new account", "User Registration",
                     JOptionPane.INFORMATION_MESSAGE);
                 return 1;
             } else {
-                JOptionPane.showMessageDialog(null, (String) registrationResponse, "User Login",
-                            JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, (String) registrationResponse, "User Registration",
+                            JOptionPane.ERROR_MESSAGE); // failed
                 return 0;
             }
-        } else if (((String) (checkUsernameResponse)).split(": ")[0].equals("E2")) {
-            JOptionPane.showMessageDialog(null, "The username already exists.", "User Login",
+        } else if (((String) (checkUsernameResponse)).split(": ")[0].equals("E2")) { // check failed
+            JOptionPane.showMessageDialog(null, "The username already exists.", "User Registration",
                     JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, (String) (checkUsernameResponse), "User Login",
+        } else { // unexpected response goes here
+            JOptionPane.showMessageDialog(null, (String) (checkUsernameResponse), "User Registration",
                     JOptionPane.ERROR_MESSAGE);
         }
         return 0;
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new ProfileClient());
+        SwingUtilities.invokeLater(new ProfileClient()); // invoke later
     }
 
     public void run() {
@@ -122,14 +126,14 @@ public class ProfileClient extends JComponent implements Runnable {
         JPanel panel = new JPanel();
 
         loginFrame.setSize(300, 200);
-        loginFrame.setResizable(false);
+        loginFrame.setResizable(false); // cannot resize
         loginFrame.setLocationRelativeTo(null);
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exit the program if clicked
         loginFrame.setVisible(true);
         loginFrame.add(panel);
 
         panel.setLayout(null);
-
+        // adding elements
         userLabel = new JLabel("Username:");
         userLabel.setBounds(10, 30, 80, 25);
 
@@ -148,13 +152,14 @@ public class ProfileClient extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String username = userLoginText.getText();
                 String password = String.valueOf(passwordLoginText.getPassword());
-                
-                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) {
+                // check validity: both username and password should be alphanumeric
+                // password length >= 8, other condition not checked because they are ensured during registration
+                if (!username.isBlank() && username.matches("^[a-zA-Z0-9]*$")) { // check alphanumeric
                     if (!password.isBlank() && password.matches("^[a-zA-Z0-9]*$")) {
                         if (password.length() >= 8) {
                             if (userLogin(username, password) == 1) {
-                                loginFrame.dispose();
-                                showMainPanel();
+                                loginFrame.dispose(); // close login window
+                                showMainPanel(); // show the main window
                             } else {
                                 passwordLoginText.setText(""); // clear textfield for convenience
 				userLoginText.setText("");
@@ -162,7 +167,7 @@ public class ProfileClient extends JComponent implements Runnable {
                         } else {
                             JOptionPane.showMessageDialog(null, "Your password should be at least 8 characters long.",
                                                             "Login", JOptionPane.ERROR_MESSAGE);
-			                passwordLoginText.setText("");
+			                passwordLoginText.setText(""); // clear textfield for convenience
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Your password should be alphanumeric.",
@@ -181,7 +186,7 @@ public class ProfileClient extends JComponent implements Runnable {
         registerButton.setBounds(170, 110, 90, 25);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showRegisterPanel();
+                showRegisterPanel(); // show register window
             }
         });
 
@@ -209,7 +214,7 @@ public class ProfileClient extends JComponent implements Runnable {
         registerFrame.setSize(300, 200);
         registerFrame.setResizable(false);
         registerFrame.setLocationRelativeTo(null);
-        registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // do not exit but just close this window
         registerFrame.setVisible(true);
         registerFrame.add(panel);
 
@@ -244,6 +249,7 @@ public class ProfileClient extends JComponent implements Runnable {
                             } else {
                                 userRegistrationText.setText(""); // Reset usernamefield for convenience
                                 passwordRegistrationText.setText(""); // Reset passwordfield for convenience
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null,
                                 "Your password should be at least 8 characters long.",
@@ -341,10 +347,10 @@ public class ProfileClient extends JComponent implements Runnable {
                                                         "Profile - Delete Profile",
                                                         JOptionPane.INFORMATION_MESSAGE);
                         myProfile = (Profile) deleteProfileResponse;
-                        loadInfo(myProfile);
+                        loadInfo(myProfile); // load the response profile
                     } else {
-                        JOptionPane.showMessageDialog(null, (String) deleteProfileResponse, "User Login",
-                            JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, (String) deleteProfileResponse,
+                            "Profile - Delete Profile", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -366,12 +372,12 @@ public class ProfileClient extends JComponent implements Runnable {
                                                                 JOptionPane.OK_CANCEL_OPTION,
                                                                 JOptionPane.WARNING_MESSAGE);
 
-                    if (result == JOptionPane.OK_OPTION) {
+                    if (result == JOptionPane.OK_OPTION) { // if confirmed
                         if (String.valueOf(password.getPassword()).equals(myProfile.getAccount().getPassword())) {
                             int secondChoice = JOptionPane.showConfirmDialog(null, "After deleting your account, " + 
                                                     "you can no longer login with this account. Please confirm.",
                                                     "Profile - Delete Account", JOptionPane.YES_NO_OPTION);
-
+                            // second confirm with password verification
                             if (secondChoice == JOptionPane.YES_OPTION) {
                                 String response = (String) sendRequest("Req4: " + myProfile.getAccount().getUsername());
                                 if (response.split(": ")[0].equals("Res4")) {
@@ -387,7 +393,6 @@ public class ProfileClient extends JComponent implements Runnable {
                                                                     JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }
-                            
                         } else {
                             JOptionPane.showMessageDialog(null, "Wrong password",
                                                             "Profile - Delete Account", JOptionPane.ERROR_MESSAGE);
@@ -409,7 +414,7 @@ public class ProfileClient extends JComponent implements Runnable {
         listAllUserButton.setBounds(145, 20, 95, 30);
         listAllUserButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showListAllUserPanel();
+                showListAllUserPanel(); // show list all user window
             }
         });
         lowerLeftPanel.add(listAllUserButton);
@@ -419,7 +424,7 @@ public class ProfileClient extends JComponent implements Runnable {
         backToMeButton.setBounds(29, 20, 95, 30);
         backToMeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                loadInfo(myProfile);
+                loadInfo(myProfile); // load my profile
                 profileSaveButton.setVisible(true);
                 profileCancelButton.setVisible(true);
                 updateUI();
@@ -432,7 +437,7 @@ public class ProfileClient extends JComponent implements Runnable {
         friendRequestButton.setBounds(29, 60, 95, 30);
         friendRequestButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showFriendRequestPanel();
+                showFriendRequestPanel(); // show friend request window
             }
         });
         lowerLeftPanel.add(friendRequestButton);
@@ -493,7 +498,7 @@ public class ProfileClient extends JComponent implements Runnable {
         profileEmailText.setColumns(10);
 
         profileAboutMeArea = new JTextArea();
-		profileAboutMeArea.setLineWrap(true);
+		profileAboutMeArea.setLineWrap(true); // auto line breaks
 		profileAboutMeScrollPanel.setViewportView(profileAboutMeArea);
 
         profileInterestsLabel = new JLabel("Likes & Interests: ");
@@ -711,7 +716,7 @@ public class ProfileClient extends JComponent implements Runnable {
                         friendRequestPanel.updateUI();
                         for (FriendRequest receivedRequest : myProfile.getReceivedFriendRequests()) {
                             String record = receivedRequest.getUsernameWhoSent();
-                            JButton buttonToAdd = new JButton(record);
+                            JButton buttonToAdd = new JButton(record); // define button with username
                             buttonToAdd.setPreferredSize(new Dimension(250, 25));
                             buttonToAdd.addActionListener(new ActionListener()
                             {
@@ -794,8 +799,8 @@ public class ProfileClient extends JComponent implements Runnable {
                             profileCancelButton.setVisible(false);
                         }
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Deleted Account", "User Login",
+                } else { // if account is deleted
+                    JOptionPane.showMessageDialog(null, "Deleted Account", "Profile",
                                                     JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -827,16 +832,17 @@ public class ProfileClient extends JComponent implements Runnable {
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 
-            initializationResponse = (String) sendRequest(initializationRequest);
+            initializationResponse = (String) sendRequest(initializationRequest); // send reqeust for initialization
+            // Res0: xxxxxx   Rep0: xxxxx
             if (((String) (initializationResponse)).split(": ")[0].equals("E0")) {
                 throw new IOException();
             } else if (((String) (initializationResponse)).split(": ")[0].equals("Res0")) {
                 JOptionPane.showMessageDialog(null, "Successfully connected to the server!", "Connection Established",
                         JOptionPane.INFORMATION_MESSAGE);
-            } else {
+            } else { // Unexpected goes here
                 JOptionPane.showMessageDialog(null, "Unexpected Error. Please try again.",
                                                 "Profile", JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
+                System.exit(0); // force quit since its a unexpected issue
             }
 
         } catch (IOException e) {
@@ -850,9 +856,9 @@ public class ProfileClient extends JComponent implements Runnable {
     private Object sendRequest(Object request) {
         Object response;
         try {
-            oos.writeObject(request);
+            oos.writeObject(request); // send the request
             oos.flush();
-            response = ois.readObject();
+            response = ois.readObject(); // read the response
         } catch (UnknownHostException e) {
             JOptionPane.showMessageDialog(null, "Connection Failed. Quiting...",
                                             "Profile", JOptionPane.ERROR_MESSAGE);
