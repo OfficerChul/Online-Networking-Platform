@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
-
 public class ProfileTest {
 
     private final PrintStream originalOutput = System.out;
