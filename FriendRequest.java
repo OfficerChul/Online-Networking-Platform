@@ -3,11 +3,11 @@ import java.io.Serializable;
 /**
  * PJ05 Option 2 - FriendRequest Class
  *
- * Used to create a FriendRequest object and return its parameters 
+ * Used to create a FriendRequest object and return its parameters
+ * 
  * @author Gilbert Hsu
  * @version November 23, 2020
  */
-
 public class FriendRequest implements Serializable {
     private static final long serialVersionUID = -1699480957029563158L;
 
