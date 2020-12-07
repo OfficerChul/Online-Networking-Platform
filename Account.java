@@ -15,6 +15,7 @@ public class Account implements Serializable {
     
     private static final long serialVersionUID = 6666842209341941741L;
 
+    // creates an Account object
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
