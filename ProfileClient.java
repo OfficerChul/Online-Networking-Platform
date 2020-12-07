@@ -61,7 +61,7 @@ public class ProfileClient extends JComponent implements Runnable {
      * @param password
      * @return int
      */
-    public int userLogin(String username, String password) {
+    private int userLogin(String username, String password) {
         String loginRequest = String.format("Req1: %s: %s", username, password);
         Object loginResponse;
         

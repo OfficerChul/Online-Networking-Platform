@@ -45,10 +45,18 @@ public class ServerTest {
         System.setOut(originalOutput);
     }
 
+    
+    /** 
+     * @return String
+     */
     private String getOutput() {
         return testOut.toString();
     }
 
+    
+    /** 
+     * @param str
+     */
     @SuppressWarnings("SameParameterValue")
     private void receiveInput(String str) {
         testIn = new ByteArrayInputStream(str.getBytes());
@@ -137,6 +145,10 @@ public class ServerTest {
 
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     */
     //test getters and setters
     //test getProfiles()
     @Test
@@ -173,6 +185,10 @@ public class ServerTest {
 
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     */
     //test setProfiles()
     @Test
     void setProfiles() throws NoSuchFieldException {

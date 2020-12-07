@@ -46,10 +46,18 @@ public class ServerRequestHandlerTest {
         System.setOut(originalOutput);
     }
 
+    
+    /** 
+     * @return String
+     */
     private String getOutput() {
         return testOut.toString();
     }
 
+    
+    /** 
+     * @param str
+     */
     @SuppressWarnings("SameParameterValue")
     private void receiveInput(String str) {
         testIn = new ByteArrayInputStream(str.getBytes());

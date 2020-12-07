@@ -46,10 +46,18 @@ class ProfileClientTest {
         System.setOut(originalOutput);
     }
 
+    
+    /** 
+     * @return String
+     */
     private String getOutput() {
         return testOut.toString();
     }
 
+    
+    /** 
+     * @param str
+     */
     @SuppressWarnings("SameParameterValue")
     private void receiveInput(String str) {
         testIn = new ByteArrayInputStream(str.getBytes());
@@ -80,6 +88,10 @@ class ProfileClientTest {
         }
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     */
     //test fields
     @Test
     public void testAllFields() throws NoSuchFieldException {

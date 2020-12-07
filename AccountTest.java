@@ -43,10 +43,18 @@ public class AccountTest {
         System.setOut(originalOutput);
     }
 
+    
+    /** 
+     * @return String
+     */
     private String getOutput() {
         return testOut.toString();
     }
 
+    
+    /** 
+     * @param str
+     */
     @SuppressWarnings("SameParameterValue")
     private void receiveInput(String str) {
         testIn = new ByteArrayInputStream(str.getBytes());
@@ -127,6 +135,11 @@ public class AccountTest {
 
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
     //test getters and setters
     //test getPassword()
     @Test
@@ -163,6 +176,11 @@ public class AccountTest {
         assertEquals("Field wasn't retrieved properly", result, "12345678");
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
     //test getUsername()
     @Test
     public void getUsername() throws NoSuchFieldException, IllegalAccessException {

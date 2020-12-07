@@ -45,10 +45,18 @@ public class FriendRequestTest {
         System.setOut(originalOutput);
     }
 
+    
+    /** 
+     * @return String
+     */
     private String getOutput() {
         return testOut.toString();
     }
 
+    
+    /** 
+     * @param str
+     */
     @SuppressWarnings("SameParameterValue")
     private void receiveInput(String str) {
         testIn = new ByteArrayInputStream(str.getBytes());
@@ -138,6 +146,10 @@ public class FriendRequestTest {
 
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     */
     //test getters and setters
     //test getUsernameWhoReceive()
     @Test
@@ -233,6 +245,11 @@ public class FriendRequestTest {
         assertEquals("Field wasn't retrieved properly", result, 0);
     }
 
+    
+    /** 
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
     //test setStatus()
     @Test
     public void setStatus() throws NoSuchFieldException, IllegalAccessException {
