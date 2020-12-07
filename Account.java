@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * PJ05 Option 2 - Account Class
  *
- * Creates an Account object and returns its parameters 
+ * Used to create an Account object and return its parameters 
  * 
  * @author Kyochul Jang, Gilbert Hsu
  * @version November 23, 2020
