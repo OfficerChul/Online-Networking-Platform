@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * PJ05 Option 2 - ServerRequestHandlerTest
  *
+ * Test cases of the request handler for the server
+ * 
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
@@ -48,6 +50,8 @@ public class ServerRequestHandlerTest {
 
     
     /** 
+     * returns the output from the test
+     * 
      * @return String
      */
     private String getOutput() {
@@ -56,6 +60,8 @@ public class ServerRequestHandlerTest {
 
     
     /** 
+     * checks for the same parameter value
+     * 
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -67,7 +73,10 @@ public class ServerRequestHandlerTest {
     String className = "ServerRequestHandler";
     Class<?> serverRequestHandler = ServerRequestHandler.class;
 
-    //test class
+    
+    /**
+     * tests the class
+    */
     @org.junit.Test
     public void testServerRequestHandler() {
         Class<?> object = Object.class;
@@ -87,7 +96,9 @@ public class ServerRequestHandlerTest {
         }
     }
 
-    //test fields
+    /**
+     * tests the fields
+    */
     @org.junit.Test
     public void testAllFields() {
         Field clientSocketField;
@@ -138,7 +149,9 @@ public class ServerRequestHandlerTest {
 
     Class<?> clazz = ServerRequestHandler.class;
 
-    //test serverRequestHandlerConstructorDeclarationTest()
+    /**
+     * tests serverRequestHandlerConstructorDeclarationTest()
+    */
     @org.junit.Test
     public void serverRequestHandlerConstructorDeclarationTest() {
         Constructor<?> constructor;
@@ -158,7 +171,9 @@ public class ServerRequestHandlerTest {
                 , Modifier.isPublic(modifiers));
     }
 
-    //test getResponseTest()
+    /**
+     * tests getResponseTest()
+    */
     @org.junit.Test
     public void getResponseTest() {
         Method method;
@@ -193,7 +208,9 @@ public class ServerRequestHandlerTest {
                 "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
-    //test runTest()
+    /**
+     * tests runTest()
+    */
     @org.junit.Test
     public void runTest() {
         Method method;
@@ -228,7 +245,9 @@ public class ServerRequestHandlerTest {
                 + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
-    //test loginTest()
+    /**
+     * tests loginTest()
+    */
     @org.junit.Test
     public void loginTest() {
         Method method;
@@ -263,7 +282,9 @@ public class ServerRequestHandlerTest {
                 + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
-    //test returnProfileFromUsernameTest()
+    /**
+     * tests returnProfileFromUsernameTest()
+    */ 
     @org.junit.Test
     public void returnProfileFromUsernameTest() {
         Method method;
@@ -303,7 +324,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test updateProfileTest()
+    /**
+     * tests updateProfileTest()
+    */
     @org.junit.Test
     public void updateProfileTest() {
         Method method;
@@ -343,7 +366,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test usernameIsTakenTest()
+    /**
+     * tests usernameIsTakenTest()
+    */ 
     @org.junit.Test
     public void usernameIsTakenTest() {
         Method method;
@@ -382,8 +407,10 @@ public class ServerRequestHandlerTest {
                         + "` method has the correct return type!"
                 , expectedReturnType, actualReturnType);
     }
-
-    //test deleteAccountTest()
+    
+    /**
+     * tests deleteAccountTest()
+    */ 
     @org.junit.Test
     public void deleteAccountTest() {
         Method method;
@@ -423,7 +450,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test acceptFriendRequestTest()
+    /**
+     * tests acceptFriendRequestTest()
+    */ 
     @org.junit.Test
     public void acceptFriendRequestTest() {
         Method method;
@@ -463,7 +492,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test rejectFriendRequestTest()
+    /**
+     * tests rejectFriendRequestTest()
+    */ 
     @org.junit.Test
     public void rejectFriendRequestTest() {
         Method method;
@@ -503,7 +534,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test sendFriendRequestTest()
+    /**
+     * tests sendFriendRequestTest()
+    */  
     @org.junit.Test
     public void sendFriendRequestTest() {
         Method method;
@@ -543,7 +576,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test friendRequestAlreadyExistsTest()
+    /**
+     * tests friendRequestAlreadyExistsTest()
+    */  
     @org.junit.Test
     public void friendRequestAlreadyExistsTest() {
         Method method;
@@ -583,7 +618,9 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
-    //test usersAreFriendsTest()
+    /**
+     * tests usersAreFriendsTest()
+    */  
     @org.junit.Test
     public void usersAreFriendsTest() {
         Method method;
