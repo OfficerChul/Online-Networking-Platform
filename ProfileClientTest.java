@@ -48,6 +48,8 @@ class ProfileClientTest {
 
     
     /** 
+     * method to get String output
+     * 
      * @return String
      */
     private String getOutput() {
@@ -56,6 +58,8 @@ class ProfileClientTest {
 
     
     /** 
+     * method to receive String input
+     * 
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -66,7 +70,9 @@ class ProfileClientTest {
 
     String className = "ProfileClient";
 
-    //test class
+    /**
+     * test profileClient class
+     */
     @Test
     public void testProfileClient() {
         Class<?> object = Object.class;
@@ -90,9 +96,11 @@ class ProfileClientTest {
 
     
     /** 
+     * test all fields in profileClient class
+     * 
      * @throws NoSuchFieldException
      */
-    //test fields
+    
     @Test
     public void testAllFields() throws NoSuchFieldException {
         //fields in ProfileClient class
