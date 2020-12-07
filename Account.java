@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @author Kyochul Jang, Gilbert Hsu
  * @version November 23, 2020
  */
-
 public class Account implements Serializable {
     private String username;
     private String password;
