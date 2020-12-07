@@ -6,7 +6,9 @@ import java.util.Objects;
 
 /**
  * PJ05 Option 2 - Request Handler for Server
- *
+ * 
+ * Handles various requests from the server
+ * 
  * @author Eashan Dubey
  * @version November 22, 2020
  */
@@ -21,6 +23,7 @@ public final class ServerRequestHandler implements Runnable {
      * ServerRequestHandler
      *
      * Constructor that instantiates the client socket instance object
+     * 
      * @param clientSocket
      */
     public ServerRequestHandler(Socket clientSocket) {
@@ -29,9 +32,7 @@ public final class ServerRequestHandler implements Runnable {
     } // ServerRequestHandler
 
     /**
-     * getResponse
-     *
-     * According to request, returns the appropriate response
+     * Returns the appropriate response depending on the type of request
      *
      * @param request
      * @return Object
@@ -152,8 +153,6 @@ public final class ServerRequestHandler implements Runnable {
     } // getResponse
 
     /**
-     * run
-     *
      * Serves the request made by the client connected to this request handler's
      * client socket by calling the getResponse method and sending back that response.
      */
@@ -185,9 +184,7 @@ public final class ServerRequestHandler implements Runnable {
     } // run
 
     /**
-     * login
-     *
-     * verifies credentials and returns a boolean accordingly.
+     * Verifies credentials and returns a boolean accordingly.
      *
      * @param username
      * @param password
@@ -213,10 +210,9 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * returnProfileFromUsername
-     *
      * Finds profile object through unique identifier (username),
      * then returns its values accordingly.
+     *
      * @param username
      * @return Profile
      */
@@ -231,10 +227,9 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * updateProfile
-     *
      * Replaces the object in the profiles array of the same username with
-     * the parameter profile object
+     * the parameter profile object.
+     * 
      * @param profileToUpdate
      */
     private void updateProfile(Profile profileToUpdate) {
@@ -248,9 +243,8 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * usernameIsTaken
-     *
      * Takes in a String username, returns boolean according to availability
+     * 
      * @param username
      * @return boolean
      */
@@ -265,9 +259,8 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * deleteAccount
-     *
      * Deletes profile according to username String parameter
+     * 
      * @param username
      */
     private void deleteAccount(String username) {
@@ -304,10 +297,9 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * acceptFriendRequest
-     *
-     * deletes friendRequest from sender & recipient records
+     * Deletes friendRequest from sender & recipient records
      * adds users to both users' friend lists respectively
+     *
      * @param senderUsername
      * @param recipientUsername
      */
@@ -354,9 +346,8 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * rejectFriendRequest
+     * Deletes friendRequest from sender & recipient records
      *
-     * deletes friendRequest from sender & recipient records
      * @param senderUsername
      * @param recipientUsername
      */
@@ -399,11 +390,10 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * sendFriendRequest
-     *
      * Creates a new FriendRequest Object, adds this to both users' respective
      * arrays
-     * returns false if either username is invalid
+     * Returns false if either username is invalid
+     * 
      * @param senderUsername
      * @param recipientUsername
      * @return boolean
@@ -448,9 +438,7 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * friendRequestAlreadyExists
-     *
-     * checks if a friend request has already been sent and returns boolean accordingly
+     * Checks if a friend request has already been sent and returns boolean accordingly
      * 
      * @param senderUsername
      * @param recipientUsername
@@ -519,8 +507,6 @@ public final class ServerRequestHandler implements Runnable {
     }
 
     /**
-     * usersAreFriends
-     *
      * Checks if user usernames are in each others' friends lists,
      * Returns either "true", "false", or "Invalid Username" string values
      *
@@ -566,9 +552,7 @@ public final class ServerRequestHandler implements Runnable {
 
     
     /** 
-     * removeSpaceAtStart
-     * 
-     * remove the space at the beginning of the string
+     * Remove the space at the beginning of the string
      * 
      * @param input
      * @return String
