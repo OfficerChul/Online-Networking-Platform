@@ -425,32 +425,38 @@ public class ProfileClient extends JComponent implements Runnable {
                                                             JOptionPane.OK_CANCEL_OPTION,
                                                             JOptionPane.QUESTION_MESSAGE);
                         if (result2 == JOptionPane.OK_OPTION) {
-                            String username = myProfile.getAccount().getUsername();
                             String newPasswordString = String.valueOf(newPassword.getPassword());
-                            Account newAccount = new Account(username, newPasswordString);
-
-                            String name = myProfile.getName();
-                            String email = myProfile.getEmail();
-                            String aboutMe = myProfile.getAboutMe();
-                            String likesAndInterestsText = myProfile.getLikesAndInterests();
-                            String[] myFriendUserNames = myProfile.getFriendUserNames();
-                            // create a profile with modified account
-                            Profile tempProfile = new Profile(name, newAccount, email, aboutMe,
-                                                                likesAndInterestsText, myFriendUserNames);
-                            tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
-                            tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
-                            // send new profile for update
-                            Object response = sendRequest(tempProfile);
-
-                            if (response instanceof Profile) {
-                                JOptionPane.showMessageDialog(null, "Successfully Updated", "Profile",
-                                                                JOptionPane.INFORMATION_MESSAGE);
-                                myProfile = (Profile) response; // set response to my profile
+                            if (!newPasswordString.isBlank() && newPasswordString.length() >= 8 &&
+                                    newPasswordString.length() < 21 && newPasswordString.matches("^[a-zA-Z0-9]*$")) {
+                                String username = myProfile.getAccount().getUsername();
+                                Account newAccount = new Account(username, newPasswordString);
+    
+                                String name = myProfile.getName();
+                                String email = myProfile.getEmail();
+                                String aboutMe = myProfile.getAboutMe();
+                                String likesAndInterestsText = myProfile.getLikesAndInterests();
+                                String[] myFriendUserNames = myProfile.getFriendUserNames();
+                                // create a profile with modified account
+                                Profile tempProfile = new Profile(name, newAccount, email, aboutMe,
+                                                                    likesAndInterestsText, myFriendUserNames);
+                                tempProfile.setReceivedFriendRequests(myProfile.getReceivedFriendRequests());
+                                tempProfile.setSentFriendRequests(myProfile.getSentFriendRequests());
+                                // send new profile for update
+                                Object response = sendRequest(tempProfile);
+    
+                                if (response instanceof Profile) {
+                                    JOptionPane.showMessageDialog(null, "Successfully Updated", "Profile",
+                                                                    JOptionPane.INFORMATION_MESSAGE);
+                                    myProfile = (Profile) response; // set response to my profile
+                                } else {
+                                    JOptionPane.showMessageDialog(null, (String) response, "Profile",
+                                                                    JOptionPane.ERROR_MESSAGE);
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(null, (String) response, "Profile",
-                                                                JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null,
+                                "Your password should be 8 to 20 characters long and be alphanumeric.",
+                                "Editing Passowrd", JOptionPane.ERROR_MESSAGE);
                             }
-
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Wrong password",
