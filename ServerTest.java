@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * PJ05 Option 2 - ServerTest
+ * 
+ * Test cases for Server class
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -47,6 +49,8 @@ public class ServerTest {
 
     
     /** 
+     * returns the output from the test
+     * 
      * @return String
      */
     private String getOutput() {
@@ -55,6 +59,8 @@ public class ServerTest {
 
     
     /** 
+     * checks for the same parameter value in the input
+     * 
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -67,7 +73,9 @@ public class ServerTest {
     Class<?> server = Server.class;
     Method method;
 
-    //test class
+    /**
+     * tests Server.java
+    */
     @Test
     public void testServer() {
         Class<?> object = Object.class;
@@ -89,7 +97,9 @@ public class ServerTest {
         }
     }
 
-    //test fields
+    /**
+     * tests all fields in Server.java
+    */
     @org.junit.Test
     public void testAllFields() {
 
@@ -146,11 +156,12 @@ public class ServerTest {
     }
 
     
-    /** 
+    /**
+     * tests getters and setters
+     * tests getProfiles()
+     * 
      * @throws NoSuchFieldException
      */
-    //test getters and setters
-    //test getProfiles()
     @Test
     void getProfiles() throws NoSuchFieldException {
 
@@ -186,10 +197,11 @@ public class ServerTest {
     }
 
     
-    /** 
+    /**
+     * test setProfiles()
+     * 
      * @throws NoSuchFieldException
      */
-    //test setProfiles()
     @Test
     void setProfiles() throws NoSuchFieldException {
 
