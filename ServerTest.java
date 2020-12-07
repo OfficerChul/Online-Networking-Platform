@@ -138,6 +138,7 @@ public class ServerTest {
     }
 
     //test getters and setters
+    //test getProfiles()
     @Test
     void getProfiles() throws NoSuchFieldException {
 
@@ -172,6 +173,7 @@ public class ServerTest {
 
     }
 
+    //test setProfiles()
     @Test
     void setProfiles() throws NoSuchFieldException {
 
