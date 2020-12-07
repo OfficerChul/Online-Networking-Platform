@@ -27,36 +27,40 @@ public class FriendRequest implements Serializable {
 
     
     /** 
+     * returns the recipient's username
+     * 
      * @return String
      */
-    // returns the recipient's username
     public String getUsernameWhoReceive() {
         return usernameWhoReceive;
     }
 
     
     /** 
+     * returns the sender's username
+     * 
      * @return String
      */
-    // returns the sender's username
     public String getUsernameWhoSent() {
         return usernameWhoSent;
     }
 
     
     /** 
+     * returns the request status
+     * 
      * @return int
      */
-    // returns the request status
     public int getStatus() {
         return status;
     }
 
     
     /** 
+     * updates the request status
+     * 
      * @param status
      */
-    // updates the request status
     public void setStatus(int status) {
         this.status = status;
     }
