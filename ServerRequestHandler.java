@@ -564,6 +564,15 @@ public final class ServerRequestHandler implements Runnable {
         }
     }
 
+    
+    /** 
+     * removeSpaceAtStart
+     * 
+     * remove the space at the beginning of the string
+     * 
+     * @param input
+     * @return String
+     */
     private String removeSpaceAtStart(String input) {
         if (input.charAt(0) == ' ') {
             input = input.substring(1);

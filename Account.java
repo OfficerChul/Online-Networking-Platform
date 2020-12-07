@@ -25,11 +25,19 @@ public class Account implements Serializable {
         this.username = username;
     }
 
+    
+    /** 
+     * @return String
+     */
     // retrieves user's password
     public String getPassword() {
         return password;
     }
 
+    
+    /** 
+     * @return String
+     */
     // retrieves user's username
     public String getUsername() {
         return username;

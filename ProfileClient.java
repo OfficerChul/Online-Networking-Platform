@@ -53,6 +53,12 @@ public class ProfileClient extends JComponent implements Runnable {
     JTextArea profileAboutMeArea;
     JLabel profileUsernameLabel;
 
+    
+    /** 
+     * @param username
+     * @param password
+     * @return int
+     */
     // Method that deals with login
     public int userLogin(String username, String password) {
         String loginRequest = String.format("Req1: %s: %s", username, password);
@@ -73,6 +79,12 @@ public class ProfileClient extends JComponent implements Runnable {
         return 0;
     }
 
+    
+    /** 
+     * @param username
+     * @param password
+     * @return int
+     */
     // Method that deals with register
     public int userRegister(String username, String password) {
         String registrationRequest = String.format("Req2: %s: %s", username, password);
@@ -104,6 +116,10 @@ public class ProfileClient extends JComponent implements Runnable {
         return 0;
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new ProfileClient()); // invoke later
     }
@@ -827,6 +843,10 @@ public class ProfileClient extends JComponent implements Runnable {
         });
         friendRequestUpperPanel.add(friendRequestReceivedRequestButton);
     }
+    
+    /** 
+     * @return String[]
+     */
     // method for getting all users
     private String[] requestUserList() {
         String request = "Req9: Request all users";
@@ -834,6 +854,11 @@ public class ProfileClient extends JComponent implements Runnable {
         response = ((String) sendRequest(request)).split(",");
         return response;
     }
+    
+    /** 
+     * @param username
+     * @param targetPanel
+     */
     // method for adding username buttons to specified panel
     private void addUsernameButton(String username, JPanel targetPanel) {
         // skip if username is the logged in user
@@ -873,6 +898,10 @@ public class ProfileClient extends JComponent implements Runnable {
         resizePanel(targetPanel);
         updateUI();
     }
+    
+    /** 
+     * @param targetPanel
+     */
     // resize the panel to allow scroll panel to work properly
     private void resizePanel(JPanel targetPanel) {
         int numberOfComponents = targetPanel.getComponentCount(); // get number of buttons
@@ -915,6 +944,11 @@ public class ProfileClient extends JComponent implements Runnable {
             System.exit(0); // force quit since its a connection issue
         }
     }
+    
+    /** 
+     * @param request
+     * @return Object
+     */
     // method that will handle request sending and response receiving. Object in Object out
     // Object can either be String for requests or Profile for updates
     private Object sendRequest(Object request) {
@@ -945,6 +979,10 @@ public class ProfileClient extends JComponent implements Runnable {
         }
         return response;
     }
+    
+    /** 
+     * @param profile
+     */
     // load a Profile object to the GUI main window
     private void loadInfo(Profile profile) {
         currentProfile = profile;
@@ -984,6 +1022,10 @@ public class ProfileClient extends JComponent implements Runnable {
             addUsernameButton(friendUsername, friendListPanel);
         }
     }
+    
+    /** 
+     * @return boolean
+     */
     // check socket connection
     private boolean isConnectionLost() {
         return !socket.isConnected();
