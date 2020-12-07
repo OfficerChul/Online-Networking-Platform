@@ -298,3 +298,6 @@
     * Tests if the method has correct modifiers or not
     * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
+    
+   * **Other Server Testing**
+   * Most of the logic for the server is in ServerRequestHandler class's getResponse method, which is tested through demo-ing the application using the Client GUI,    * as all of the requests/responses are sent/obtained through the server, in order for the application to function.
