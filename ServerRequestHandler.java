@@ -34,7 +34,7 @@ public final class ServerRequestHandler implements Runnable {
      * According to request, returns the appropriate response
      *
      * @param request
-     * @return
+     * @return Object
      */
     private synchronized Object getResponse(Object request) { // synchronized to avoid race conditions
         profiles = Server.getProfiles(); // updates ServerRequestHandler data from Server
@@ -191,7 +191,7 @@ public final class ServerRequestHandler implements Runnable {
      *
      * @param username
      * @param password
-     * @return
+     * @return boolean
      */
     private boolean login(String username, String password) {
         // check credentials from arraylist, return user details if correct
@@ -218,7 +218,7 @@ public final class ServerRequestHandler implements Runnable {
      * Finds profile object through unique identifier (username),
      * then returns its values accordingly.
      * @param username
-     * @return
+     * @return Profile
      */
     private Profile returnProfileFromUsername(String username) {
         Profile profile = null;
@@ -252,7 +252,7 @@ public final class ServerRequestHandler implements Runnable {
      *
      * Takes in a String username, returns boolean according to availability
      * @param username
-     * @return
+     * @return boolean
      */
     private boolean usernameIsTaken(String username) {
         boolean usernameExists = false;
@@ -406,7 +406,7 @@ public final class ServerRequestHandler implements Runnable {
      * returns false if either username is invalid
      * @param senderUsername
      * @param recipientUsername
-     * @return
+     * @return boolean
      */
     private boolean sendFriendRequest(String senderUsername, String recipientUsername) {
 
@@ -454,7 +454,7 @@ public final class ServerRequestHandler implements Runnable {
      * 
      * @param senderUsername
      * @param recipientUsername
-     * @return
+     * @return boolean
      */
     private boolean friendRequestAlreadyExists(String senderUsername, String recipientUsername) {
         FriendRequest[] senderSentRequests;
@@ -526,7 +526,7 @@ public final class ServerRequestHandler implements Runnable {
      *
      * @param username1
      * @param username2
-     * @return
+     * @return String
      */
     private String usersAreFriends(String username1, String username2) {
         Profile profile1 = returnProfileFromUsername(username1);

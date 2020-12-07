@@ -55,11 +55,12 @@ public class ProfileClient extends JComponent implements Runnable {
 
     
     /** 
+     * method that deals with login
+     * 
      * @param username
      * @param password
      * @return int
      */
-    // Method that deals with login
     public int userLogin(String username, String password) {
         String loginRequest = String.format("Req1: %s: %s", username, password);
         Object loginResponse;
@@ -81,11 +82,12 @@ public class ProfileClient extends JComponent implements Runnable {
 
     
     /** 
+     * Method that deals with register
+     * 
      * @param username
      * @param password
      * @return int
      */
-    // Method that deals with register
     public int userRegister(String username, String password) {
         String registrationRequest = String.format("Req2: %s: %s", username, password);
         String checkUsernameResponse;
@@ -118,18 +120,25 @@ public class ProfileClient extends JComponent implements Runnable {
 
     
     /** 
+     * main method
+     * 
      * @param args
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new ProfileClient()); // invoke later
     }
 
+    /** 
+     * initialize the network connection and show login window
+     */
     public void run() {
         initializeNetwork(); // Establish network connection
         showLoginPanel(); // Show login window
     }
 
-    // Show login window
+    /** 
+     * Show login window
+     */
     private void showLoginPanel() {
         JLabel userLabel;
         JLabel passwordLabel;
@@ -215,7 +224,9 @@ public class ProfileClient extends JComponent implements Runnable {
 
     }
 
-    // Show the window for creating a new account
+    /** 
+     * Show the window for creating a new account
+     */
     private void showRegisterPanel() {
         JLabel userLabel;
         JLabel passwordLabel;
@@ -254,7 +265,6 @@ public class ProfileClient extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String username = userRegistrationText.getText();
                 String password = String.valueOf(passwordRegistrationText.getPassword()); // Get input password
-
                 // Username and password should be composed of letters and numbers.
                 // Username can be no more than 15 characters, and password should be 8-20 characters long.
                 if (!username.isBlank() && username.length() < 16 && username.matches("^[a-zA-Z0-9]*$")) {
@@ -304,7 +314,9 @@ public class ProfileClient extends JComponent implements Runnable {
         panel.add(registerCancelButton);
     }
 
-    // Show the main window where most of the operations can be done
+    /** 
+     * Show the main window where most of the operations can be done
+     */
     private void showMainPanel() {
         JButton listAllUserButton;
         JButton backToMeButton;
@@ -680,7 +692,10 @@ public class ProfileClient extends JComponent implements Runnable {
         timer.setInitialDelay(0);
         timer.start();
     }
-    // Show the window where all users are listed
+
+    /** 
+     * Show the window where all users are listed
+     */
     private void showListAllUserPanel() {
         listAllUserFrame = new JFrame();
         JPanel panel = new JPanel();
@@ -722,7 +737,10 @@ public class ProfileClient extends JComponent implements Runnable {
         listAllUserMainPanel.updateUI(); // update the GUI
 
     }
-    // show the window where one can view sent or received friend requests
+
+    /** 
+     * show the window where one can view sent or received friend requests
+     */
     private void showFriendRequestPanel() {
         friendRequestFrame = new JFrame();
         JPanel panel = new JPanel();
@@ -845,9 +863,10 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     
     /** 
+     * method for getting all users
+     * 
      * @return String[]
      */
-    // method for getting all users
     private String[] requestUserList() {
         String request = "Req9: Request all users";
         String[] response = new String[0];
@@ -856,10 +875,11 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     
     /** 
+     * method for adding username buttons to specified panel
+     * 
      * @param username
      * @param targetPanel
      */
-    // method for adding username buttons to specified panel
     private void addUsernameButton(String username, JPanel targetPanel) {
         // skip if username is the logged in user
         if (username.equals(myProfile.getAccount().getUsername())) {
@@ -900,9 +920,10 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     
     /** 
+     * resize the panel to allow scroll panel to work properly
+     * 
      * @param targetPanel
      */
-    // resize the panel to allow scroll panel to work properly
     private void resizePanel(JPanel targetPanel) {
         int numberOfComponents = targetPanel.getComponentCount(); // get number of buttons
         int height;
@@ -915,7 +936,10 @@ public class ProfileClient extends JComponent implements Runnable {
         targetPanel.setPreferredSize(new Dimension(0, height)); 
         updateUI();
     }
-    // try to connect to the server and setup the global writer and reader
+
+    /** 
+     * ctry to connect to the server and setup the global writer and reader
+     */
     private void initializeNetwork() {
         String initializationRequest = "Req0: Initialization";
         String initializationResponse;
@@ -946,11 +970,12 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     
     /** 
+     * method that will handle request sending and response receiving. Object in, Object out
+     * Object can either be String for requests or Profile for updates
+     * 
      * @param request
      * @return Object
      */
-    // method that will handle request sending and response receiving. Object in Object out
-    // Object can either be String for requests or Profile for updates
     private Object sendRequest(Object request) {
         Object response;
         try {
@@ -980,10 +1005,11 @@ public class ProfileClient extends JComponent implements Runnable {
         return response;
     }
     
-    /** 
+    /**
+     * load a Profile object to the GUI main window
+     *  
      * @param profile
      */
-    // load a Profile object to the GUI main window
     private void loadInfo(Profile profile) {
         currentProfile = profile;
         profileUsernameLabel.setText("User: " + profile.getAccount().getUsername());
@@ -1009,7 +1035,11 @@ public class ProfileClient extends JComponent implements Runnable {
             }
         }
     }
-    // pull my profile and update the friendlist panel
+
+    /** 
+     * update the profile of logged in user
+     * 
+     */
     private void updateMyProfile() {
         String request = "Req10: " + myProfile.getAccount().getUsername();
         Object response = sendRequest(request);
@@ -1024,9 +1054,10 @@ public class ProfileClient extends JComponent implements Runnable {
     }
     
     /** 
+     * check socket connection
+     * 
      * @return boolean
      */
-    // check socket connection
     private boolean isConnectionLost() {
         return !socket.isConnected();
     }
