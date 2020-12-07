@@ -131,8 +131,7 @@
 * **ProfileClient**
   * Client class that is capable of simultaneous use by multiple users over the same network
   * Manages all the GUI interfaces
-  * Methods in the ActionListener:
-  * Other methods:
+  * Methods:
     * **userLogin(String username, String password)**: lets the user to login with the given username and password by sending the request to the server. If either username or password is incorrect, it displays an error message. Otherwise, a new Profile object is created with the given username and password.
     * **userRegister(String username, String password)**: lets the user to register with the given username and password by sending the request to the server. If there's a username that already exists, it displays an error message. Then, it returns to the login page.
     * **showLoginPanel()**: displays the login page.
@@ -299,3 +298,6 @@
     * Tests if the method has correct modifiers or not
     * Tests if the method has a correct return type or not
     * Tests if the method retrieves properly or not
+    
+   * **Other Server Testing**
+   * Most of the logic for the server is in ServerRequestHandler class's getResponse method, which is tested through demo-ing the application using the Client GUI,    * as all of the requests/responses are sent/obtained through the server, in order for the application to function.
