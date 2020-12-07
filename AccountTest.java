@@ -44,7 +44,9 @@ public class AccountTest {
     }
 
     
-    /** 
+    /**
+     * method to get String output
+     *
      * @return String
      */
     private String getOutput() {
@@ -52,7 +54,9 @@ public class AccountTest {
     }
 
     
-    /** 
+    /**
+     * method to receive String input
+     *
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -67,7 +71,9 @@ public class AccountTest {
     Method method;
     Account newAccount = new Account("abc", "12345678");
 
-    //test class
+    /**
+     * test Account class
+     */
     @Test
     public void testAccount() {
         //check if Account class exists or not
@@ -86,7 +92,9 @@ public class AccountTest {
         }
     }
 
-    //test fields
+    /**
+     * test all of the fields in Account class
+     */
     @Test
     public void testAllFields() {
         //fields in Account class
@@ -136,12 +144,13 @@ public class AccountTest {
     }
 
     
-    /** 
+    /**
+     * test getPassword()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test getters and setters
-    //test getPassword()
+
     @Test
     public void getPassword() throws NoSuchFieldException, IllegalAccessException {
 
@@ -177,11 +186,13 @@ public class AccountTest {
     }
 
     
-    /** 
+    /**
+     * test getUsername()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test getUsername()
+
     @Test
     public void getUsername() throws NoSuchFieldException, IllegalAccessException {
         Field field = account.getDeclaredField("password");
