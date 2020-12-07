@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 /**
  * PJ05 Option 2 - Server
+ * 
+ * Server used to allow multiple clients to be connected synchronously.
  *
  * @author Eashan Dubey
  * @version November 22, 2020
@@ -20,6 +22,7 @@ public final class Server {
      * Server Constructor
      *
      * if it exists, reads all profiles from serverData file, and instantiates Profile array
+     * 
      * @param port
      * @throws IOException
      */
@@ -34,9 +37,7 @@ public final class Server {
     } // server constructor
 
     /**
-     * serveClients
-     *
-     * allow server to serve multiple clients simultaneously,
+     * Allow server to serve multiple clients simultaneously,
      * by starting a new ServerRequestHandler thread for each client in
      * an endless loop until server is closed.
      */
@@ -73,9 +74,7 @@ public final class Server {
     } // serveClients
 
     /**
-     * main
-     *
-     * invokes constructor and instantiates a serversocket object
+     * Invokes constructor and instantiates a serversocket object
      * invokes serveclients so clients can connect to server
      * and requests can be hendled
      *
@@ -101,16 +100,15 @@ public final class Server {
     } // main
 
     /**
-     * closeServer
-     * write all the Profiles array data back to the file
+     * Write all the Profiles array data back to the file
      */
     private static void closeServer() {
         writeProfilesToFile("serverData.txt");
     }
 
     /**
-     * writeProfilesToFile
-     * write all the Profiles array data back to the file
+     * Write all the Profiles array data back to the file
+     * 
      * @param filename
      */
     public static void writeProfilesToFile(String filename) {
@@ -131,9 +129,8 @@ public final class Server {
     }
 
     /**
-     * readProfilesFromFile
-     *
-     * reads profiles from server file upon call
+     * Reads profiles from server file upon call
+     * 
      * @param filename
      */
     public void readProfilesFromFile(String filename) {
@@ -165,19 +162,17 @@ public final class Server {
     }
 
     /**
-     * getProfiles
-     *
-     * accessor method for profiles array
-     * @return
+     * Accessor method for profiles array
+     * 
+     * @return Profile[]
      */
     public static Profile[] getProfiles() {
         return profiles;
     }
 
     /**
-     * setProfiles
+     * Modifier method for profiles array
      *
-     * modifier method for profiles array
      * @param profiles
      */
     public static void setProfiles(Profile[] profiles) {
