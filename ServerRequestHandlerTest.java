@@ -130,6 +130,7 @@ public class ServerRequestHandlerTest {
 
     Class<?> clazz = ServerRequestHandler.class;
 
+    //test serverRequestHandlerConstructorDeclarationTest()
     @org.junit.Test
     public void serverRequestHandlerConstructorDeclarationTest() {
         Constructor<?> constructor;
@@ -149,6 +150,7 @@ public class ServerRequestHandlerTest {
                 , Modifier.isPublic(modifiers));
     }
 
+    //test getResponseTest()
     @org.junit.Test
     public void getResponseTest() {
         Method method;
@@ -183,6 +185,7 @@ public class ServerRequestHandlerTest {
                 "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
+    //test runTest()
     @org.junit.Test
     public void runTest() {
         Method method;
@@ -217,6 +220,7 @@ public class ServerRequestHandlerTest {
                 + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
+    //test loginTest()
     @org.junit.Test
     public void loginTest() {
         Method method;
@@ -251,6 +255,7 @@ public class ServerRequestHandlerTest {
                 + "` method has the correct return type!", expectedReturnType, actualReturnType);
     }
 
+    //test returnProfileFromUsernameTest()
     @org.junit.Test
     public void returnProfileFromUsernameTest() {
         Method method;
@@ -290,6 +295,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test updateProfileTest()
     @org.junit.Test
     public void updateProfileTest() {
         Method method;
@@ -329,6 +335,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test usernameIsTakenTest()
     @org.junit.Test
     public void usernameIsTakenTest() {
         Method method;
@@ -368,6 +375,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test deleteAccountTest()
     @org.junit.Test
     public void deleteAccountTest() {
         Method method;
@@ -407,6 +415,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test acceptFriendRequestTest()
     @org.junit.Test
     public void acceptFriendRequestTest() {
         Method method;
@@ -446,6 +455,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test rejectFriendRequestTest()
     @org.junit.Test
     public void rejectFriendRequestTest() {
         Method method;
@@ -485,6 +495,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test sendFriendRequestTest()
     @org.junit.Test
     public void sendFriendRequestTest() {
         Method method;
@@ -524,6 +535,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test friendRequestAlreadyExistsTest()
     @org.junit.Test
     public void friendRequestAlreadyExistsTest() {
         Method method;
@@ -563,6 +575,7 @@ public class ServerRequestHandlerTest {
                 , expectedReturnType, actualReturnType);
     }
 
+    //test usersAreFriendsTest()
     @org.junit.Test
     public void usersAreFriendsTest() {
         Method method;
