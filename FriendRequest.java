@@ -9,18 +9,13 @@ import java.io.Serializable;
  */
 
 public class FriendRequest implements Serializable {
-    /**
-     *
-     */
     private static final long serialVersionUID = -1699480957029563158L;
 
     String usernameWhoSent;
     String usernameWhoReceive;
     int status; // -1: refused; 0: pending; 1: accepted
     
-    /*
-     * creates a FriendRequest object with the usernames of the sender and the recipient
-     */
+    // creates a FriendRequest object with the usernames of the sender and the recipient
     public FriendRequest(String usernameWhoSent, String usernameWhoReceive) {
         this.usernameWhoSent = usernameWhoSent;
         this.usernameWhoReceive = usernameWhoReceive;
