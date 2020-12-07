@@ -17,12 +17,13 @@ public class FriendRequest implements Serializable {
     String usernameWhoReceive;
     int status; // -1: refused; 0: pending; 1: accepted
     
-    // creates a FriendRequest object with the usernames of the sender and the recipient
-    // sets the request status to pending
+    /*
+     * creates a FriendRequest object with the usernames of the sender and the recipient
+     */
     public FriendRequest(String usernameWhoSent, String usernameWhoReceive) {
         this.usernameWhoSent = usernameWhoSent;
         this.usernameWhoReceive = usernameWhoReceive;
-        this.status = 0;
+        this.status = 0; // sets the request status to pending
     }
 
     
