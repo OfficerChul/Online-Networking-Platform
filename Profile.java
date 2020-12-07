@@ -9,7 +9,6 @@ import java.util.Arrays;
  * @author Kyochul Jang
  * @version November 23, 2020
  */
-
 public class Profile implements Serializable {
     private static final long serialVersionUID = 2395638123565212616L;
 
