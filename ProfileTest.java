@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * PJ05 Option 2 - ProfileTest
+ * 
+ * Test cases for Profile.java
  *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
@@ -50,6 +52,8 @@ public class ProfileTest {
 
     
     /** 
+     * returns the output from the test
+     *
      * @return String
      */
     private String getOutput() {
@@ -58,6 +62,8 @@ public class ProfileTest {
 
     
     /** 
+     * method receive a String input
+     * 
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -77,8 +83,9 @@ public class ProfileTest {
     Method method;
 
 
-
-    //test class
+    /**
+     * tests the class
+    */
     @Test
     public void testProfile() {
         //check if Profile class exists or not
@@ -97,7 +104,9 @@ public class ProfileTest {
         }
     }
 
-    //test field
+    /**
+     * tests the fields
+    */
     @Test
     public void testFields() {
         //fields in Profile class
@@ -277,11 +286,12 @@ public class ProfileTest {
 
     
     /** 
+     * tests getters and setters
+     * tests getAccount()
+     * 
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test getters and setters
-    //test getAccount()
     @Test
     public void getAccount() throws NoSuchFieldException, IllegalAccessException {
 
@@ -317,10 +327,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests getReceivedFriendRequests()
+     * 
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test getReceivedFriendRequests()
     @Test
     public void getReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
@@ -358,10 +369,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests getSentFiendRequests()
+     * 
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test getSentFiendRequests()
     @Test
     public void getSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
@@ -397,7 +409,9 @@ public class ProfileTest {
 
     }
 
-    //test getFriendUserNames()
+    /**
+     * tests getFriendUserNames()
+    */
     @Test
     public void getFriendUserNames() {
 
@@ -430,7 +444,9 @@ public class ProfileTest {
 
     }
 
-    //test getLikesAndInterests()
+    /**
+     * tests getLikesAndInterests()
+    */
     @Test
     public void getLikesAndInterests() {
 
@@ -463,7 +479,9 @@ public class ProfileTest {
 
     }
 
-    //test getAboutMe()
+    /**
+     * tests getAboutMe()
+    */
     @Test
     public void getAboutMe() {
 
@@ -496,7 +514,9 @@ public class ProfileTest {
 
     }
 
-    //test getEmail()
+    /**
+     * tests getEmail()
+    */
     @Test
     public void getEmail() {
 
@@ -529,7 +549,9 @@ public class ProfileTest {
 
     }
 
-    //test getName()
+    /**
+     * tests getName()
+    */
     @Test
     public void getName() {
 
@@ -564,10 +586,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setName()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setName()
     @Test
     public void setName() throws NoSuchFieldException, IllegalAccessException {
 
@@ -605,10 +628,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setAboutMe()
+     * 
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setAboutMe()
     @Test
     public void setAboutMe() throws NoSuchFieldException, IllegalAccessException {
 
@@ -645,11 +669,12 @@ public class ProfileTest {
     }
 
     
-    /** 
+    /**
+     * tests setAccount()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setAccount()
     @Test
     public void setAccount() throws NoSuchFieldException, IllegalAccessException {
 
@@ -688,10 +713,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setEmail()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setEmail()
     @Test
     public void setEmail() throws NoSuchFieldException, IllegalAccessException {
 
@@ -729,10 +755,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setFriendUserNames()
+     * 
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setFriendUserNames()
     @Test
     public void setFriendUserNames() throws NoSuchFieldException, IllegalAccessException {
 
@@ -770,11 +797,12 @@ public class ProfileTest {
     }
 
     
-    /** 
+    /**
+     * tests setLikesAndInterests()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setLikesAndInterests()
     @Test
     public void setLikesAndInterests() throws NoSuchFieldException, IllegalAccessException {
 
@@ -812,10 +840,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setReceivedFriendRequests()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setReceivedFriendRequests()
     @Test
     public void setReceivedFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
@@ -853,10 +882,11 @@ public class ProfileTest {
 
     
     /** 
+     * tests setSentFriendRequests() 
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setSentFriendRequests()
     @Test
     public void setSentFriendRequests() throws NoSuchFieldException, IllegalAccessException {
 
@@ -899,7 +929,9 @@ public class ProfileTest {
     Profile profileEx = new Profile("", new Account("", "")
         , "", "", "", new String[]{""});
 
-    //test addToFriendUsernames()
+    /**
+     * tests addToFriendUsernames()
+     */
     @Test
     public void addToFriendUsernames() {
         profileEx.addToFriendUsernames("usernameAdd");
