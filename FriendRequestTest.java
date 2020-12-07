@@ -46,7 +46,9 @@ public class FriendRequestTest {
     }
 
     
-    /** 
+    /**
+     * method to get String output
+     *
      * @return String
      */
     private String getOutput() {
@@ -54,7 +56,9 @@ public class FriendRequestTest {
     }
 
     
-    /** 
+    /**
+     * method to receive String input
+     *
      * @param str
      */
     @SuppressWarnings("SameParameterValue")
@@ -69,7 +73,9 @@ public class FriendRequestTest {
     Class<?> friendRequest = FriendRequest.class;
     FriendRequest newFriendRequest = new FriendRequest("sentUser", "receivedUser");
 
-    //test class
+    /**
+     * test friendRequest class
+     */
     @Test
     public void testFriendRequest() {
         //check if FriendRequest class exists or not
@@ -88,7 +94,9 @@ public class FriendRequestTest {
         }
     }
 
-    //test fields
+    /**
+     * test all the fields in friendRequest class
+     */
     @Test
     public void testAllFields() {
         //fields in FriendRequest class
@@ -147,11 +155,12 @@ public class FriendRequestTest {
     }
 
     
-    /** 
+    /**
+     * test getUsernameWhoReceive()
+     *
      * @throws NoSuchFieldException
      */
-    //test getters and setters
-    //test getUsernameWhoReceive()
+
     @Test
     public void getUsernameWhoReceive() throws NoSuchFieldException {
 
@@ -182,8 +191,9 @@ public class FriendRequestTest {
 
         assertEquals("Field wasn't retrieved properly", result, "receivedUser");
     }
-    
-    //test getUsernameWhoSent()
+    /**
+     * test getUsernameWhoSent()
+     */
     @Test
     public void getUsernameWhoSent() {
         String result = newFriendRequest.getUsernameWhoSent();
@@ -213,8 +223,10 @@ public class FriendRequestTest {
 
         assertEquals("Field wasn't retrieved properly", result, "sentUser");
     }
-    
-    //test getStatus()
+
+    /**
+     * test getStatus()
+     */
     @Test
     public void getStatus() {
         int result = newFriendRequest.getStatus();
@@ -246,11 +258,13 @@ public class FriendRequestTest {
     }
 
     
-    /** 
+    /**
+     * test setStatus()
+     *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-    //test setStatus()
+
     @Test
     public void setStatus() throws NoSuchFieldException, IllegalAccessException {
         newFriendRequest.setStatus(1);
