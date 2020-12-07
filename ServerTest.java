@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
-
 public class ServerTest {
 
     private final PrintStream originalOutput = System.out;
