@@ -3,6 +3,7 @@ import java.io.Serializable;
 /**
  * PJ05 Option 2 - FriendRequest Class
  *
+ * Used to create a FriendRequest object and return its parameters 
  * @author Gilbert Hsu
  * @version November 23, 2020
  */
