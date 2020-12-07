@@ -18,10 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * PJ05 Option 2 - FriendRequestTest
  *
+ * Test cases for FriendRequest.java
+ *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
-
 public class FriendRequestTest {
 
     private final PrintStream originalOutput = System.out;
@@ -74,7 +75,7 @@ public class FriendRequestTest {
     FriendRequest newFriendRequest = new FriendRequest("sentUser", "receivedUser");
 
     /**
-     * test friendRequest class
+     * tests friendRequest class
      */
     @Test
     public void testFriendRequest() {
@@ -95,7 +96,7 @@ public class FriendRequestTest {
     }
 
     /**
-     * test all the fields in friendRequest class
+     * tests all the fields in friendRequest class
      */
     @Test
     public void testAllFields() {
@@ -156,11 +157,10 @@ public class FriendRequestTest {
 
     
     /**
-     * test getUsernameWhoReceive()
+     * tests getUsernameWhoReceive()
      *
      * @throws NoSuchFieldException
      */
-
     @Test
     public void getUsernameWhoReceive() throws NoSuchFieldException {
 
@@ -192,7 +192,7 @@ public class FriendRequestTest {
         assertEquals("Field wasn't retrieved properly", result, "receivedUser");
     }
     /**
-     * test getUsernameWhoSent()
+     * tests getUsernameWhoSent()
      */
     @Test
     public void getUsernameWhoSent() {
@@ -225,7 +225,7 @@ public class FriendRequestTest {
     }
 
     /**
-     * test getStatus()
+     * tests getStatus()
      */
     @Test
     public void getStatus() {
@@ -259,12 +259,11 @@ public class FriendRequestTest {
 
     
     /**
-     * test setStatus()
+     * tests setStatus()
      *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
      */
-
     @Test
     public void setStatus() throws NoSuchFieldException, IllegalAccessException {
         newFriendRequest.setStatus(1);
