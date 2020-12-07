@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * PJ05 Option 2 - ProfileClientTest
  *
+ * Test cases for the client 
+ * 
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
@@ -71,7 +73,7 @@ class ProfileClientTest {
     String className = "ProfileClient";
 
     /**
-     * test profileClient class
+     * tests profileClient class
      */
     @Test
     public void testProfileClient() {
@@ -100,7 +102,6 @@ class ProfileClientTest {
      * 
      * @throws NoSuchFieldException
      */
-    
     @Test
     public void testAllFields() throws NoSuchFieldException {
         //fields in ProfileClient class
