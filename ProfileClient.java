@@ -8,7 +8,9 @@ import java.net.*;
 
 /**
  * PJ05 Option 2 - Client
- *
+ * 
+ * Implements GUI for user interactions. Creates a socket for the client to be connected to the server
+ * 
  * @author Ziyang Huang
  * @version November 23, 2020
  */
@@ -938,7 +940,7 @@ public class ProfileClient extends JComponent implements Runnable {
     }
 
     /** 
-     * ctry to connect to the server and setup the global writer and reader
+     * try to connect to the server and setup the global writer and reader
      */
     private void initializeNetwork() {
         String initializationRequest = "Req0: Initialization";
@@ -1038,7 +1040,6 @@ public class ProfileClient extends JComponent implements Runnable {
 
     /** 
      * update the profile of logged in user
-     * 
      */
     private void updateMyProfile() {
         String request = "Req10: " + myProfile.getAccount().getUsername();
