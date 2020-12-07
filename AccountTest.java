@@ -16,10 +16,11 @@ import static org.junit.Assert.assertEquals;
 /**
  * PJ05 Option 2 - AccountTest
  *
+ * Test cases for the Account class
+ *
  * @author Gilbert Hsu, Kyochul Jang
  * @version November 30, 2020
  */
-
 public class AccountTest {
 
     private final PrintStream originalOutput = System.out;
@@ -93,7 +94,7 @@ public class AccountTest {
     }
 
     /**
-     * test all of the fields in Account class
+     * tests all of the fields in Account class
      */
     @Test
     public void testAllFields() {
@@ -145,7 +146,7 @@ public class AccountTest {
 
     
     /**
-     * test getPassword()
+     * tests getPassword()
      *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
@@ -187,7 +188,7 @@ public class AccountTest {
 
     
     /**
-     * test getUsername()
+     * tests getUsername()
      *
      * @throws NoSuchFieldException
      * @throws IllegalAccessException
