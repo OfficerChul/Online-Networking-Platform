@@ -128,6 +128,7 @@ public class AccountTest {
     }
 
     //test getters and setters
+    //test getPassword()
     @Test
     public void getPassword() throws NoSuchFieldException, IllegalAccessException {
 
@@ -162,6 +163,7 @@ public class AccountTest {
         assertEquals("Field wasn't retrieved properly", result, "12345678");
     }
 
+    //test getUsername()
     @Test
     public void getUsername() throws NoSuchFieldException, IllegalAccessException {
         Field field = account.getDeclaredField("password");
