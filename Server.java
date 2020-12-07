@@ -13,7 +13,6 @@ import java.util.Arrays;
  * @author Eashan Dubey
  * @version November 22, 2020
  */
-
 public final class Server {
     private final ServerSocket serverSocket;
     private static Profile[] profiles; // data of all the profiles
