@@ -1,4 +1,4 @@
-# CS 180 Project 5 - A Social Network "Profile" Application
+# A Social Network "Profile" Application
 
 ## GUI Interactions
 
